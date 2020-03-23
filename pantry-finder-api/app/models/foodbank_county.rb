@@ -1,0 +1,2 @@
+class FoodbankCounty < ApplicationRecord
+end
