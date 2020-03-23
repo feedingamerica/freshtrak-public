@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+bundle exec jets db:create db:schema:load
+
+# Assumes default installation of MySQL
+echo "Seeding dev and test databases"
+unzip -p setup/seed.sql.zip | mysql -u root pantry_finder_api_development
+unzip -p setup/seed.sql.zip | mysql -u root pantry_finder_api_test
