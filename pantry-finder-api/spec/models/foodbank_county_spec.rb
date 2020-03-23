@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe FoodbankCounty, type: :model do
   it 'should connect to the foodbank_counties table' do
     expect(FoodbankCounty.count).to be > 0

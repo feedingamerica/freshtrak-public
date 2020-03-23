@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe ZipCode, type: :model do
   it 'should connect to the zip_codes table' do
     expect(ZipCode.count).to be > 0

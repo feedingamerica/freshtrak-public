@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe Location, type: :model do
   it 'should connect to the locations table' do
     expect(Location.count).to be > 0
