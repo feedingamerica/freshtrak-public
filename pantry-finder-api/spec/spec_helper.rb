@@ -2,7 +2,8 @@
 
 ENV['JETS_TEST'] = '1'
 ENV['JETS_ENV'] ||= 'test'
-# Ensures aws api never called. Fixture home folder does not contain ~/.aws/credentails
+# Ensures aws api never called.
+# Fixture home folder does not contain ~/.aws/credentails
 ENV['HOME'] = 'spec/fixtures/home'
 
 require 'byebug'
@@ -18,7 +19,7 @@ require 'jets/spec_helpers'
 
 module Helpers
   def payload(name)
-    JSON.load(IO.read("spec/fixtures/payloads/#{name}.json"))
+    JSON.parse(IO.read("spec/fixtures/payloads/#{name}.json"))
   end
 end
 
