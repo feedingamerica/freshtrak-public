@@ -1,0 +1,9 @@
+AllCops:
+  Exclude:
+    - 'db/schema.rb'
+Style/HashEachMethods:
+  Enabled: true
+Style/HashTransformKeys:
+  Enabled: true
+Style/HashTransformValues:
+  Enabled: true
