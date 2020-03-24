@@ -1,0 +1,84 @@
+name: CI
+
+on: [push]
+
+jobs:
+  test-pantry-finder-api:
+    name: Run Unit Tests For Pantry Finder API
+    runs-on: ubuntu-latest
+    env:
+      working-directory: pantry-finder-api
+
+    services:
+      mysql:
+        image: mysql:8
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+        ports:
+          - 3306:3306
+        volumes:
+          - "/var/run/mysqld:/var/run/mysqld"
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Ruby
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 2.6.5
+      - name: Cache Dependencies
+        uses: actions/cache@v1
+        with:
+          path: ${{env.working-directory}}/vendor/bundle
+          key: ${{ runner.os }}-bundler-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-bundler-
+      - name: Setup
+        env:
+          DB_HOST: 127.0.0.1
+          JETS_ENV: test
+        run: |
+          gem install bundler
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+          bin/setup_dev_db
+        working-directory: ${{env.working-directory}}
+      - name: Run Tests
+        env:
+          DB_HOST: 127.0.0.1
+          JETS_ENV: test
+        run: |
+          bundle exec rspec
+        working-directory: ${{env.working-directory}}
+
+  lint-pantry-finder-api:
+    name: Run Linter For Pantry Finder API
+    runs-on: ubuntu-latest
+    env:
+      working-directory: pantry-finder-api
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Ruby
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 2.6.5
+      - name: Cache Dependencies
+        uses: actions/cache@v1
+        with:
+          path: ${{env.working-directory}}/vendor/bundle
+          key: ${{ runner.os }}-bundler-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-bundler-
+      - name: Setup
+        run: |
+          gem install bundler
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+        working-directory: ${{env.working-directory}}
+      - name: Lint
+        run: |
+          bundle exec rubocop
+        working-directory: ${{env.working-directory}}
