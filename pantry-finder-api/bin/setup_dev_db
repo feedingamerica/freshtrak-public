@@ -1,8 +1,19 @@
-#!/usr/bin/env bash
+#!/usr/bin/env ruby
 
-bundle exec jets db:create db:schema:load
+`bundle exec jets db:create db:schema:load`
 
-# Assumes default installation of MySQL
-echo "Seeding dev and test databases"
-unzip -p setup/seed.sql.zip | mysql -u root pantry_finder_api_development
-unzip -p setup/seed.sql.zip | mysql -u root pantry_finder_api_test
+puts 'Seeding dev and test databases'
+
+user = ENV.fetch('DB_USER', 'root')
+password = ENV.fetch('DB_PASS', '')
+host = ENV.fetch('DB_HOST', '')
+
+mysql_args = "-u #{user}"
+mysql_args += " -p#{password}" unless password.empty?
+mysql_args += " -h #{host}" unless host.empty?
+
+unless ENV['JETS_ENV'] == 'test'
+  `unzip -p setup/seed.sql.zip | mysql #{mysql_args} pantry_finder_api_development`
+end
+
+`unzip -p setup/seed.sql.zip | mysql #{mysql_args} pantry_finder_api_test`
