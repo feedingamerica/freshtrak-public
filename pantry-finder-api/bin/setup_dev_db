@@ -13,7 +13,9 @@ mysql_args += " -p#{password}" unless password.empty?
 mysql_args += " -h #{host}" unless host.empty?
 
 unless ENV['JETS_ENV'] == 'test'
-  `unzip -p setup/seed.sql.zip | mysql #{mysql_args} pantry_finder_api_development`
+  `unzip -p setup/seed.sql.zip \
+    | mysql #{mysql_args} pantry_finder_api_development`
 end
 
-`unzip -p setup/seed.sql.zip | mysql #{mysql_args} pantry_finder_api_test`
+`unzip -p setup/seed.sql.zip \
+  | mysql #{mysql_args} pantry_finder_api_test`

@@ -1,6 +1,10 @@
 AllCops:
   Exclude:
     - 'db/schema.rb'
+    - 'vendor/**/*'
+Style/FrozenStringLiteralComment:
+  Exclude:
+    - 'bin/*'
 Style/HashEachMethods:
   Enabled: true
 Style/HashTransformKeys:

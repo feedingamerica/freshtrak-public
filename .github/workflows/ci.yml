@@ -6,6 +6,8 @@ jobs:
   test-pantry-finder-api:
     name: Run Unit Tests For Pantry Finder API
     runs-on: ubuntu-latest
+    env:
+      working-directory: pantry-finder-api
 
     services:
       mysql:
@@ -28,20 +30,55 @@ jobs:
       - name: Cache Dependencies
         uses: actions/cache@v1
         with:
-          path: pantry-finder-api/vendor/bundle
-          key: ${{ runner.os }}-bundler-${{ hashFiles('pantry-finder-api/Gemfile.lock') }}
+          path: ${{env.working-directory}}/vendor/bundle
+          key: ${{ runner.os }}-bundler-${{ hashFiles('**/Gemfile.lock') }}
           restore-keys: |
             ${{ runner.os }}-bundler-
-      - name: Install Dependencies
-        run: |
-          gem install bundler
-          bundle config path vendor/bundle
-      - name: Setup and Run Tests
+      - name: Setup
         env:
           DB_HOST: 127.0.0.1
           JETS_ENV: test
         run: |
-          cd pantry-finder-api
+          gem install bundler
+          bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
           bin/setup_dev_db
+        working-directory: ${{env.working-directory}}
+      - name: Run Tests
+        env:
+          DB_HOST: 127.0.0.1
+          JETS_ENV: test
+        run: |
           bundle exec rspec
+        working-directory: ${{env.working-directory}}
+
+  lint-pantry-finder-api:
+    name: Run Linter For Pantry Finder API
+    runs-on: ubuntu-latest
+    env:
+      working-directory: pantry-finder-api
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Ruby
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 2.6.5
+      - name: Cache Dependencies
+        uses: actions/cache@v1
+        with:
+          path: ${{env.working-directory}}/vendor/bundle
+          key: ${{ runner.os }}-bundler-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-bundler-
+      - name: Setup
+        run: |
+          gem install bundler
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+        working-directory: ${{env.working-directory}}
+      - name: Lint
+        run: |
+          bundle exec rubocop
+        working-directory: ${{env.working-directory}}
