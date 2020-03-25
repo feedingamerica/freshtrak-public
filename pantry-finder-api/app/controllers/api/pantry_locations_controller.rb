@@ -5,7 +5,7 @@ class Api::PantryLocationsController < ApplicationController
   def index
     locations = PantryLocation.serving(search_params)
 
-    render json: PantryLocationSerializer.new(locations)
+    render json: ActiveModel::SerializableResource.new(locations).as_json
   end
 
   def search_params

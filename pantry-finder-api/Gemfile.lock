@@ -63,6 +63,11 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
+    active_model_serializers (0.10.10)
+      actionpack (>= 4.1, < 6.1)
+      activemodel (>= 4.1, < 6.1)
+      case_transform (>= 0.2)
+      jsonapi-renderer (>= 0.1.1.beta1, < 0.3)
     activejob (6.0.2.2)
       activesupport (= 6.0.2.2)
       globalid (>= 0.3.6)
@@ -142,6 +147,8 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (~> 1.5)
       xpath (~> 3.2)
+    case_transform (0.2)
+      activesupport
     cfn_camelizer (0.4.9)
       activesupport
       memoist
@@ -156,8 +163,6 @@ GEM
       aws-sdk-dynamodb
       rainbow
     erubi (1.9.0)
-    fast_jsonapi (1.5)
-      activesupport (>= 4.2)
     gems (1.2.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
@@ -171,6 +176,7 @@ GEM
       loofah (~> 2.2, >= 2.2.2)
     jmespath (1.4.0)
     json (2.3.0)
+    jsonapi-renderer (0.2.2)
     kramdown (2.1.0)
     launchy (2.5.0)
       addressable (~> 2.7)
@@ -252,10 +258,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_model_serializers (~> 0.10.10)
   byebug
   capybara
   dynomite
-  fast_jsonapi (~> 1.5)
   jets!
   launchy
   mysql2 (~> 0.5.2)
