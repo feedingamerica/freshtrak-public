@@ -3,7 +3,7 @@
 # Exposes the PantryLocation data
 class Api::PantryLocationsController < ApplicationController
   def index
-    locations = PantryLocation.serving(search_params)
+    locations = PantryLocation.serving_foodbank(search_params)
     serialized_locations =
       ActiveModelSerializers::SerializableResource.new(locations).as_json
 

@@ -19,4 +19,8 @@ describe PantryLocation, type: :model do
       expect(location.foodbank.id).to eq(foodbank.id)
     end
   end
+
+  it 'scopes by pantries that serve a zipcode' do
+    # TODO: Figure out how to test this whithout replicating source code
+  end
 end

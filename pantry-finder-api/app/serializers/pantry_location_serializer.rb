@@ -2,10 +2,9 @@
 
 # Serializer to strip away the cruft in the locations table
 class PantryLocationSerializer < ActiveModel::Serializer
-  attributes :id, :city, :state, :zip, :county, :phone
+  attributes :id, :address, :city, :state, :zip, :phone
   attribute :loc_name, key: :name
   attribute :loc_nickname, key: :nickname
-  attribute :address
 
   def address
     return object.address1 if object.address2.empty?
