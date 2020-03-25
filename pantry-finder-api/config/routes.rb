@@ -2,7 +2,7 @@
 
 Jets.application.routes.draw do
   namespace :api do
-    resources :locations, only: :index
+    resources :pantry_locations, only: :index
   end
   root 'jets/public#show'
 

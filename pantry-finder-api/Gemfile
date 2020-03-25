@@ -30,3 +30,5 @@ group :test do
   #   when starting jets console
   gem 'rspec'
 end
+
+gem "fast_jsonapi", "~> 1.5"

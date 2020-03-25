@@ -156,6 +156,8 @@ GEM
       aws-sdk-dynamodb
       rainbow
     erubi (1.9.0)
+    fast_jsonapi (1.5)
+      activesupport (>= 4.2)
     gems (1.2.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
@@ -253,6 +255,7 @@ DEPENDENCIES
   byebug
   capybara
   dynomite
+  fast_jsonapi (~> 1.5)
   jets!
   launchy
   mysql2 (~> 0.5.2)
