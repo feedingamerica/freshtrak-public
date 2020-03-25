@@ -10,6 +10,7 @@ class PantryLocation < ApplicationRecord
                         inverse_of: :pantry_locations
 
   scope :serving, -> (zip_code) {
-    where(primary_fb_id: ZipCode.find_by(zip_code: zip_code).county.foodbanks.select(:id))
+    joins(foodbank: { counties: :zip_codes })
+      .where(foodbanks: { counties: { zip_codes: { zip_code: zip_code } } })
   }
 end
