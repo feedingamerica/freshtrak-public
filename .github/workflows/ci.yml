@@ -42,7 +42,7 @@ jobs:
           gem install bundler
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
-          bin/setup_dev_db
+          bundle exec jets db:create db:schema:load
         working-directory: ${{env.working-directory}}
       - name: Run Tests
         env:

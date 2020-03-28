@@ -1,37 +1,17 @@
 # frozen_string_literal: true
 
 describe Foodbank, type: :model do
-  it 'should connect to the foodbanks table' do
-    expect(Foodbank.count).to be > 0
-  end
-
-  it 'should retrieve a foodbank' do
-    expect(Foodbank.last).to be_an_instance_of(Foodbank)
-  end
+  let(:foodbank) { create(:foodbank) }
 
   it 'has many counties' do
-    foodbanks =
-      Foodbank.joins(:foodbank_counties)
-              .where.not(foodbank_counties: { fb_id: nil })
-              .last(10)
+    counties = 5.times.map { create(:county, foodbank_ids: foodbank.id) }
 
-    foodbanks.each do |foodbank|
-      foodbank_ids = FoodbankCounty.where(fb_id: foodbank.id).pluck(:fips).sort
-      expect(foodbank.counties.pluck(:fips).sort).to eq(foodbank_ids)
-    end
+    expect(foodbank.counties.pluck(:fips)).to eq(counties.pluck(:fips))
   end
 
   it 'has many agencies' do
-    foodbanks =
-      Foodbank.joins(:agencies)
-              .where.not(locations: { primary_fb_id: nil })
-              .last(10)
+    agencies = 5.times.map { create(:agency, foodbank: foodbank) }
 
-    foodbanks.each do |fb|
-      agency_ids =
-        Agency.where(primary_fb_id: fb.id).pluck(:id).sort
-
-      expect(fb.agencies.pluck(:id).sort).to eq(agency_ids)
-    end
+    expect(foodbank.agencies.pluck(:id)).to eq(agencies.pluck(:id))
   end
 end

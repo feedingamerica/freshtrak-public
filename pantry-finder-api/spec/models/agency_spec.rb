@@ -1,45 +1,47 @@
 # frozen_string_literal: true
 
 describe Agency, type: :model do
-  it 'should connect to the agencies table' do
-    expect(Agency.count).to be > 0
+  let(:agency) { create(:agency) }
+
+  it 'has a foodbank' do
+    expect(agency.foodbank).to be_an_instance_of(Foodbank)
   end
 
-  it 'should retrieve an agency' do
-    expect(Agency.last).to be_an_instance_of(Agency)
+  it 'has a county' do
+    expect(agency.county).to be_an_instance_of(County)
   end
 
-  it 'has an active default scope' do
-    expect(Agency.all.count).to eq(Agency.active.count)
-  end
-
-  it 'should scope to active agencies' do
-    expect(Agency.active.pluck(:status_id).uniq).to eq([1])
-  end
-
-  it 'has one foodbank' do
-    fb_ids = Foodbank.pluck(:id)
-    agencies = Agency.where(primary_fb_id: fb_ids).last(10)
-
-    agencies.each do |agency|
-      foodbank = Foodbank.find(agency.primary_fb_id)
-
-      expect(agency.foodbank.id).to eq(foodbank.id)
+  context 'with scopes' do
+    before do
+      @active_agency = create(:agency, status_id: 1)
+      create(:agency, status_id: 0)
     end
-  end
 
-  it 'has one county' do
-    county_ids = County.pluck(:fips)
-    agencies = Agency.where(fips: county_ids).last(10)
-
-    agencies.each do |agency|
-      county = County.find(agency.fips)
-
-      expect(agency.county.id).to eq(county.id)
+    it 'has an active default scope' do
+      expect(Agency.pluck(:id)).to eq([@active_agency.id])
     end
-  end
 
-  it 'scopes by agencies that serve a zipcode' do
-    # TODO: Figure out how to test this whithout replicating source code
+    it 'can find agencies through a foodbank' do
+      zip = create(:zip_code)
+      fb = create(:foodbank, county_ids: zip.county.id)
+      agencies = 5.times.map do
+        create(:agency, foodbank: fb)
+      end
+
+      agency_results = Agency.by_foodbank(zip.zip_code)
+
+      expect(agency_results.pluck(:id)).to eq(agencies.pluck(:id))
+    end
+
+    it 'can find agencies through a county' do
+      zip = create(:zip_code)
+      agencies = 5.times.map do
+        create(:agency, fips: zip.county.fips)
+      end
+
+      agency_results = Agency.by_county(zip.zip_code)
+
+      expect(agency_results.pluck(:id)).to eq(agencies.pluck(:id))
+    end
   end
 end

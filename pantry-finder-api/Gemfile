@@ -29,6 +29,9 @@ group :test do
   #   "irb: warn: can't alias context from irb_context warning"
   #   when starting jets console
   gem 'rspec'
+  gem "factory_bot", "~> 5.1"
+  gem "faker", "~> 2.11"
+  gem "database_cleaner-active_record", "~> 1.8"
 end
 
 gem 'active_model_serializers', '~> 0.10.10'

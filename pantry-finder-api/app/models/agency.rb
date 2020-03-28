@@ -14,12 +14,12 @@ class Agency < ApplicationRecord
 
   scope :active, -> { where(status_id: 1) }
 
-  scope :find_through_foodbank, lambda { |zip_code|
+  scope :by_foodbank, lambda { |zip_code|
     joins(foodbank: { counties: :zip_codes })
       .where(foodbanks: { counties: { zip_codes: { zip_code: zip_code } } })
   }
 
-  scope :find_through_county, lambda { |zip_code|
+  scope :by_county, lambda { |zip_code|
     joins(county: :zip_codes)
       .where(counties: { zip_codes: { zip_code: zip_code } })
   }

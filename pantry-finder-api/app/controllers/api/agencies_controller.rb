@@ -4,7 +4,7 @@ module Api
   # Exposes the PantryLocation data
   class AgenciesController < ApplicationController
     def index
-      agencies = Agency.find_through_foodbank(search_params)
+      agencies = Agency.by_foodbank(search_params)
 
       serialized_agencies =
         ActiveModelSerializers::SerializableResource.new(agencies).as_json
