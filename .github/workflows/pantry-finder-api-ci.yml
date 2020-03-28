@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   test-pantry-finder-api:
-    name: Run Unit Tests For Pantry Finder API
+    name: Run Unit Tests
     runs-on: ubuntu-latest
     env:
       working-directory: pantry-finder-api
@@ -51,9 +51,13 @@ jobs:
         run: |
           bundle exec rspec
         working-directory: ${{env.working-directory}}
+      - name: Upload Coverage Report
+        uses: codecov/codecov-action@v1
+        with:
+          file: ${{env.working-directory}}/coverage/index.html
 
   lint-pantry-finder-api:
-    name: Run Linter For Pantry Finder API
+    name: Run Linter
     runs-on: ubuntu-latest
     env:
       working-directory: pantry-finder-api

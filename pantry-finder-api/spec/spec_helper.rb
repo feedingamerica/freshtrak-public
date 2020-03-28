@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require 'simplecov'
+SimpleCov.start
+
 ENV['JETS_TEST'] = '1'
 ENV['JETS_ENV'] ||= 'test'
 # Ensures aws api never called.
