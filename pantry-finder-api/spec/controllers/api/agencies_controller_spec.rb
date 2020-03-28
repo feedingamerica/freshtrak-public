@@ -6,10 +6,10 @@ describe Api::AgenciesController, type: :controller do
   before do
     other_zip = create(:zip_code)
     5.times do
-      fb_1 = create(:foodbank, county_ids: zip_code.county.id)
-      fb_2 = create(:foodbank, county_ids: other_zip.county.id)
-      create(:agency, foodbank: fb_1)
-      create(:agency, foodbank: fb_2)
+      fb1 = create(:foodbank, county_ids: zip_code.county.id)
+      fb2 = create(:foodbank, county_ids: other_zip.county.id)
+      create(:agency, foodbank: fb1)
+      create(:agency, foodbank: fb2)
     end
   end
 

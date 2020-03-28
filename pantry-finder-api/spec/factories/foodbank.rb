@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :foodbank do
-    fb_id { SecureRandom.rand(10000) }
+    fb_id { SecureRandom.rand(10_000) }
     fb_name { Faker::Company.name }
     fb_nickname { fb_name }
     fb_type_id { 1 }
