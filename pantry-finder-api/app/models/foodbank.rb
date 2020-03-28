@@ -8,5 +8,5 @@ class Foodbank < ApplicationRecord
 
   has_many :foodbank_counties, foreign_key: :fb_id, inverse_of: :foodbank
   has_many :counties, through: :foodbank_counties
-  has_many :pantry_locations, foreign_key: :primary_fb_id, inverse_of: :foodbank
+  has_many :agencies, foreign_key: :primary_fb_id, inverse_of: :foodbank
 end

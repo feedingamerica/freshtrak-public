@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Serializer to strip away the cruft in the locations table
-class PantryLocationSerializer < ActiveModel::Serializer
+class AgencySerializer < ActiveModel::Serializer
   attributes :id, :address, :city, :state, :zip, :phone
   attribute :loc_name, key: :name
   attribute :loc_nickname, key: :nickname

@@ -22,6 +22,19 @@ describe County, type: :model do
     end
   end
 
+  it 'has many agencies' do
+    counties =
+      County.joins(:agencies)
+            .where.not(locations: { fips: nil })
+            .last(10)
+
+    counties.each do |county|
+      agency_ids = Agency.where(fips: county.fips).order(:id).pluck(:id)
+      agency_by_county_ids = county.agencies.order(:id).pluck(:id)
+      expect(agency_by_county_ids).to eq(agency_ids)
+    end
+  end
+
   it 'has many foodbanks' do
     counties =
       County.joins(:foodbank_counties)
