@@ -1,4 +1,6 @@
 # FreshTrak Public Facing API
+![](https://github.com/midohiofoodbank/freshtrak-public/workflows/CI/badge.svg)
+
 Partnership between Can't Stop Columbus and the Mid-Ohio Foodbank to create a public api for the FreshTrak database
 
 ### Original Idea: 
