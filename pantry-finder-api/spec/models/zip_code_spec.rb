@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 
 describe ZipCode, type: :model do
-  it 'should connect to the zip_codes table' do
-    expect(ZipCode.count).to be > 0
-  end
+  let(:zip_code) { create(:zip_code) }
 
-  it 'should retrieve a zip_code' do
-    expect(ZipCode.last).to be_an_instance_of(ZipCode)
+  it 'has one county' do
+    expect(zip_code.county).to be_an_instance_of(County)
   end
 end

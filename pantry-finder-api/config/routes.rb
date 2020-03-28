@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 Jets.application.routes.draw do
+  namespace :api do
+    resources :agencies, only: :index
+  end
+
   root 'jets/public#show'
 
   # The jets/public#show controller can serve static utf8
