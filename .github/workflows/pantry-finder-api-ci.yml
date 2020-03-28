@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   test-pantry-finder-api:
-    name: Run Unit Tests
+    name: Run Unit Tests For Pantry Finder API
     runs-on: ubuntu-latest
     env:
       working-directory: pantry-finder-api
@@ -57,7 +57,7 @@ jobs:
           file: ${{env.working-directory}}/coverage/index.html
 
   lint-pantry-finder-api:
-    name: Run Linter
+    name: Run Linter For Pantry Finder API
     runs-on: ubuntu-latest
     env:
       working-directory: pantry-finder-api
