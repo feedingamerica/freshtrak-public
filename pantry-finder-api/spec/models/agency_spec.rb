@@ -11,6 +11,12 @@ describe Agency, type: :model do
     expect(agency.county).to be_an_instance_of(County)
   end
 
+  it 'has events' do
+    events = 5.times.map { create(:event, agency: agency) }
+
+    expect(agency.events.pluck(:id)).to eq(events.pluck(:id))
+  end
+
   context 'with scopes' do
     before do
       # default that should be ignored by scopes
