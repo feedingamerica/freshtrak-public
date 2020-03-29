@@ -9,6 +9,7 @@ FactoryBot.define do
         ServiceCategory.last.id + 1
       end
     end
+    service_category_name { 'Choice Pantry' }
     service_category_desc { '' }
     sc_mapping { '' }
     date_added { Time.now }

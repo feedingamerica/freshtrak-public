@@ -14,4 +14,8 @@ describe Event, type: :model do
   it 'has a service category' do
     expect(event.service_category).to be_an_instance_of(ServiceCategory)
   end
+
+  it 'should have a service description' do
+    expect(event.service_description).to eq('Choice Pantry')
+  end
 end
