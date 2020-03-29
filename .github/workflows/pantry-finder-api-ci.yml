@@ -54,7 +54,7 @@ jobs:
       - name: Upload Coverage Report
         uses: codecov/codecov-action@v1
         with:
-          file: ${{env.working-directory}}/coverage
+          file: ${{env.working-directory}}/coverage/coverage.xml
           fail_ci_if_error: true
 
   lint-pantry-finder-api:

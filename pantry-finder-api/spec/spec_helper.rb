@@ -2,8 +2,8 @@
 
 require 'simplecov'
 SimpleCov.start
-require 'simplecov-json'
-SimpleCov.formatter = SimpleCov::Formatter::JSONFormatter
+require 'simplecov-cobertura'
+SimpleCov.formatter = SimpleCov::Formatter::CoberturaFormatter
 
 ENV['JETS_TEST'] = '1'
 ENV['JETS_ENV'] ||= 'test'
