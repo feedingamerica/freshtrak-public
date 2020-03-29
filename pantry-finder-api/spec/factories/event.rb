@@ -24,5 +24,6 @@ FactoryBot.define do
     utc_offset { 0 }
 
     agency
+    service_type
   end
 end
