@@ -55,6 +55,7 @@ jobs:
         uses: codecov/codecov-action@v1
         with:
           file: ${{env.working-directory}}/coverage/coverage.json
+          fail_ci_if_error: true
 
   lint-pantry-finder-api:
     name: Run Linter For Pantry Finder API
