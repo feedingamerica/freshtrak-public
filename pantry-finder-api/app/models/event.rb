@@ -7,6 +7,7 @@ class Event < ApplicationRecord
   belongs_to :agency, foreign_key: :loc_id, inverse_of: :events
   belongs_to :service_type, foreign_key: :service_id, inverse_of: :events
   has_one :service_category, through: :service_type
+  has_many :event_dates, foreign_key: :event_id, inverse_of: :event
 
   def service_description
     service_category.service_category_name

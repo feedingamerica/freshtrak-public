@@ -1,4 +1,3 @@
-
 # frozen_string_literal: true
 
 describe ServiceCategory, type: :model do

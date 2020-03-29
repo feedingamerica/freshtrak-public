@@ -15,6 +15,12 @@ describe Event, type: :model do
     expect(event.service_category).to be_an_instance_of(ServiceCategory)
   end
 
+  it 'has many event dates' do
+    dates = 5.times.map { create(:event_date, event: event) }
+
+    expect(event.event_dates.pluck(:id)).to eq(dates.pluck(:id))
+  end
+
   it 'should have a service description' do
     expect(event.service_description).to eq('Choice Pantry')
   end
