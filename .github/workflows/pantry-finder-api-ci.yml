@@ -54,7 +54,7 @@ jobs:
       - name: Upload Coverage Report
         uses: codecov/codecov-action@v1
         with:
-          file: ${{env.working-directory}}/coverage/index.html
+          file: ${{env.working-directory}}/coverage/coverage.json
 
   lint-pantry-finder-api:
     name: Run Linter For Pantry Finder API
