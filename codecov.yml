@@ -2,13 +2,11 @@ coverage:
   status:
     project:
       default:
-        # basic
         target: auto
         threshold: 0%
         base: auto 
     patch:
       default:
-        # basic
         target: auto
         threshold: 0%
         base: auto
