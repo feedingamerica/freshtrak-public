@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Api
-  # Exposes the PantryLocation data
+  # Exposes the Foodbank data
   class FoodbanksController < ApplicationController
     def index
       foodbanks = Foodbank.by_county(search_params)
