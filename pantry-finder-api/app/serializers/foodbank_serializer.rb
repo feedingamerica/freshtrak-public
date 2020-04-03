@@ -15,8 +15,8 @@ class FoodbankSerializer < ActiveModel::Serializer
   end
 
   def display_url
-    return nil if !object.fb_agency_locator_url && \
-                  !object.fb_url && \
+    return '' if  !object.fb_agency_locator_url &&
+                  !object.fb_url &&
                   !object.fb_fano_url?
 
     chosen_url
