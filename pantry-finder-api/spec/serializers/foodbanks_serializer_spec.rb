@@ -72,8 +72,6 @@ describe FoodbankSerializer do
                  '"nickname":null,"display_url":"fb_fano_url",' \
                  '"fb_agency_locator_url":null,"fb_url":null,' \
                  '"fb_fano_url":"fb_fano_url"}'
-    
     expect(serializer.to_json).to eql(exp_rslt)
   end
-
 end
