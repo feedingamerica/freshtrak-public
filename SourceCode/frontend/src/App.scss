@@ -1,0 +1,40 @@
+
+.site-footer {
+    background-color: #26272b;
+    padding: 10px;
+    font-size: 13px;
+    line-height: 15px;
+    color: #737373;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+.App-header {
+    background-color: #FFFFFF;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+.header{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    color:white;
+    text-align: center;
+    background-color: #007bff;
+    padding: 20px 10px;
+}
+.content-data{
+    position: absolute;
+    left: 0;
+    width: 100%;
+    color:black;
+    text-align: center;
+
+}
