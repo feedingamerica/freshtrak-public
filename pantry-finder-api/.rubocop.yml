@@ -8,6 +8,9 @@ AllCops:
 Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'
+Metrics/MethodLength:
+  Exclude:
+    - 'spec/**/*'
 Rails/Date:
   Enabled: false
 Rails/HttpPositionalArguments:

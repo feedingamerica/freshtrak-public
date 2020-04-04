@@ -6,6 +6,8 @@ class AgencySerializer < ActiveModel::Serializer
   attribute :loc_name, key: :name
   attribute :loc_nickname, key: :nickname
 
+  has_many :event_dates
+
   def address
     return object.address1 if object.address2.empty?
 

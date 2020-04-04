@@ -17,6 +17,13 @@ describe Agency, type: :model do
     expect(agency.events.pluck(:id)).to eq(events.pluck(:id))
   end
 
+  it 'has event dates' do
+    event = create(:event, agency: agency)
+    event_dates = 5.times.map { create(:event_date, event: event) }
+
+    expect(agency.event_dates.pluck(:id)).to eq(event_dates.pluck(:id))
+  end
+
   context 'with scopes' do
     before do
       # default that should be ignored by scopes
@@ -48,6 +55,19 @@ describe Agency, type: :model do
 
       agency_results = described_class.by_county(zip.zip_code)
 
+      expect(agency_results.pluck(:id)).to eq(agencies.pluck(:id))
+    end
+
+    it 'can find agencies through an event date' do
+      date = (Date.today + 2).to_s.delete('-')
+      agencies = 5.times.map do
+        agency = create(:agency)
+        event = create(:event, agency: agency)
+        create(:event_date, event: event, date: date)
+        agency
+      end
+
+      agency_results = Agency.by_event_date(date)
       expect(agency_results.pluck(:id)).to eq(agencies.pluck(:id))
     end
   end
