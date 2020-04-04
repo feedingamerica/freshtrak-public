@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# import app/lib/Config
+
 # Serializer to strip away the cruft in the foodbanks table
 class FoodbankSerializer < ActiveModel::Serializer
   attributes :address, :city, :state, :zip
@@ -15,9 +17,9 @@ class FoodbankSerializer < ActiveModel::Serializer
   end
 
   def display_url
-    return '' if  !object.fb_agency_locator_url &&
-                  !object.fb_url &&
-                  !object.fb_fano_url?
+    return Config.default_fb_display_url if !object.fb_agency_locator_url &&
+                                            !object.fb_url &&
+                                            !object.fb_fano_url?
 
     chosen_url
   end
