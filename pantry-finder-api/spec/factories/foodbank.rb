@@ -83,5 +83,11 @@ FactoryBot.define do
     census_block_group { 0 }
     census_tract { 0 }
     status_id { 1 }
+    phone_public_help { '' }
+    fb_url { '' }
+    fb_agency_locator_url { '' }
+    fb_volunteer_url { '' }
+    fb_donate_url { '' }
+    fb_food_donate_url { '' }
   end
 end
