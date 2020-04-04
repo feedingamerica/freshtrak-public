@@ -8,6 +8,7 @@ FactoryBot.define do
     reserved { 0 }
     start_time_key { 1000 }
     end_time_key { 1800 }
+    event_duration_hours { 1 }
     status_publish { 1 }
     accept_walkin { 1 }
     accept_reservations { 1 }
