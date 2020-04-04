@@ -55,6 +55,157 @@ ActiveRecord::Schema.define(version: 0) do
     t.index ["fips_five_digit"], name: "fivedigitfips"
   end
 
+  create_table "dim_dates", primary_key: "date_key", id: :integer, unsigned: true, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.date "date_m"
+    t.string "FullDate", limit: 10
+    t.string "DateName", limit: 10
+    t.integer "DayOfWeek", limit: 1, unsigned: true
+    t.string "DayNameOfWeek", limit: 20
+    t.integer "nthDow", limit: 1, comment: "the nth day of the week. E.g. 1st Monday, 2nd Monday, 3rd Tuesday, etc...", unsigned: true
+    t.integer "DayOfMonth", limit: 1, unsigned: true
+    t.integer "DayOfYear", limit: 2, unsigned: true
+    t.string "WeekdayWeekend", limit: 20
+    t.integer "SunWeekOfYear", limit: 1, unsigned: true
+    t.integer "SunYearWeek", limit: 3, unsigned: true
+    t.integer "MonWeekOfYear", limit: 1, unsigned: true
+    t.integer "MonYearWeek", limit: 3, unsigned: true
+    t.string "MonthName", limit: 20
+    t.integer "MonthOfYear", limit: 1, unsigned: true
+    t.string "IsLastDayOfMonth", limit: 1
+    t.string "IsPublicHoliday", limit: 1, comment: "is this a pulick dfkadsf df d fads ff asdf sad fsd fas df sd fsd sda fkjasdklfj;lsdjfkl;asd jfl; dslk dlfkj jsdkl; jl;kdsjf l;kdsjfl;k jasdl;kf jl;kasdjlk;jsa"
+    t.string "IsPublicHolidayDescription", limit: 40
+    t.integer "CalendarQuarter", limit: 1, unsigned: true
+    t.integer "CalendarYear", limit: 2, unsigned: true
+    t.integer "CalendarYearMonth", limit: 3, unsigned: true
+    t.string "CalendarYearMonthDashed", limit: 7
+    t.string "CalendarYearQtr", limit: 6
+    t.integer "JulFiscalMonthOfYear", limit: 1, unsigned: true
+    t.integer "JulFiscalQuarter", limit: 1, unsigned: true
+    t.integer "JulFiscalYear", limit: 2, unsigned: true
+    t.string "JulFiscalYearMonth", limit: 9
+    t.string "JulFiscalYearQtr", limit: 8
+    t.integer "OctFiscalMonthOfYear", limit: 1, unsigned: true
+    t.integer "OctFiscalQuarter", limit: 1, unsigned: true
+    t.integer "OctFiscalYear", limit: 2, unsigned: true
+    t.string "OctFiscalYearMonth", limit: 9
+    t.string "OctFiscalYearQtr", limit: 8
+    t.integer "AprFiscalMonthOfYear", limit: 1, unsigned: true
+    t.integer "AprFiscalQuarter", limit: 1, unsigned: true
+    t.integer "AprFiscalYear", limit: 2, unsigned: true
+    t.string "AprFiscalYearMonth", limit: 9
+    t.string "AprFiscalYearQtr", limit: 8
+    t.integer "UTCMonth", limit: 1, unsigned: true
+  end
+
+  create_table "dim_minutes", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+    t.integer "minute_key", limit: 1
+    t.string "minute_common", limit: 2
+    t.string "minute_2", limit: 2
+    t.string "minute_3", limit: 2
+    t.string "minute_4", limit: 2
+    t.string "minute_5", limit: 2
+    t.string "minute_6", limit: 2
+    t.string "minute_10", limit: 2
+    t.string "minute_12", limit: 2
+    t.string "minute_15", limit: 2
+    t.string "minute_20", limit: 2
+    t.string "minute_30", limit: 2
+    t.string "minute_60", limit: 2
+  end
+
+  create_table "dim_times", primary_key: "time_key", id: :integer, unsigned: true, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", comment: "Table that holds the time dimension linking to timekey in other tables", force: :cascade do |t|
+    t.integer "minute_of_day", null: false, comment: "the minute of the day. minutes past midnight.", unsigned: true
+    t.integer "hour_of_day", null: false, unsigned: true
+    t.string "short_time", limit: 5, null: false
+    t.string "AM_PM", limit: 2, null: false, comment: "is the time in the AM or PM "
+    t.string "military_time", limit: 5, null: false
+    t.time "mysql_time", null: false
+    t.string "common_time", limit: 10, null: false
+    t.integer "minute_key", null: false, unsigned: true
+    t.integer "batch_id", null: false, unsigned: true
+    t.datetime "date_added"
+    t.integer "added_by", null: false, unsigned: true
+    t.datetime "last_update"
+    t.integer "last_update_by", null: false, unsigned: true
+    t.integer "status_id", default: 1, null: false, unsigned: true
+  end
+
+  create_table "event_dates", primary_key: "event_date_id", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", comment: "Record of when the event is offering their services. Used to manage capacity, generate event_hours and event_slots, and other notes.", force: :cascade do |t|
+    t.integer "event_id", null: false, unsigned: true
+    t.integer "event_date_key", null: false, unsigned: true
+    t.integer "service_id", null: false, comment: "The service type being provided at the event. Default comes from event->event_service_profile but allows for customization. e.g. Event normally does produce, but on one distribution they will give out turkeys + produce."
+    t.integer "capacity", null: false, comment: "The total number of appointments that can be scheduled in event_slots that roll up to this event_date record. e.g. 100. Capacity is evenly divided among the connected event_hours scaled to their length (e.g. a half hour gets half as many appointments as a full hour)."
+    t.integer "reserved", null: false, comment: "The total number of appointments that have been scheduled in event_slots that roll up to this event_date record. e.g. 80. This number should always be less than or equal to the capcity number."
+    t.integer "start_time_key", null: false, comment: "The start time of the distribution. Usually an hour start, but can be any valid timekey from the dim_times table", unsigned: true
+    t.integer "end_time_key", null: false, comment: "The end time of the distribution. Usually an hour end, but can be any valid timekey from the dim_times table", unsigned: true
+    t.integer "slot_length_minutes", default: 60, null: false, comment: "The length in minutes of the distribution slots tied to the distribution hour records of this distribution date record. e.g. If a distribution operates with four 15 minute slots of time per hour, this value would be 15.", unsigned: true
+    t.integer "status_publish", limit: 1, null: false, comment: "Controls whether this event_date is published or not."
+    t.integer "accept_walkin", limit: 1, null: false, comment: "Whether this event_date is eligible for walkins or not."
+    t.integer "accept_reservations", limit: 1, null: false, comment: "Whether this event_date accepts reservations or not."
+    t.integer "accept_interest", limit: 1, null: false, comment: "Whether this event_date accepts general interest or not."
+    t.integer "published_date_key", null: false, comment: "The date the entry is allowed to be shown to the public."
+    t.datetime "date_added"
+    t.integer "added_by", null: false, unsigned: true
+    t.datetime "last_update"
+    t.integer "last_update_by", null: false, unsigned: true
+    t.integer "status_id", default: 1, null: false, unsigned: true
+  end
+
+  create_table "event_hours", primary_key: "event_hour_id", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=COMPACT", comment: "Record of what hours, connected to the event_dates, are available to order on, with controls for capacity. Also allows for split shifts and early closures because of low reservations.", force: :cascade do |t|
+    t.integer "event_date_id", null: false, unsigned: true
+    t.integer "capacity", null: false, comment: "The total number of appointments that can be scheduled in event_slots that roll up to this event_hour record. e.g. 25"
+    t.integer "reserved", null: false, comment: "The total number of appointments that have been scheduled in event_slots that roll up to this event_hour record. e.g. 20. This number should always be less than or equal to the capacity number."
+    t.integer "start_time_key", null: false, comment: "The start time of the event_hour. Usually an hour start, but can be any valid timekey from the dim_times table", unsigned: true
+    t.integer "end_time_key", null: false, comment: "The end time of the event_hour. Usually an hour end, but can be any valid timekey from the dim_times table"
+    t.decimal "duration_hours", precision: 4, scale: 2, default: "1.0", null: false, comment: "Provides an accurate way to sum up a column and state how long an agency is open for a day, accounts well for half hours, 15 of 60 minute hours, etc...", unsigned: true
+    t.datetime "date_added"
+    t.integer "added_by", null: false, unsigned: true
+    t.datetime "last_update"
+    t.integer "last_update_by", null: false, unsigned: true
+    t.integer "status_id", default: 1, null: false, unsigned: true
+  end
+
+  create_table "event_service_profiles", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+    t.integer "event_id", null: false, comment: "The event_id the event_service_profile belongs to"
+    t.integer "service_id", comment: "The default service type provided through the event"
+    t.integer "frequency_type_id", comment: "Frequency, e.g. Every, 1st, 2nd, etc..."
+    t.integer "dayofweek_id", comment: "Id for the day of the Week, Weekdays, Weekends, etc..."
+    t.integer "start_timekey", comment: "start_timekey of the distribution"
+    t.integer "end_timekey", comment: "end_timekey of the distribution"
+    t.integer "capacity_type", limit: 1, default: 1, null: false, comment: "(future design) the default capacity type for the event_date. Default is services, but could also choose children, seniors, etc... if you have an age specifc service that is not 1-1 with a service event. "
+    t.integer "default_capacity_daily", comment: "The default daily capacity value for the event_dates generated from the schedule profile. e.g. 100"
+    t.integer "time_shift_id", comment: "(future design) MHM had used this to shift schedules forward or backward depending on some conditions."
+    t.integer "generate_status_id", comment: "Controls if the event_service_profile will generate dates or not. Use this status for when an event_service_profile is in a draft state, then change to generate when it is ready to start making dates."
+    t.integer "publish_status_id", null: false, comment: "Controls if the Profile is Published or not. "
+    t.integer "status_publish_event_dates", limit: 1, null: false, comment: "Default setting for whether event_dates generated from this service_profile are published", unsigned: true
+    t.integer "ed_accept_walkin", limit: 1, default: 0, null: false, comment: "Default setting for event_datese whether they accept walkins or not.", unsigned: true
+    t.integer "ed_accept_resesrvations", limit: 1, default: 0, null: false, comment: "Default setting for event_dates whether they accept reservations or not.", unsigned: true
+    t.integer "ed_accept_interest", limit: 1, default: 0, null: false, comment: "Default setting for event_dates whether they accept interest in their distribution or not.", unsigned: true
+    t.string "published_desc_short", comment: "Short description (for menus etc...) that shows when a customer makes an appointment or views information on a map. Also shows when a user selects a timeslot."
+    t.string "published_desc_long", comment: "Long description (for popups etc... ) that shows when a customer makes an appointment or views information in a menu. Replicated onto each event_date and painted in the event_details box when a customer his view_details. Could also show on the appointment confirmation screen."
+    t.integer "active_date_key", null: false, comment: "The first date an event_date generated from this event can be on. e.g. if the value is 03/26/2020 no schedules can be created before this date for this event_service_profile"
+    t.integer "inactive_date_key", default: 99999999, null: false, comment: "The last date an event_date generated from this event_service_profile could be generated on. All generated dates from this schedule must be <= this date."
+    t.integer "last_generate_date_key", null: false, comment: "The datekey of the last time TASD records were checked or generated from this schedule profile ID."
+    t.datetime "date_added"
+    t.integer "added_by"
+    t.datetime "last_update"
+    t.integer "last_update_by"
+    t.integer "status_id", default: 1, null: false
+  end
+
+  create_table "event_slots", primary_key: "event_slot_id", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=COMPACT", comment: "Record of a slot of time that appointments can be scheduled into.", force: :cascade do |t|
+    t.integer "event_hour_id", null: false, unsigned: true
+    t.integer "capacity", null: false, comment: "The total number of appointments that can be scheduled in this event_slot e.g. 6 (100 event_date capacity / 4 hours = 25 appointments per hour. 25 appointments per hour / (60 minutes per hour / 15 minutes per slot) = 6.25 = 6 appointments per slot."
+    t.integer "reserved", null: false, comment: "The total number of appointments that have been scheduled in this event_slots e.g. 5. This number should always be less than or equal to the capacity number."
+    t.integer "start_time_key", null: false, comment: "The start time of the event_slot. Usually an hour start, but can be any valid timekey from the dim_times table", unsigned: true
+    t.integer "end_time_key", null: false, comment: "The end time of the event_slot. Usually an hour end, but can be any valid timekey from the dim_times table"
+    t.datetime "date_added"
+    t.integer "added_by", null: false, unsigned: true
+    t.datetime "last_update"
+    t.integer "last_update_by", null: false, unsigned: true
+    t.integer "status_id", default: 1, null: false, unsigned: true
+  end
+
   create_table "events", primary_key: "event_id", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", comment: "programs operated by locations (agencies), each has a specific default type of service (service_type_id)", force: :cascade do |t|
     t.integer "event_num", default: 0, null: false
     t.string "event_name", limit: 80, default: "", null: false
@@ -69,11 +220,20 @@ ActiveRecord::Schema.define(version: 0) do
     t.string "secondary_service_ids", default: "", null: false
     t.time "start_time"
     t.time "end_time"
-    t.string "schedule_desc", comment: "basic description of the schedule for this event"
+    t.string "schedule_mgmt_notes", comment: "Place to keep notes about potential changees to the agency schedule"
+    t.integer "last_schedule_mgmt_datekey", null: false, comment: "Last date these scheduled were managed. Use to randomly audit, etc..."
+    t.integer "last_schedule_mgmt_by", default: 0, null: false, comment: "Last User that managed the schedule information", unsigned: true
+    t.string "schedule_desc", comment: "Basic description of the schedule for this event"
+    t.integer "status_publish_event", limit: 1, null: false, comment: "Master control for publishing - controls whether or not this event is published, default 0 for everyone. Turn them on 1 by 1."
+    t.integer "status_publish_event_dates", limit: 1, null: false, comment: "Master control for whether or not event_dates connected to this event are published or not.", unsigned: true
+    t.integer "event_accept_walkin", limit: 1, default: 0, null: false, comment: "Default setting for event_service_profiles if they accept walkins or not.", unsigned: true
+    t.integer "event_accept_resesrvations", limit: 1, default: 0, null: false, comment: "Default setting for event_service_profiles if they accept reservations or not.", unsigned: true
+    t.integer "event_accept_interest", limit: 1, default: 0, null: false, comment: "Default setting for event_service_profiles if they accept interest in their dist or not.", unsigned: true
     t.integer "display_order", limit: 1, default: 0, null: false, unsigned: true
     t.column "display_on_home", "enum('yes','no')", default: "no", null: false
     t.column "alt_id", "enum('Yes','No')", default: "No", null: false
     t.column "quick_serve", "enum('no','yes')", default: "no", null: false, comment: "Feature used to scan alt ids, or other barcodes, and create a service event with no extra steps."
+    t.column "mobile_serve", "enum('no','yes')", default: "no", null: false, comment: "this event is eligible for use with the mobile checkin screens developed in March 2020 by Phil Trimble"
     t.column "check_allow_bypass", "enum('yes','no')", default: "yes", null: false, comment: "Lets a site configure whether or not to give the user the option to bypass the data checking and quick serve the family anyway. Used for when the data checking station is overwhelmed."
     t.column "check_dob_validity", "enum('no','yes')", default: "no", null: false, comment: "checks to see if the birthday is in the future, equal to zero, over 110 years old, and other errors"
     t.column "check_address_verified", "enum('no','yes')", default: "no", null: false, comment: "looks at the fam loc record and sees if the address is verified, and if so was it in the last year"
@@ -90,6 +250,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.string "add_new_family_script", default: "", null: false, comment: "The script the event uses to add a new family. If this field is not filled out use family_res_add1.php (or successor) otherwise, use the idenfitied script."
     t.integer "limits_future_day", limit: 2, default: 0, null: false, unsigned: true
     t.integer "limits_same_day", limit: 2, default: 0, null: false, unsigned: true
+    t.integer "scheduling_interval", limit: 2, comment: "allow an overide of the scheduling interval that comes from the location level", unsigned: true
     t.string "future7", limit: 20, default: "", null: false
     t.integer "d_date_key", default: 0, null: false, comment: "the last time the warehouse RE data was calculated", unsigned: true
     t.integer "d_last_year", default: 0, null: false, comment: "the number of services in the last year relative to the date key", unsigned: true
@@ -105,7 +266,9 @@ ActiveRecord::Schema.define(version: 0) do
     t.text "sc_monthly_30", null: false, comment: "the monthly trend for this month, and the preceeding 12 for the service category"
     t.text "sc_monthly_35", null: false, comment: "the monthly trend for this month, and the preceeding 12 for the service category"
     t.text "sc_monthly_40", null: false, comment: "the monthly trend for this month, and the preceeding 12 for the service category"
-    t.integer "event_address_status_id", limit: 1, default: 0, null: false, unsigned: true
+    t.integer "service_territory_status_id", limit: 1, default: 0, null: false, comment: "Status for whether or not the event inherits its service_territory from the loc (0) or is custom to the event (1)", unsigned: true
+    t.integer "st_id", default: 0, null: false, comment: "The specific service_territories entry that this event follows", unsigned: true
+    t.integer "event_address_status_id", limit: 1, default: 0, null: false, comment: "Status for whether or not the event inherits its address from the loc (0) or is custom to the event (1)", unsigned: true
     t.string "address1", limit: 150, default: "", null: false
     t.string "address2", limit: 150, default: "", null: false
     t.string "city", limit: 60, default: "", null: false
@@ -145,28 +308,31 @@ ActiveRecord::Schema.define(version: 0) do
     t.string "geofips_cd", limit: 4
     t.string "geofips_state", limit: 2
     t.integer "source_id", limit: 3, default: 0, null: false, unsigned: true
+    t.text "notes"
     t.datetime "date_added", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.integer "added_by", default: 0, null: false, unsigned: true
     t.timestamp "last_update", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.integer "last_update_by", unsigned: true
     t.integer "status_id", limit: 1, default: 0, null: false, unsigned: true
-    t.index ["display_order"], name: "displayorder"
+    t.index ["event_accept_walkin"], name: "displayorder"
     t.index ["loc_id"], name: "loc_id"
   end
 
   create_table "foodbank_counties", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.integer "fb_id", limit: 3, unsigned: true
-    t.integer "fips", unsigned: true
+    t.integer "fips", comment: "County Code", unsigned: true
     t.string "fips_five_digit", limit: 5, default: "", collation: "utf8mb4_unicode_ci"
     t.string "county_number", limit: 3, default: "", collation: "utf8mb4_unicode_ci"
-    t.string "state_number", limit: 2, default: "", collation: "utf8mb4_bin"
+    t.string "state_number", limit: 2, default: "", collation: "utf8mb4_bin", comment: "state number"
     t.string "county_name", collation: "utf8mb4_unicode_ci"
     t.string "state", collation: "utf8mb4_unicode_ci"
     t.string "fb_name", collation: "utf8mb4_unicode_ci"
     t.integer "is_shared_county", default: 0, unsigned: true
-    t.integer "is_primary_fb", default: 1, unsigned: true
+    t.string "is_primary_fb", limit: 2, default: "", collation: "utf8mb4_bin", comment: "Identified if it is the primary foodbank for the county or not"
+    t.string "fa_raw_split_share", limit: 25, default: "", null: false
+    t.integer "record_num", default: 0, null: false, unsigned: true
     t.string "notes", default: "", collation: "utf8mb4_unicode_ci"
-    t.datetime "date_added"
+    t.datetime "date_added", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.integer "added_by", default: 0, unsigned: true
     t.datetime "last_update"
     t.integer "last_update_by", unsigned: true
@@ -181,10 +347,14 @@ ActiveRecord::Schema.define(version: 0) do
     t.string "city", limit: 60
     t.string "state", limit: 10
     t.string "zip", limit: 15
+    t.string "phone_public_help", limit: 30, null: false, comment: "Public phone number customers can call to get help."
     t.integer "fb_type_id", limit: 1, null: false, unsigned: true
     t.string "fb_logo", null: false
-    t.string "fb_url"
-    t.string "fb_agency_locator_url"
+    t.string "fb_url", null: false, comment: "Foodbank general url for their website."
+    t.string "fb_agency_locator_url", null: false, comment: "Public link for how to find food and agencies with food for this foodbank."
+    t.string "fb_volunteer_url", null: false, comment: "Public link for how to volunteer with this foodbank"
+    t.string "fb_donate_url", null: false, comment: "Public link for how to donate money to this foodbank"
+    t.string "fb_food_donate_url", null: false, comment: "Public link for how to donate food to this foodbank"
     t.string "fb_fano_url"
     t.integer "display_order", limit: 1, null: false, unsigned: true
     t.integer "live_on_pt", limit: 1, default: 2, null: false, unsigned: true
@@ -414,6 +584,18 @@ ActiveRecord::Schema.define(version: 0) do
     t.index ["geofips_tract"], name: "tract"
     t.index ["primary_fb_id"], name: "foodbank"
     t.index ["state"], name: "state"
+  end
+
+  create_table "service_categories", primary_key: "service_category", id: :integer, unsigned: true, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", comment: "categories of services that summary the service types.", force: :cascade do |t|
+    t.string "service_category_name", limit: 50, default: "", null: false, collation: "utf8_general_ci"
+    t.string "service_category_desc", null: false
+    t.string "color", limit: 20, default: "#FF0080", null: false
+    t.string "sc_mapping", null: false, comment: "Field used to tell where each service category data should be warehoused. Used in the events table and others."
+    t.string "notes", default: "", null: false, collation: "utf8_general_ci"
+    t.datetime "date_added", null: false
+    t.string "added_by", limit: 50, default: "", null: false, collation: "utf8_general_ci"
+    t.timestamp "last_update", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.integer "status_id", limit: 1, default: 2, null: false, unsigned: true
   end
 
   create_table "service_types", primary_key: "service_id", id: :integer, limit: 2, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", comment: "types of service and categories of service that a family might receive", force: :cascade do |t|
