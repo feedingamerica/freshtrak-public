@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'yaml'
-
 # Application environment variables defined here for global access
 module Config
   class << self
