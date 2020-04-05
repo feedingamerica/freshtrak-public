@@ -11,7 +11,7 @@ describe Api::FoodbanksController, type: :controller do
     end
   end
 
-  it 'should be indexable by zip_code' do
+  it 'is indexable by zip_code' do
     get '/api/foodbanks', zip_code: zip_code.zip_code
     expect(response.status).to eq 200
     response_body = JSON.parse(response.body)

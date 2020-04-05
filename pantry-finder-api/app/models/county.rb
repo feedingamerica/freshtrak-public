@@ -6,8 +6,12 @@ class County < ApplicationRecord
 
   alias_attribute :fips, :FIPS
 
-  has_many :zip_codes, foreign_key: :fips, inverse_of: :county
-  has_many :foodbank_counties, foreign_key: :fips, inverse_of: :county
-  has_many :foodbanks, through: :foodbank_counties
-  has_many :agencies, foreign_key: :fips, inverse_of: :county
+  has_many :zip_codes, foreign_key: :fips, inverse_of: :county,
+                       dependent: :restrict_with_exception
+  has_many :foodbank_counties, foreign_key: :fips, inverse_of: :county,
+                               dependent: :restrict_with_exception
+  has_many :foodbanks, through: :foodbank_counties,
+                       dependent: :restrict_with_exception
+  has_many :agencies, foreign_key: :fips, inverse_of: :county,
+                      dependent: :restrict_with_exception
 end
