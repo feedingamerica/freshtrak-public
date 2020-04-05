@@ -21,7 +21,7 @@ describe Event, type: :model do
     expect(event.event_dates.pluck(:id)).to eq(dates.pluck(:id))
   end
 
-  it 'should have a service description' do
+  it 'has a service description' do
     expect(event.service_description).to eq('Choice Pantry')
   end
 end

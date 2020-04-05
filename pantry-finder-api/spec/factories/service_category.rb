@@ -12,6 +12,6 @@ FactoryBot.define do
     service_category_name { 'Choice Pantry' }
     service_category_desc { '' }
     sc_mapping { '' }
-    date_added { Time.now }
+    date_added { Time.now.utc }
   end
 end

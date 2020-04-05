@@ -5,14 +5,15 @@ AllCops:
   Exclude:
     - 'db/schema.rb'
     - 'vendor/**/*'
+Metrics/AbcSize:
+  Exclude:
+    - 'spec/**/*'
 Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'
 Metrics/MethodLength:
   Exclude:
     - 'spec/**/*'
-Rails/Date:
-  Enabled: false
 Rails/HttpPositionalArguments:
   Exclude:
     - 'spec/controllers/**/*'

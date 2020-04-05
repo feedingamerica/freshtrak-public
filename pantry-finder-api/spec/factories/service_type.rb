@@ -7,7 +7,7 @@ FactoryBot.define do
     service_sub_category1 { 0 }
     regulated_service { 0 }
     logo { '' }
-    date_added { Time.now }
+    date_added { Time.now.utc }
 
     service_category
   end

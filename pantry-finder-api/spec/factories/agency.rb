@@ -59,7 +59,7 @@ FactoryBot.define do
     sc_monthly_30 { 0 }
     sc_monthly_35 { 0 }
     sc_monthly_40 { 0 }
-    date_added { Date.today }
+    date_added { Time.zone.today }
     last_update_by { 0 }
 
     county

@@ -59,7 +59,7 @@ describe Agency, type: :model do
     end
 
     it 'can find agencies through an event date' do
-      date = (Date.today + 2).to_s.delete('-')
+      date = (Time.zone.today + 2).to_s.delete('-')
       agencies = 5.times.map do
         agency = create(:agency)
         event = create(:event, agency: agency)
@@ -67,7 +67,7 @@ describe Agency, type: :model do
         agency
       end
 
-      agency_results = Agency.by_event_date(date)
+      agency_results = described_class.by_event_date(date)
       expect(agency_results.pluck(:id)).to eq(agencies.pluck(:id))
     end
   end

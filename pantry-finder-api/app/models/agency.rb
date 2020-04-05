@@ -9,8 +9,10 @@ class Agency < ApplicationRecord
   belongs_to :foodbank, foreign_key: :primary_fb_id,
                         inverse_of: :agencies
   belongs_to :county, foreign_key: :fips, inverse_of: :agencies
-  has_many :events, foreign_key: :loc_id, inverse_of: :agency
-  has_many :event_dates, through: :events
+  has_many :events, foreign_key: :loc_id, inverse_of: :agency,
+                    dependent: :restrict_with_exception
+  has_many :event_dates, through: :events,
+                         dependent: :restrict_with_exception
 
   default_scope { active }
 
