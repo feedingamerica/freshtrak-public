@@ -17,12 +17,13 @@ describe Foodbank, type: :model do
 
   context 'with scopes' do
     before do
-      @active_foodbank = create(:foodbank, status_id: 1)
+      # default that should not be returned by scopes
       create(:foodbank, status_id: 0)
     end
 
     it 'has an active default scope' do
-      expect(Foodbank.pluck(:id)).to eq([@active_foodbank.id])
+      active_foodbank = create(:foodbank, status_id: 1)
+      expect(described_class.pluck(:id)).to eq([active_foodbank.id])
     end
 
     it 'can find foodbanks through a zip' do
@@ -32,7 +33,7 @@ describe Foodbank, type: :model do
         create(:foodbank, county_ids: zip.county.id)
       end
 
-      foodbank_results = Foodbank.by_county(zip.zip_code)
+      foodbank_results = described_class.by_county(zip.zip_code)
 
       expect(foodbank_results.pluck(:fb_id)).to eq(foodbanks.pluck(:fb_id))
     end

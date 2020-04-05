@@ -19,6 +19,8 @@ group :development, :test do
   gem 'puma'
   gem 'rack'
   gem 'rubocop', '~> 0.80.1', require: false
+  gem 'rubocop-rails', '~> 2.5'
+  gem 'rubocop-rspec', '~> 1.38'
   gem 'shotgun'
 end
 

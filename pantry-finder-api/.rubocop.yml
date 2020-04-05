@@ -1,3 +1,6 @@
+require:
+  - rubocop-rails
+  - rubocop-rspec
 AllCops:
   Exclude:
     - 'db/schema.rb'
@@ -5,6 +8,16 @@ AllCops:
 Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'
+Rails/Date:
+  Enabled: false
+Rails/HttpPositionalArguments:
+  Exclude:
+    - 'spec/controllers/**/*'
+RSpec/ExampleLength:
+  Exclude:
+    - 'spec/**/*'
+RSpec/MultipleExpectations:
+  Max: 4
 Style/FrozenStringLiteralComment:
   Exclude:
     - 'bin/*'

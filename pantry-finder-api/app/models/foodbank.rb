@@ -6,9 +6,12 @@ class Foodbank < ApplicationRecord
 
   alias_attribute :id, :fb_id
 
-  has_many :foodbank_counties, foreign_key: :fb_id, inverse_of: :foodbank
-  has_many :counties, through: :foodbank_counties
-  has_many :agencies, foreign_key: :primary_fb_id, inverse_of: :foodbank
+  has_many :foodbank_counties, foreign_key: :fb_id, inverse_of: :foodbank,
+                               dependent: :restrict_with_exception
+  has_many :counties, through: :foodbank_counties,
+                      dependent: :restrict_with_exception
+  has_many :agencies, foreign_key: :primary_fb_id, inverse_of: :foodbank,
+                      dependent: :restrict_with_exception
 
   default_scope { active }
 

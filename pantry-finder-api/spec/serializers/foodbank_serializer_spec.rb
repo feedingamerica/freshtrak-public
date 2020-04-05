@@ -3,7 +3,7 @@
 describe FoodbankSerializer do
   it 'JSON single addr, display_url is Config.default_fb_display_url' do
     serializer =
-      FoodbankSerializer.new(
+      described_class.new(
         Foodbank.new(fb_name: 'local foodbank', address1: 'addr 1',
                      city: 'the town', state: 'OH', zip: '12345')
       )
@@ -20,7 +20,7 @@ describe FoodbankSerializer do
 
   it 'JSON combi addr, display_url is Config.default_fb_display_url' do
     serializer =
-      FoodbankSerializer.new(
+      described_class.new(
         Foodbank.new(fb_name: 'local foodbank', address1: 'addr 1',
                      address2: 'addr 2', city: 'the town', state: 'OH',
                      zip: '12345')
@@ -38,7 +38,7 @@ describe FoodbankSerializer do
 
   it 'JSON when display_url is fb_agency_locator_url' do
     serializer =
-      FoodbankSerializer.new(
+      described_class.new(
         Foodbank.new(fb_name: 'local foodbank', address1: 'addr 1', \
                      address2: 'addr 2', city: 'the town', \
                      state: 'OH', zip: '12345', \
@@ -56,7 +56,7 @@ describe FoodbankSerializer do
 
   it 'JSON when display_url is fb_url' do
     serializer =
-      FoodbankSerializer.new(
+      described_class.new(
         Foodbank.new(fb_name: 'local foodbank', address1: 'addr 1', \
                      address2: 'addr 2', city: 'the town', state: 'OH', \
                      zip: '12345', fb_url: 'fb_url')
@@ -72,7 +72,7 @@ describe FoodbankSerializer do
 
   it 'JSON when display_url is fb_fano_url' do
     serializer =
-      FoodbankSerializer.new(
+      described_class.new(
         Foodbank.new(fb_name: 'local foodbank', address1: 'addr 1', \
                      address2: 'addr 2', city: 'the town', state: 'OH', \
                      zip: '12345', fb_fano_url: 'fb_fano_url')

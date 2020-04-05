@@ -13,12 +13,13 @@ describe Agency, type: :model do
 
   context 'with scopes' do
     before do
-      @active_agency = create(:agency, status_id: 1)
+      # default that should be ignored by scopes
       create(:agency, status_id: 0)
     end
 
     it 'has an active default scope' do
-      expect(Agency.pluck(:id)).to eq([@active_agency.id])
+      active_agency = create(:agency, status_id: 1)
+      expect(described_class.pluck(:id)).to eq([active_agency.id])
     end
 
     it 'can find agencies through a foodbank' do
@@ -28,7 +29,7 @@ describe Agency, type: :model do
         create(:agency, foodbank: fb)
       end
 
-      agency_results = Agency.by_foodbank(zip.zip_code)
+      agency_results = described_class.by_foodbank(zip.zip_code)
 
       expect(agency_results.pluck(:id)).to eq(agencies.pluck(:id))
     end
@@ -39,7 +40,7 @@ describe Agency, type: :model do
         create(:agency, fips: zip.county.fips)
       end
 
-      agency_results = Agency.by_county(zip.zip_code)
+      agency_results = described_class.by_county(zip.zip_code)
 
       expect(agency_results.pluck(:id)).to eq(agencies.pluck(:id))
     end

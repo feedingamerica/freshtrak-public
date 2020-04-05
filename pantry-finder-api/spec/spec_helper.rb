@@ -38,7 +38,7 @@ RSpec.configure do |c|
     DatabaseCleaner.clean_with(:truncation)
   end
 
-  c.around(:each) do |example|
+  c.around do |example|
     DatabaseCleaner.cleaning do
       example.run
     end
