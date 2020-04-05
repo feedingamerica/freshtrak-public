@@ -45,7 +45,7 @@ RSpec.configure do |c|
   end
 
   c.before do
-    # Override readonly models to enable factory bot to create records
+    # Override readonly models so that factory bot can create records
     # rubocop:disable RSpec/AnyInstance
     allow_any_instance_of(ApplicationRecord)
       .to receive(:readonly?).and_return(false)
