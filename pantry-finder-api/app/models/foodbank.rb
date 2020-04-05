@@ -9,4 +9,13 @@ class Foodbank < ApplicationRecord
   has_many :foodbank_counties, foreign_key: :fb_id, inverse_of: :foodbank
   has_many :counties, through: :foodbank_counties
   has_many :agencies, foreign_key: :primary_fb_id, inverse_of: :foodbank
+
+  default_scope { active }
+
+  scope :active, -> { where(status_id: 1) }
+
+  scope :by_county, lambda { |zip_code|
+    joins(counties: :zip_codes)
+      .where(counties: { zip_codes: { zip_code: zip_code } })
+  }
 end

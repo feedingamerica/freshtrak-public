@@ -3,6 +3,7 @@
 Jets.application.routes.draw do
   namespace :api do
     resources :agencies, only: :index
+    resources :foodbanks, only: :index
   end
 
   root 'jets/public#show'
