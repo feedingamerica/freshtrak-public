@@ -4,8 +4,9 @@ FactoryBot.define do
   factory :event do
     service_zips { '' }
     last_schedule_mgmt_datekey { 0 }
-    status_publish_event { 0 }
-    status_publish_event_dates { 0 }
+    status_id { 1 }
+    status_publish_event { 1 }
+    status_publish_event_dates { 1 }
     d_trend_month { '' }
     d_trend_week { '' }
     sc_monthly_10 { '' }

@@ -70,5 +70,12 @@ describe Agency, type: :model do
       agency_results = described_class.by_event_date(date)
       expect(agency_results.pluck(:id)).to eq(agencies.pluck(:id))
     end
+
+    it 'ignores unpublished event dates when searching by date' do
+      event = create(:event, status_publish_event_dates: 0)
+      event_date = create(:event_date, event: event)
+
+      expect(described_class.by_event_date(event_date.date)).to be_empty
+    end
   end
 end
