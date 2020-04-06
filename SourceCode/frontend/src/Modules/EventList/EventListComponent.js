@@ -2,39 +2,54 @@
  * EventList Component
  */
 import React from 'react';
-import '../../App.scss';
+import '../../Assets/scss/main.scss';
 import EventCardComponent from './Event/EventCardComponent';
 
 const EventListComponent = () => {
 
     // Temporary list 
     const items = [{
-        heading:'ABC',    
+        id:'1',    
     },{
-        heading:'EFG',    
+        id:'2',    
     },{
-        heading:'HIJ',    
+        id:'3',    
     }]
     return (
-        <div>
-            <label>
-                Sort by
-            </label>
-            <select>
-                <option>Recommended</option>
-            </select>
-            <ul>
-                <li><a href="#">LIST</a></li>
-                <li><a href="#">MAP</a></li>
-            </ul>
-            <p><strong>Monday, 4/2/2020</strong></p>
-            <ul style={{display:'flex',justifyContent:'space-around'}}>
+            <div className="search-results-list">
+                <div className="row align-items-end">
+                    <div className="col-lg-4 col-xl-4">
+                        <h2 className="font-weight-bold mobile-text-left">
+                            Resource Events in Your Area
+                        </h2>
+                    </div>
+                    <div className="col-lg-4 col-xl-4 d-none-xs d-none-sm">
+                        <div className="switch-view d-flex justify-content-center">
+                            <input id="toggle-on" className="toggle toggle-left" name="toggle" value="false" type="radio" checked />
+                            <label for="toggle-on" className="btn-toggle">List</label>
+                            <input id="toggle-off" className="toggle toggle-right" name="toggle" value="true" type="radio" />
+                            <label for="toggle-off" className="btn-toggle">Map</label>
+                        </div>
+                    </div>
+                    <div className="col-lg-4 col-xl-4">
+                        <div className="form-group">
+                            <label>Sort by</label>
+                            <select className="form-control">
+                                <option>Recommended</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                   <ul style={{listStyle:'none'}}>
                 {items.map((val,index)=>{
                    return  <li><EventCardComponent details={val}/>
                    </li>
                 })}
             </ul>
-        </div>
+            </div>
+          
+     
+        
     )
 
 };

@@ -1,0 +1,102 @@
+@import "./variables";
+@import "./mixins";
+
+.btn{
+    min-height: 50px;
+    border-radius: 8px;
+    text-transform: uppercase;
+    font-size: .85rem;
+    &.custom-button{
+        background:$secondary-color;
+        color:$color-white;
+        padding-left: 1.2rem;
+        padding-right: 1.2rem;        
+        @include responsive(extra-smaller-devices) {
+            width: 100%;
+         }
+    }
+    &.search-button{ 
+        @include responsive(extra-smaller-devices) {
+         margin-top: 10px;
+         width: 100%;
+      }
+     }
+     &.default-button{
+         background-color: $default-button;
+         color: $secondary-color;
+         padding-left: 1.2rem;
+         padding-right: 1.2rem;        
+         @include responsive(extra-smaller-devices) {
+             width: 100%;
+          }
+     }
+}
+.form-group{
+    label{
+        margin-bottom: 4px;
+    }
+    .form-control{
+        min-height: 50px;
+        border-color: $secondary-color;
+        background: none;
+    }
+}
+// toggle
+
+.btn-toggle{
+    border: 3px solid transparent;
+    display: inline-block;
+    padding: 10px;
+    position: relative;
+    text-align: center;
+    background: $switch-button;
+    transition: background 600ms ease, color 600ms ease;
+    font-weight: 700;
+    margin-bottom: 0;
+    z-index: 0;
+    margin: 0 -5px;
+    color: $secondary-color;
+}
+
+input[type="radio"].toggle {
+    display: none;
+    & + label{
+        cursor: pointer;
+        min-width: 130px;
+        @include border-radius(8px);
+        &:hover{
+             color: $dark-gray-color;
+        }
+        &:after{
+            content: "";
+            height: 100%;
+            position: absolute;
+            top: 0;
+            transition: left 200ms cubic-bezier(0.77, 0, 0.175, 1);
+            width: 100%;
+            z-index: -1;
+        }
+    }
+    &.toggle-left + label {
+        border-right: 0;
+        &:after{
+            left: 100%
+        }
+    }
+    &.toggle-right + label{
+        margin-left: -5px;
+        &:after{
+            left: -100%;
+        }
+    }
+    &:checked + label {
+        cursor: default;
+        color: $secondary-color;
+        background: $color-white;
+        transition: color 200ms;
+        z-index: 1;
+        &:after{
+            left: 0;
+        }
+    }
+}
