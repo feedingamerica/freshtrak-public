@@ -14,6 +14,9 @@ Metrics/BlockLength:
 Metrics/MethodLength:
   Exclude:
     - 'spec/**/*'
+Rails/Date:
+  # TODO: figure out how to configure ActiveSupport::TimeZone without rails
+  Enabled: false
 Rails/HttpPositionalArguments:
   Exclude:
     - 'spec/controllers/**/*'

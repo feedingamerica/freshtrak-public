@@ -59,7 +59,7 @@ describe Agency, type: :model do
     end
 
     it 'can find agencies through an event date' do
-      date = (Time.zone.today + 2).to_s.delete('-')
+      date = (Date.today + 2).to_s.delete('-')
       agencies = 5.times.map do
         agency = create(:agency)
         event = create(:event, agency: agency)

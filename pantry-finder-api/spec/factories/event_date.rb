@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :event_date do
-    event_date_key { (Time.zone.today + 1).to_s.delete('-') }
+    event_date_key { (Date.today + 1).to_s.delete('-') }
     service_id { event.service_type.id }
     status_id { 1 }
     status_publish { 1 }

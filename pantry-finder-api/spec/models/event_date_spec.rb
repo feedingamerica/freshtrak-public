@@ -10,7 +10,7 @@ describe EventDate, type: :model do
   context 'with scopes' do
     it 'defaults to dates in the future' do
       create(:event_date,
-             event_date_key: (Time.zone.today - 2).to_s.delete('-'))
+             event_date_key: (Date.today - 2).to_s.delete('-'))
       expected_event_id = event_date.id
       expect(described_class.all.pluck(:id)).to eq([expected_event_id])
     end
@@ -25,7 +25,7 @@ describe EventDate, type: :model do
 
     it 'includes events today in the future scope' do
       event_today = create(:event_date,
-                           event_date_key: Time.zone.today.to_s.delete('-'))
+                           event_date_key: Date.today.to_s.delete('-'))
       expect(described_class.future.pluck(:id)).to eq([event_today.id])
     end
   end

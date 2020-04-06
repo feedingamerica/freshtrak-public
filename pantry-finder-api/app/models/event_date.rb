@@ -11,6 +11,6 @@ class EventDate < ApplicationRecord
   scope :active, -> { where(status_id: 1) }
   scope :published, -> { where(status_publish: 1) }
   scope :future, lambda {
-    where('event_date_key >= ?', Time.zone.today.to_s.delete('-'))
+    where('event_date_key >= ?', Date.today.to_s.delete('-'))
   }
 end

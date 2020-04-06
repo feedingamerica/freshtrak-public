@@ -2,7 +2,7 @@
 
 describe Api::AgenciesController, type: :controller do
   let(:zip_code) { create(:zip_code) }
-  let(:date) { (Time.zone.today + 5).to_s }
+  let(:date) { (Date.today + 5).to_s }
   let(:foodbank) { create(:foodbank, county_ids: zip_code.county.id) }
   let(:agency) { create(:agency, foodbank: foodbank) }
   let(:event) { create(:event, agency: agency) }
@@ -13,7 +13,7 @@ describe Api::AgenciesController, type: :controller do
 
   before do
     other_zip = create(:zip_code)
-    other_date = (Time.zone.today + 2).to_s.delete('-')
+    other_date = (Date.today + 2).to_s.delete('-')
     other_foodbank = create(:foodbank, county_ids: other_zip.county.id)
     other_agency = create(:agency, foodbank: other_foodbank)
     other_event = create(:event, agency: other_agency)
