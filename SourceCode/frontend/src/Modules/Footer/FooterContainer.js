@@ -3,16 +3,14 @@
  */
 import React from 'react';
 import FooterComponent from './FooterComponent';
-import LogoComponent from '../General/LogoComponent';
 import '../../App.scss';
 
 const FooterContainer = () => {
     
     return (
-        <div className ="site-footer">
-        	<LogoComponent/>
-			<FooterComponent/>	
-        </div>
+        <footer className="footer-bg footer">
+            <FooterComponent/>
+        </footer>
     )
 
 };
