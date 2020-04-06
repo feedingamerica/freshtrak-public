@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "0.19.0",
-    "bootstrap": "4.4.1",
+    "bootstrap": "^4.4.1",
     "history": "4.10.1",
     "node-sass": "^4.13.1",
     "react": "16.12.0",
@@ -14,7 +14,8 @@
     "react-router-dom": "5.1.2",
     "react-scripts": "^3.4.1",
     "react-toastify": "5.3.2",
-    "sweetalert2": "9.7.2"
+    "sweetalert2": "9.7.2",
+    "popper.js": "^1.16.1"
   },
   "scripts": {
     "start": "REACT_APP_STAGE=dev react-scripts start",
