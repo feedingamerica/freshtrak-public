@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.scss';
-import DashboardComponent from "./Modules/Dashboard/DashboardComponent";
+import DashBoardContainer from "./Modules/Dashboard/DashBoardContainer";
 
 
 const App=() =>{
@@ -8,7 +8,7 @@ const App=() =>{
     <div className="App">
       
       <header className="App-header">
-            <DashboardComponent/>
+            <DashBoardContainer/>
       </header>
     </div>
   );
