@@ -5,7 +5,7 @@ import React from 'react';
 import HeaderContainer from '../Header/HeaderContainer';
 import SearchComponent from '../General/SearchComponent';
 
-import '../../App.scss';
+import '../../Assets/scss/main.scss';
 
 const DashBoardComponent = () => {
     return (

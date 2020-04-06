@@ -4,7 +4,7 @@
 import React from 'react';
 import HeaderComponent from './HeaderComponent';
 import HeaderDataComponent from './HeaderDataComponent';
-import '../../App.scss';
+import '../../Assets/scss/main.scss';
 
 const HeaderContainer = () => {
     

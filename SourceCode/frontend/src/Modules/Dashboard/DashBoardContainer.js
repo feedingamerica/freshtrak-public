@@ -6,16 +6,21 @@ import DashBoardComponent from './DashBoardComponent';
 import DashBoardDataComponent from './DashBoardDataComponent';
 import DashBoardFoodBankComponent from './DashBoardFoodBankComponent';
 import FooterContainer from '../Footer/FooterContainer';
-import '../../App.scss';
+import '../../Assets/scss/main.scss';
 
 const DashBoardContainer = () => {
     
     return (
         <div>
-            <DashBoardComponent/>            
-            <DashBoardDataComponent/>
-            <DashBoardFoodBankComponent/>
-            <FooterContainer/>
+        	 <DashBoardComponent/>    
+        	 <section>
+	        	<div className="container pt-150 pb-150">		                   
+		            <DashBoardDataComponent/>
+		            <DashBoardFoodBankComponent/>
+		            <FooterContainer/>
+            	</div>
+            </section>
+
         </div>
     )
 
