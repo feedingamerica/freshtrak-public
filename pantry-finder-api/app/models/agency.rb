@@ -19,8 +19,7 @@ class Agency < ApplicationRecord
   scope :active, -> { where(status_id: 1) }
 
   scope :by_event_date, lambda { |date|
-    joins(:events, :event_dates)
-      .merge(Event.publishes_dates)
+    joins(:event_dates)
       .where(event_dates: { date: date })
   }
 
