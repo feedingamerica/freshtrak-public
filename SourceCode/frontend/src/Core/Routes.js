@@ -15,7 +15,6 @@ const Routes = () => {
             <Suspense fallback={<div className="displayNone"> </div>}>
                 <Switch>
                     <Route exact path={RENDER_URL.HOME_URL} component={App}/>
-                    <Route path={RENDER_URL.DASHBOARD_URL} component={DashboardComponent}/>
                     <Route path={RENDER_URL.EVENT_LIST_URL} component={EventListComponent}/>
                                         
                     
