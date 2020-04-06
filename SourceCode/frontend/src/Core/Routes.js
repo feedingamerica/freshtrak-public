@@ -1,6 +1,6 @@
 //routing files
 import React, {lazy, Suspense} from 'react';
-import '../Assets/Styles/Common/style.css';
+// import '../Assets/Styles/Common/style.css';
 import {RENDER_URL} from '../Utils/Urls';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 const DashBoardContainer = lazy(() => import("../Modules/Dashboard/DashBoardContainer"));
