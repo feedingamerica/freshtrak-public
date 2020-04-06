@@ -4,8 +4,6 @@
  */
 
 import React from 'react';
-import {Link} from "react-router-dom";
-import {Nav} from 'react-bootstrap';
 import ButtonComponent from '../General/ButtonComponent';
 const SearchComponent = () => {
 	 const handleClick = (e) => {

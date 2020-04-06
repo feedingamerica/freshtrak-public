@@ -3,9 +3,6 @@
  */
 
 import React from 'react';
-import {Link} from "react-router-dom";
-import {Nav} from 'react-bootstrap';
-import HeaderDataComponent from '../Header/HeaderDataComponent';
 const HeaderComponent = () => {
     return (
     	<div>
@@ -20,7 +17,7 @@ const HeaderComponent = () => {
              	</div>
             </div>            
         </div>         
-            <HeaderDataComponent/>  
+           
         </div>
     )
 };

@@ -2,7 +2,7 @@
  * Dash board Component
  */
 import React from 'react';
-import HeaderComponent from '../Header/HeaderComponent';
+import HeaderContainer from '../Header/HeaderContainer';
 import SearchComponent from '../General/SearchComponent';
 
 import '../../App.scss';
@@ -11,7 +11,7 @@ const DashBoardComponent = () => {
     return (
     	<div>
 	        <div>
-	            <HeaderComponent/>         
+	            <HeaderContainer/>         
 	        </div>
 	         <div>
 	         	<SearchComponent/>

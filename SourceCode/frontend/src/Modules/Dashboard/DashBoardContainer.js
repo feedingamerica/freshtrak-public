@@ -5,6 +5,7 @@ import React from 'react';
 import DashBoardComponent from './DashBoardComponent';
 import DashBoardDataComponent from './DashBoardDataComponent';
 import DashBoardFoodBankComponent from './DashBoardFoodBankComponent';
+import FooterContainer from '../Footer/FooterContainer';
 import '../../App.scss';
 
 const DashBoardContainer = () => {
@@ -14,6 +15,7 @@ const DashBoardContainer = () => {
             <DashBoardComponent/>            
             <DashBoardDataComponent/>
             <DashBoardFoodBankComponent/>
+            <FooterContainer/>
         </div>
     )
 
