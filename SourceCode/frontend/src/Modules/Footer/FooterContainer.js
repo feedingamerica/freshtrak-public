@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import FooterComponent from './FooterComponent';
-import '../../App.scss';
+import '../../Assets/scss/main.scss';
 
 const FooterContainer = () => {
     
