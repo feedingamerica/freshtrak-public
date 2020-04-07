@@ -10,12 +10,26 @@ const SearchComponent = () => {
         alert("basil");
     };
     return (
-    	<div>       
-            <div className ="data-text">
-                <span>Street<input type ="text" name="street" placeholder="street" /></span>
-				<span>Zip<input type ="text" name="zip" placeholder="Zip" /></span>            
-                <span><ButtonComponent type ='button' name="searchForResources" dataid= '' id="search-resource" value="Search For Resources" className = 'test' onClickfunction={handleClick} /></span>
-            </div>
+    	<div className="search-area text-left">       
+            <form>
+                <div className=" row align-items-end">
+                    <div className="col-sm-6 col-md-6 col-lg-7 col-xl-8">
+                        <div className="d-flex">
+                            <div className="form-group flex-grow-1">
+                                <label>Street</label>
+                                <input type="text" className="form-control" />
+                            </div>
+                            <div className="form-group zip-code">
+                                <label>Zip</label>
+                                <input type="text" className="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                        <div className="col-sm-6 col-md-6 col-lg-5 col-xl-4 text-right">
+                            <ButtonComponent type ='button' name="searchForResources" dataid= '' id="search-resource" value="Search For Resources" className = 'btn custom-button search-button' onClickfunction={handleClick} />
+                        </div>
+                </div>
+            </form>
         </div>
     )
 };

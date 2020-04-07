@@ -11,17 +11,16 @@ import '../../Assets/scss/main.scss';
 const DashBoardContainer = () => {
     
     return (
-        <div>
-        	 <DashBoardComponent/>    
-        	 <section>
-	        	<div className="container pt-150 pb-150">		                   
-		            <DashBoardDataComponent/>
-		            <DashBoardFoodBankComponent/>
-		            <FooterContainer/>
-            	</div>
-            </section>
-
-        </div>
+		<div>
+			<DashBoardComponent/>    
+			<section>	        		                   
+				<DashBoardDataComponent/>
+			</section>
+			<section class="gray-bg">            	
+				<DashBoardFoodBankComponent/>
+			</section>			
+			<FooterContainer/>
+		</div>
     )
 
 };

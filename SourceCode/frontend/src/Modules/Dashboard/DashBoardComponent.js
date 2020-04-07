@@ -3,8 +3,6 @@
  */
 import React from 'react';
 import HeaderContainer from '../Header/HeaderContainer';
-import SearchComponent from '../General/SearchComponent';
-
 import '../../Assets/scss/main.scss';
 
 const DashBoardComponent = () => {
@@ -13,9 +11,6 @@ const DashBoardComponent = () => {
 	        <div>
 	            <HeaderContainer/>         
 	        </div>
-	         <div>
-	         	<SearchComponent/>
-	         </div>
          </div>
     )
 
