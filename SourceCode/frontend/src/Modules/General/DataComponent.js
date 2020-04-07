@@ -2,7 +2,7 @@
  * Sample content
  */
 import React from 'react';
-import '../../App.scss';
+import '../../Assets/scss/main.scss';
 
 const DataComponent = () => {
     return (        
