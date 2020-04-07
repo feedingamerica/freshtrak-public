@@ -1,7 +1,7 @@
 import React from 'react';
 import MenuComponent from '../General/MenuComponent';
 import FooterComponent from '../General/FooterComponent';
-import EventListComponent from '../Events/EventListComponent';
+import EventListComponent from './/EventListComponent';
 import {Link} from 'react-router-dom';
 import {RENDER_URL} from '../../Utils/Urls';
 import '../../App.css';
