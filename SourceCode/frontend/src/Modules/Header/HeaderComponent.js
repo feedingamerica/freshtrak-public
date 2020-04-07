@@ -2,13 +2,24 @@
  * Created by Basil on 04/04/20.
  */
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+
 import mainLogo from '../../Assets/img/logo.png';
 import navBarIcon from '../../Assets/img/menu.svg';
 import userIcon from '../../Assets/img/Mask.svg';
 const HeaderComponent = () => {
+    const [navbarShrink, setNavbarShrink] = useState('');
+    useEffect(() => {
+        window.onscroll = () => {
+          if(window.pageYOffset > 100){
+            setNavbarShrink('navbar-shrink');
+          } else {
+            setNavbarShrink('');
+          }
+        }
+    }, []);;
     return (
-    	 <nav className="navbar navbar-expand-md navbar-light fixed-top" id="mainNav">
+    	 <nav className={`navbar navbar-expand-md navbar-light fixed-top ${navbarShrink}`} id="mainNav">
                 <div className="container">
                     <div>
                         <h3 className="my-auto mobile-view">
