@@ -7,11 +7,9 @@ import '../../Assets/scss/main.scss';
 
 const DashBoardComponent = () => {
     return (
-    	<div>
 	        <div>
 	            <HeaderContainer/>         
 	        </div>
-         </div>
     )
 
 };

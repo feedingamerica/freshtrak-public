@@ -4,7 +4,6 @@
 import React from 'react';
 import FooterComponent from './FooterComponent';
 import '../../Assets/scss/main.scss';
-
 const FooterContainer = () => {
     
     return (
