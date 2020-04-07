@@ -8,13 +8,25 @@ import EventCardComponent from './Event/EventCardComponent';
 const EventListComponent = () => {
 
     // Temporary list 
-    const items = [{
+    const items = [
+    {
+        date:'MONDAY, 4/2/2020',
+        day:[{
+        id:'1',    // All other card variables come here
+    },{
+        id:'2',    
+    },{
+        id:'3',    
+    }]},
+    {
+        date:'TUESDAY, 5/2/2020',
+        day:[{
         id:'1',    
     },{
         id:'2',    
     },{
         id:'3',    
-    }]
+    }]}]
     return (
             <div className="search-results-list">
                 <div className="row align-items-end">
@@ -40,12 +52,32 @@ const EventListComponent = () => {
                         </div>
                     </div>
                 </div>
-                   <ul style={{listStyle:'none'}}>
-                {items.map((val,index)=>{
-                   return  <li><EventCardComponent details={val}/>
-                   </li>
+                   
+                {   
+                    items.map((details,index)=>{
+                       return <div className="row mt-5">
+                        <div className="col-md-12">
+                        <div className="day-view">
+                            <div className="row">
+                                <div className="col-md-12"><span className="day-view-title">{details.date}</span></div>
+                            </div>
+                            <div className="row mt-2">
+                                {
+                                    details.day.map((day,index)=>{
+                                        return    <EventCardComponent date={details.date} day={day}/>
+                                    })
+                                }
+                             
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                         
+                            
+                     
+                       
                 })}
-            </ul>
+            
             </div>
           
      
