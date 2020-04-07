@@ -2,21 +2,35 @@
  * Created by Basil on 04/04/20.
  */
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+
+import mainLogo from '../../Assets/img/logo.png';
+import navBarIcon from '../../Assets/img/menu.svg';
+import userIcon from '../../Assets/img/Mask.svg';
 const HeaderComponent = () => {
+    const [navbarShrink, setNavbarShrink] = useState('');
+    useEffect(() => {
+        window.onscroll = () => {
+          if(window.pageYOffset > 100){
+            setNavbarShrink('navbar-shrink');
+          } else {
+            setNavbarShrink('');
+          }
+        }
+    }, []);;
     return (
-    	 <nav className="navbar navbar-expand-md navbar-light fixed-top" id="mainNav">
+    	 <nav className={`navbar navbar-expand-md navbar-light fixed-top ${navbarShrink}`} id="mainNav">
                 <div className="container">
                     <div>
                         <h3 className="my-auto mobile-view">
                             <a className="navbar-brand ml-3 ml-sm-0" href="#">
-                                <img src="img/logo.png" className="d-inline-block" />
+                                <img src={mainLogo} alt="FreshTrak" className="d-inline-block" />
                             </a>
                         </h3>
                         <button className="navbar-toggler mr-2" type="button" data-toggle="collapse"
                             data-target="#navbarCollapse">
                             <span className="navbar-toggler-icon">
-                                <img src="img/menu.svg" className="img-fluid"/>
+                                <img src={navBarIcon} alt="UserLogo" className="img-fluid"/>
                             </span>
                         </button>
                     </div>
@@ -46,7 +60,7 @@ const HeaderComponent = () => {
                     </div>
                     <div className="user-avatar">
                         <a className="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false"> <img src="img/Mask.svg"/></a>
+                                    aria-haspopup="true" aria-expanded="false"> <img src={userIcon} alt="user imge"/></a>
                                 <div className="dropdown-menu" aria-labelledby="dropdown01">
                                     <a className="dropdown-item" href="#">Action</a>
                                     <a className="dropdown-item" href="#">Another action</a>

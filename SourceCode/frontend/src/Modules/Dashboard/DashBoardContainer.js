@@ -16,7 +16,7 @@ const DashBoardContainer = () => {
 			<section>	        		                   
 				<DashBoardDataComponent/>
 			</section>
-			<section class="gray-bg">            	
+			<section className="gray-bg">            	
 				<DashBoardFoodBankComponent/>
 			</section>			
 			<FooterContainer/>
