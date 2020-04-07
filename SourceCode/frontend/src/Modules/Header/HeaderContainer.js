@@ -9,10 +9,10 @@ import '../../App.scss';
 const HeaderContainer = () => {
     
     return (
-        <div>
+         <header className="header">
             <HeaderComponent/>	          
 	        <HeaderDataComponent/> 
-        </div>
+         </header>
     )
 
 };
