@@ -46,3 +46,17 @@ export const confirm = (title, successFn, object) => {
     });
 };
 
+export const setItemToLocalStorage = (storageKey, storageValue) => {
+    return localStorage.setItem(storageKey, JSON.stringify(storageValue));
+};
+
+export const getItemLocalStorage = (storageKey) => {
+    let key = "" + storageKey;
+    return localStorage.getItem(key);
+};
+
+export const clearItemsFromLocalStorage = () => {
+    return localStorage.clear();
+};
+
+
