@@ -29,4 +29,5 @@ export const RENDER_URL = {
     EVENT_CREATE_URL:'/events/create',
     EVENT_LIST_URL:'/events/list',
     EVENT_EDIT_URL:'/events/:id/edit',
+    ADD_FAMILY_URL: '/family/create',
 };
