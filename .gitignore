@@ -1,2 +1,4 @@
-/SourceCode/frontend/node_modules
+**/node_modules
+*.xml
+SourceCode/frontend/node_modules
 .idea/
