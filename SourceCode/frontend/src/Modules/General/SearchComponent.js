@@ -1,14 +1,13 @@
-
-/**
- * Created by Basil on 04/04/20.
- */
-
 import React from 'react';
 import ButtonComponent from '../General/ButtonComponent';
+import ResourceListComponent from './Search/ResourceListComponent';
+
 const SearchComponent = () => {
+
 	 const handleClick = (e) => {
         alert("basil");
     };
+
     return (
     	<div className="search-area text-left">       
             <form>
@@ -26,10 +25,16 @@ const SearchComponent = () => {
                         </div>
                     </div>
                         <div className="col-sm-6 col-md-6 col-lg-5 col-xl-4 text-right">
-                            <ButtonComponent type ='button' name="searchForResources" dataid= '' id="search-resource" value="Search For Resources" className = 'btn custom-button search-button' onClickfunction={handleClick} />
+                            <ButtonComponent type ='submit' name="searchForResources" dataid= ''
+                                             id="search-resource" value="Search For Resources"
+                                             className = 'btn custom-button search-button'
+                                             onClickfunction={handleClick} />
                         </div>
                 </div>
             </form>
+
+            <ResourceListComponent/>
+
         </div>
     )
 };

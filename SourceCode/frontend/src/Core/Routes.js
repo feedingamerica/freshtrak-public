@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 const DashBoardContainer = lazy(() => import("../Modules/Dashboard/DashBoardContainer"));
 /*const EventContainer = lazy(() => import("../Modules/Events/EventContainer"));
 const EventListContainer = lazy(() => import("../Modules/Events/EventListContaner"));*/
-const EventListComponent = lazy(() => import("../Modules/EventList/EventListComponent")); 
+const EventListComponent = lazy(() => import("../Modules/Events/EventContainer"));
 const App = lazy(() => import("../App"));
 
 const Routes = () => {
