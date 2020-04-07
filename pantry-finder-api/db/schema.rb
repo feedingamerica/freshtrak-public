@@ -131,6 +131,7 @@ ActiveRecord::Schema.define(version: 0) do
   end
 
   create_table "event_dates", primary_key: "event_date_id", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", comment: "Record of when the event is offering their services. Used to manage capacity, generate event_hours and event_slots, and other notes.", force: :cascade do |t|
+    t.integer "esp_id", default: 0, null: false, comment: "The event_service_profile this event_date is linked to. All event_dates should be linked at least through an ad hoc profile."
     t.integer "event_id", null: false, unsigned: true
     t.integer "event_date_key", null: false, unsigned: true
     t.integer "service_id", null: false, comment: "The service type being provided at the event. Default comes from event->event_service_profile but allows for customization. e.g. Event normally does produce, but on one distribution they will give out turkeys + produce."
@@ -138,6 +139,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.integer "reserved", null: false, comment: "The total number of appointments that have been scheduled in event_slots that roll up to this event_date record. e.g. 80. This number should always be less than or equal to the capcity number."
     t.integer "start_time_key", null: false, comment: "The start time of the distribution. Usually an hour start, but can be any valid timekey from the dim_times table", unsigned: true
     t.integer "end_time_key", null: false, comment: "The end time of the distribution. Usually an hour end, but can be any valid timekey from the dim_times table", unsigned: true
+    t.decimal "event_duration_hours", precision: 4, scale: 2, null: false, comment: "Provides an accurate way to sum up a column and state how long an agency is open for a day, accounts well for half hours, 15 of 60 minute hours, etc..."
     t.integer "slot_length_minutes", default: 60, null: false, comment: "The length in minutes of the distribution slots tied to the distribution hour records of this distribution date record. e.g. If a distribution operates with four 15 minute slots of time per hour, this value would be 15.", unsigned: true
     t.integer "status_publish", limit: 1, null: false, comment: "Controls whether this event_date is published or not."
     t.integer "accept_walkin", limit: 1, null: false, comment: "Whether this event_date is eligible for walkins or not."
@@ -151,7 +153,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.integer "status_id", default: 1, null: false, unsigned: true
   end
 
-  create_table "event_hours", primary_key: "event_hour_id", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=COMPACT", comment: "Record of what hours, connected to the event_dates, are available to order on, with controls for capacity. Also allows for split shifts and early closures because of low reservations.", force: :cascade do |t|
+  create_table "event_hours", primary_key: "event_hour_id", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", comment: "Record of what hours, connected to the event_dates, are available to order on, with controls for capacity. Also allows for split shifts and early closures because of low reservations.", force: :cascade do |t|
     t.integer "event_date_id", null: false, unsigned: true
     t.integer "capacity", null: false, comment: "The total number of appointments that can be scheduled in event_slots that roll up to this event_hour record. e.g. 25"
     t.integer "reserved", null: false, comment: "The total number of appointments that have been scheduled in event_slots that roll up to this event_hour record. e.g. 20. This number should always be less than or equal to the capacity number."
@@ -193,12 +195,13 @@ ActiveRecord::Schema.define(version: 0) do
     t.integer "status_id", default: 1, null: false
   end
 
-  create_table "event_slots", primary_key: "event_slot_id", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=COMPACT", comment: "Record of a slot of time that appointments can be scheduled into.", force: :cascade do |t|
+  create_table "event_slots", primary_key: "event_slot_id", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", comment: "Record of a slot of time that appointments can be scheduled into.", force: :cascade do |t|
     t.integer "event_hour_id", null: false, unsigned: true
     t.integer "capacity", null: false, comment: "The total number of appointments that can be scheduled in this event_slot e.g. 6 (100 event_date capacity / 4 hours = 25 appointments per hour. 25 appointments per hour / (60 minutes per hour / 15 minutes per slot) = 6.25 = 6 appointments per slot."
     t.integer "reserved", null: false, comment: "The total number of appointments that have been scheduled in this event_slots e.g. 5. This number should always be less than or equal to the capacity number."
     t.integer "start_time_key", null: false, comment: "The start time of the event_slot. Usually an hour start, but can be any valid timekey from the dim_times table", unsigned: true
     t.integer "end_time_key", null: false, comment: "The end time of the event_slot. Usually an hour end, but can be any valid timekey from the dim_times table"
+    t.integer "duration_minutes", limit: 1, null: false, comment: "The length of the event_slot in minutes", unsigned: true
     t.datetime "date_added"
     t.integer "added_by", null: false, unsigned: true
     t.datetime "last_update"

@@ -3,8 +3,15 @@
 FactoryBot.define do
   factory :agency do
     loc_num { 0 }
-    loc_nickname { Faker::Company.name }
+    loc_name { Faker::Company.name }
+    loc_nickname { loc_name }
     zip_plus4 { Faker::Address.zip }
+    zip { zip_plus4[0..4] }
+    city { Faker::Address.city }
+    state { Faker::Address.state }
+    address1 { Faker::Address.street_address }
+    address2 { Faker::Address.secondary_address }
+    phone { Faker::PhoneNumber.phone_number }
     msa { 0 }
     cbsa { 0 }
     latitude { Faker::Address.latitude }

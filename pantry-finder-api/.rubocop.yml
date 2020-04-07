@@ -5,10 +5,17 @@ AllCops:
   Exclude:
     - 'db/schema.rb'
     - 'vendor/**/*'
+Metrics/AbcSize:
+  Exclude:
+    - 'spec/**/*'
 Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'
+Metrics/MethodLength:
+  Exclude:
+    - 'spec/**/*'
 Rails/Date:
+  # TODO: figure out how to configure ActiveSupport::TimeZone without rails
   Enabled: false
 Rails/HttpPositionalArguments:
   Exclude:
