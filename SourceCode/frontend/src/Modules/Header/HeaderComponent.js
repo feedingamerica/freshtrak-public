@@ -7,7 +7,7 @@ import React, { useEffect, useState } from 'react';
 import mainLogo from '../../Assets/img/logo.png';
 import navBarIcon from '../../Assets/img/menu.svg';
 import userIcon from '../../Assets/img/Mask.svg';
-const HeaderComponent = () => {
+const HeaderComponent = (props) => {
     const [navbarShrink, setNavbarShrink] = useState('');
     useEffect(() => {
         window.onscroll = () => {
@@ -19,7 +19,7 @@ const HeaderComponent = () => {
         }
     }, []);;
     return (
-    	 <nav className={`navbar navbar-expand-md navbar-light fixed-top ${navbarShrink}`} id="mainNav">
+    	 <nav className={`navbar navbar-expand-md navbar-light fixed-top ${navbarShrink} ${props.shortHeader}`} id="mainNav">
                 <div className="container">
                     <div>
                         <h3 className="my-auto mobile-view">
