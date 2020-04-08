@@ -1,0 +1,36 @@
+require:
+  - rubocop-rails
+  - rubocop-rspec
+AllCops:
+  Exclude:
+    - 'db/schema.rb'
+    - 'vendor/**/*'
+Metrics/AbcSize:
+  Exclude:
+    - 'spec/**/*'
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+Metrics/MethodLength:
+  Exclude:
+    - 'spec/**/*'
+Rails/Date:
+  # TODO: figure out how to configure ActiveSupport::TimeZone without rails
+  Enabled: false
+Rails/HttpPositionalArguments:
+  Exclude:
+    - 'spec/controllers/**/*'
+RSpec/ExampleLength:
+  Exclude:
+    - 'spec/**/*'
+RSpec/MultipleExpectations:
+  Max: 4
+Style/FrozenStringLiteralComment:
+  Exclude:
+    - 'bin/*'
+Style/HashEachMethods:
+  Enabled: true
+Style/HashTransformKeys:
+  Enabled: true
+Style/HashTransformValues:
+  Enabled: true
