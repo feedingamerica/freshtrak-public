@@ -14,7 +14,7 @@ const DashBoardContainer = () => {
 		<div>
 			<DashBoardComponent />    
 			<section>	        		                   
-				<DashBoardDataComponent isLoggedIn={true}/>
+				<DashBoardDataComponent isLoggedIn={false}/>
 			</section>
 			<section className="gray-bg">            	
 				<DashBoardFoodBankComponent/>

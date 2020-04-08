@@ -5,12 +5,7 @@
 
  import * as React from 'react';
 import {useState,useEffect} from 'react';
-import BoxComponent from '../General/BoxComponent';
-import ButtonComponent from '../General/ButtonComponent';
 import SearchComponent from '../General/SearchComponent';
-import CalenderIcon from '../../Assets/img/calendar.svg';
-import PreRegisteredIcon from '../../Assets/img/pre-register.svg';
-import FindFoodIcon from '../../Assets/img/findfood.svg';
 import RegisteredEventListComponent from '../AuthenticatedLanding/RegisteredEventListComponent';
 import DashboardCreateAccountComponent from './DashboardCreateAccountComponent';
 const DashBoardDataComponent = (props) => {	
