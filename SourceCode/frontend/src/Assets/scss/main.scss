@@ -2,6 +2,7 @@
 @import "./mixins";
 @import "./form-elements";
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
 
 body {
     background: $color-white;
@@ -55,10 +56,14 @@ body {
     .mt-60{
         margin-top: 60px;
     }
+    .caption-text{
+        font-family: $font-varela;
+        letter-spacing: .4px;
+    }
     .navbar-toggler{
         .navbar-toggler-icon{
             background-image: none !important;
-        }        
+        }
         &:focus{
             outline: none;
         }
@@ -68,6 +73,7 @@ body {
         height: 509px;
         @include responsive(extra-smaller-devices) {
             height: 300px;
+            background-size: cover;
         }
         @include responsive(smaller-devices) {
             height: 509px;
@@ -80,7 +86,7 @@ body {
         }
         @include responsive(extra-large-devices) {
         }
-        #mainNav {            
+        #mainNav {
             &.navbar-shrink {
                 border-color: rgba(34, 34, 34, 0.1);
                 background-color: $primaryColor;
@@ -191,6 +197,7 @@ body {
                 p {
                     font-size: 1.2rem;
                     color: $secondary-color;
+                    font-family: $font-varela;
                     @include responsive(extra-smaller-devices) {
                         font-size: 0.9rem;
                     }
@@ -296,7 +303,7 @@ body {
         }
     }
     .title-wrap{
-        max-width: 500px;
+        max-width: 550px;
         @include responsive(extra-smaller-devices) {
             max-width: auto;
         }
@@ -305,27 +312,78 @@ body {
         .content-wrapper{
             max-width: 400px;
             margin: 1.2rem 0;
+            .custom-button{
+                min-width: 220px;
+            }
             @include responsive(extra-smaller-devices) {
                 max-width: auto;
             }
-            
+            .pantry-name{
+                font-family: $font-varela;
+                font-size: .85rem;
+            }
+            .time-wrapper, .address-wrapper{
+                font-size: .85rem;
+            }
+            .time-value{
+                font-size: 1rem;
+            }
             .distance{
                 width: 150px;
+                font-family: $font-varela;
             }
             &.event-details{
                 font-size: .9rem;
+                font-family: $font-varela;
             }
-            
+            &.page-info-wrap{
+                font-size: .8rem;
+                p{
+                    margin-bottom: 8px;
+                }
+            }
+            .form-title{
+                font-weight: 700;
+                font-size: 1.1rem;
+                color: $secondary-color;
+                padding-left: 5px;
+                margin-bottom: 10px;
+            }
+            .form-sub-title{
+                font-size: .8rem;
+                color: $secondary-color;
+                padding-left: 5px;
+            }
+            .form-text{
+                padding-left: 5px;
+                font-size: .8rem;
+            }
+            .add-new-vehicle{
+                font-size: .8rem;
+                display: flex;
+                padding-left: 5px;
+                .add-button{
+                    width: 16px;
+                    height: 16px;
+                    padding: 3px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background-color: $text-color;
+                    margin-right: 5px;
+                }
+            }
         }
         .address-details{
-            font-size: .9rem;
+            font-size: .85rem;
             letter-spacing: 1px;
+            font-family: $font-varela;
         }
         .medium-title, .small-title{
             color: $secondary-color;
         }
     }
-    
+
     .item-icon {
         height: 66px;
         width: 66px;
@@ -450,11 +508,13 @@ body {
             margin: 0;
             padding: 0;
             list-style: none;
+            font-family: $font-varela;
             li {
                 padding: 5px 0;
+                letter-spacing: .4px;
                 a {
                     color: $color-white;
-                    font-size: 0.8rem;
+                    font-size: 0.85rem;
                     text-decoration: underline;
                 }
             }
@@ -475,6 +535,10 @@ body {
             background: $color-white;
             @include box-shadow(0px, 4px, 8px, $shadow-color);
             margin-bottom: 15px;
+            .custom-button, .default-button{
+                padding-left: inherit;
+                padding-right: inherit;
+            }
             .day-view-item-header {
                 background-color: $list-header-bg;
                 color: $color-white;
@@ -486,8 +550,8 @@ body {
                     padding: 0 0 0.2rem 0;
                     @include truncate(100%);
                     @include responsive(extra-smaller-devices) {
-                    white-space: normal;
-                    overflow: auto;
+                        white-space: normal;
+                        overflow: auto;
                     }
                 }
                 .day-view-item-location {
@@ -495,10 +559,12 @@ body {
                     .day-view-item-name {
                         flex-grow: 1;
                         @include truncate(100%);
+                        font-family: $font-varela;
                     }
                     .day-view-item-distance {
                         width: 70px;
                         text-align: right;
+                        font-family: $font-varela;
                     }
                 }
             }
@@ -518,19 +584,22 @@ body {
                     }
                 }
                 .timings {
-                    font-size: 0.9rem;
+                    font-size: 0.85rem;
                     margin: 10px 0;
+                    font-family: $font-varela;
                 }
                 .address-wrap {
-                    font-size: 0.8rem;
+                    font-size: 0.75rem;
                     max-width: 150px;
                     margin: 0.5rem 0;
+                    font-family: $font-varela;
                 }
             }
             .day-view-more {
                 color: $secondary-color;
                 font-weight: 500;
                 font-size: 0.8rem;
+                font-family: $font-varela;
             }
             @include responsive(extra-smaller-devices) {
             }
@@ -549,6 +618,7 @@ body {
     @include responsive(extra-smaller-devices) {
         .mobile-text-left {
             text-align: left !important;
+            margin-bottom: 1rem!important;
         }
         h2,
         .h2 {
@@ -577,3 +647,4 @@ body {
         }
     }
 }
+

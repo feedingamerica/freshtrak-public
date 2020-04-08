@@ -7,7 +7,7 @@ import AdditionalPickUpFormComponent from './AdditionalPickUpFormComponent';
 import RegistrationTextComponent from './RegistrationTextComponent';
 import {confirm, showMessage} from '../../Utils/Util';
 import FooterContainer from "../Footer/FooterContainer";
-import HeaderContainer from "../Header/HeaderContainer";
+import HeaderComponent from "../Header/HeaderComponent";
 import '../../Assets/scss/main.scss';
 import back from '../../Assets/img/back.svg';
 
@@ -105,7 +105,7 @@ const FamilyContainer = () => {
     return (
 
         <div>
-            <HeaderContainer/>
+            <HeaderComponent shortHeader={'navbar-green'} />
             <div className="main-wrapper">
                 <section>
                     <div className="container pt-100 pb-100 register-confirmation">
@@ -155,19 +155,20 @@ const FamilyContainer = () => {
                                 <RegistrationTextComponent/>
                                 <form>
                                     <div className="content-wrapper pt-100">
-                                                <div className="form-fields">
+                                        <div className="form-fields">
 
                                                     <HouseHoldFormComponent ref={addressFormRef}
                                                                             onSelectedChild = {buildFamilyData}
                                                                             onFormErrors = {formErrors} />
-                                                    <div className="form-sub-title font-weight-bold"/>
+
 
 
                                                     <MemberCountFormComponent ref={addressFormRef}
                                                                               onSelectedChild = {buildFamilyData}
                                                                               onFormErrors = {formErrors} />
-                                                    </div>
-                                                </div>
+
+                                        </div>
+                                        <div className="form-fields pt-50">
 
                                             <PrimaryInfoFormComponent ref={addressFormRef}
                                                                       onSelectedChild = {buildFamilyData}
@@ -184,9 +185,13 @@ const FamilyContainer = () => {
 
                                             <div className="button-wrap mt-4">
                                                 <button className="btn custom-button">Continue</button>
-                                             </div>
 
+                                            </div>
+                                        </div>
+                                    </div>
                                 </form>
+
+
                             </div>
                         </div>
                     </div>

@@ -84,7 +84,7 @@ const HouseHoldFormComponent= React.forwardRef((props, ref)=> {
             </div>
             <div className="form-group">
                 <label>Housing Type</label>
-                <select name="housing_type" id="housing_type" className="form-control">
+                <select className="form-control" name="housing_type" id="housing_type" >
                     <option>Apartment</option>
                 </select>
             </div>
@@ -96,16 +96,17 @@ const HouseHoldFormComponent= React.forwardRef((props, ref)=> {
             </div>
 
             <div className="d-flex">
-                   <div className="form-group">
-                   <label>Unit or Apt.</label>
-             <input type="text" className="form-control"  onChange={buildAddressForm} name="apt_no" id="apt_no"  onBlur={handleErrors} />
-             </div>
+                <div className="form-group">
+                    <label>Unit or Apt.</label>
+                    <input type="text" className="form-control" onChange={buildAddressForm} name="apt_no" id="apt_no"  onBlur={handleErrors}/>
+                </div>
+                <div className="form-group ml-2">
+                    <label>ZIP Code</label>
+                    <input type="text" className="form-control"  onChange={buildAddressForm} name="zip_code" id="zip_code"  onBlur={handleErrors}/>
+                </div>
             </div>
 
-            <div className="form-group">
-                <label>ZIP Code</label>
-                <input type="text" className="form-control" onChange={buildAddressForm} name="zip_code" id="zip_code"  onBlur={handleErrors}  />
-             </div>
+
         </div>
     )
 });
