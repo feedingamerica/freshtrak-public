@@ -3,6 +3,7 @@ import React, {lazy, Suspense} from 'react';
 // import '../Assets/Styles/Common/style.css';
 import {RENDER_URL} from '../Utils/Urls';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+const AuthenticatedLandingComponent =  lazy(() => import('../Modules/AuthenticatedLanding/AuthenticatedLandingComponent'));
 const ConfirmationComponent = lazy(() => import("../Modules/Confirmation/ConfirmationComponent")); 
 const DashBoardContainer = lazy(() => import("../Modules/Dashboard/DashBoardContainer"));
 /*const EventContainer = lazy(() => import("../Modules/Events/EventContainer"));
@@ -21,6 +22,7 @@ const Routes = () => {
                     <Route path={RENDER_URL.EVENT_LIST_URL} component={EventListComponent}/>   
                     <Route path={RENDER_URL.DASHBOARD_URL} component={DashBoardContainer}/>
                     <Route path={RENDER_URL.ADD_FAMILY_URL} component={FamilyContainer}/>
+                    <Route path={RENDER_URL.AUTHENTICATED_USER_URL} component={AuthenticatedLandingComponent}/>
                 </Switch>
             </Suspense>
         </Router>
