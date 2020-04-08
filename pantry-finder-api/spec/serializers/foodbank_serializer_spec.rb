@@ -84,7 +84,7 @@ describe FoodbankSerializer do
                      zip: '12345', phone_public_help: '999-999-9999', \
                      fb_fano_url: 'fb_fano_url')
       )
-  
+
     exp_rslt = '{"address":"addr 1 addr 2","city":"the town",' \
                  '"state":"OH","zip":"12345",' \
                  '"phone":"999-999-9999","name":"local foodbank",' \
