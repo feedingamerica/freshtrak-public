@@ -69,7 +69,7 @@ const AdditionalPickUpFormComponent= React.forwardRef((props, ref)=> {
             </div>
             <div className="add-new-vehicle">
                 <span className="add-button"><img src={add} className="img-fluid"/></span>
-                <span>Add A vehcile</span>
+                <span>Add a Vechicle </span>
             </div>
             <div className="form-text">
                 Where possible, when you arrive we’ll look for your vehicle and bring your goods to you. See event details for more info.
