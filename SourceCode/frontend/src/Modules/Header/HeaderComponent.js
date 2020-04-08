@@ -9,7 +9,8 @@ import navBarIcon from '../../Assets/img/menu.svg';
 import userIcon from '../../Assets/img/Mask.svg';
 import {Link} from "react-router-dom";
 import {Nav,NavDropdown,Navbar,DropdownItem} from 'react-bootstrap';
-const HeaderComponent = () => {
+
+const HeaderComponent = (props) => {
     const [navbarShrink, setNavbarShrink] = useState('');
     useEffect(() => {
         window.onscroll = () => {
@@ -19,9 +20,9 @@ const HeaderComponent = () => {
             setNavbarShrink('');
           }
         }
-    }, []);;
+    }, []);
     return (
-    	/*<nav className={`navbar navbar-expand-md navbar-light fixed-top ${navbarShrink}`} id="mainNav">
+    	 <nav className={`navbar navbar-expand-md navbar-light fixed-top ${navbarShrink} ${props.shortHeader}`} id="mainNav">
                 <div className="container">
                     <div>
                         <h3 className="my-auto mobile-view">

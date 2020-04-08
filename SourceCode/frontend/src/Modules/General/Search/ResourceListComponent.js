@@ -1,4 +1,5 @@
 import React from 'react';
+import mofcLogo from '../../../Assets/img/MOFC-Logo.svg';
 
 const ResourceListComponent = () => {
 
@@ -8,7 +9,7 @@ const ResourceListComponent = () => {
             <div className="row align-items-center mt-2">
                 <div className="col-lg-4 col-sm-6">
                     <div className="d-flex align-items-center">
-                        <span className="search-list-logo"><img src="img/MOFC-Logo.svg"/></span>
+                        <span className="search-list-logo"><img src={mofcLogo}/></span>
                         <span className="font-weight-bold ml-2">Mid-Ohio Foodbank</span>
                     </div>
                 </div>
@@ -21,7 +22,7 @@ const ResourceListComponent = () => {
             <div className="row align-items-center mt-2">
                 <div className="col-lg-4 col-sm-6">
                     <div className="d-flex align-items-center">
-                        <span className="search-list-logo"><img src="img/MOFC-Logo.svg"/></span>
+                        <span className="search-list-logo"><img src={mofcLogo}/></span>
                         <span className="font-weight-bold ml-2">Mid-Ohio Foodbank</span>
                     </div>
                 </div>

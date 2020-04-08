@@ -152,7 +152,6 @@ const PrimaryInfoFormComponent =  React.forwardRef((props, ref) => {
         <div>
 
 
-            <div className="form-fields pt-50">
                 <div className="form-title">
                     Your Information
                 </div>
@@ -216,7 +215,7 @@ const PrimaryInfoFormComponent =  React.forwardRef((props, ref) => {
                         <option>Email</option>
                         <option>Email</option>
                     </select>
-                </div>
+
             </div>
         </div>
     )
