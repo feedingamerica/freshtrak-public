@@ -12,9 +12,9 @@ const DashBoardContainer = () => {
     
     return (
 		<div>
-			<DashBoardComponent/>    
+			<DashBoardComponent />    
 			<section>	        		                   
-				<DashBoardDataComponent/>
+				<DashBoardDataComponent isLoggedIn={true}/>
 			</section>
 			<section className="gray-bg">            	
 				<DashBoardFoodBankComponent/>
