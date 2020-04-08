@@ -22,7 +22,7 @@ const HeaderComponent = (props) => {
         }
     }, []);
     return (
-    	 <nav className={`navbar navbar-expand-md navbar-light fixed-top ${navbarShrink} ${props.shortHeader}`} id="mainNav">
+    	 /*<nav className={`navbar navbar-expand-md navbar-light fixed-top ${navbarShrink} ${props.shortHeader}`} id="mainNav">
                 <div className="container">
                     <div>
                         <h3 className="my-auto mobile-view">
