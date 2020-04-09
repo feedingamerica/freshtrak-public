@@ -75,7 +75,7 @@ const HeaderComponent = (props) => {
                     </div>
                 </div>
             </nav>*/
-            <Nav className={`navbar navbar-expand-md navbar-light fixed-top ${navbarShrink}`} id="mainNav">
+            <Nav className={`navbar navbar-expand-md navbar-light fixed-top ${navbarShrink} ${props.shortHeader}`} id="mainNav">
                 <div className="container">
                     <Navbar expand="md" className="w-100" >
                         <Navbar.Brand href="#home" className="my-auto mobile-view">                            
@@ -108,7 +108,7 @@ const HeaderComponent = (props) => {
                                 </Nav>
                             </Navbar.Collapse>                        
                             <div className="user-avatar">
-                                {isLoggedIn == true ? <LoggedInComponent/> : <SignInComponent/>}
+                                {isLoggedIn == false ? <LoggedInComponent/> : <SignInComponent/>}
                             </div>
                     </Navbar>
                 </div>
