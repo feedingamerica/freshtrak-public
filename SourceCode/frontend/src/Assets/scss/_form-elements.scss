@@ -25,9 +25,17 @@
     &.default-button{
         background-color: $default-button;
         color: $secondary-color;
+        padding-left: 2.3rem;
+        padding-right: 2.3rem;
         @include responsive(extra-smaller-devices) {
             width: 100%;
         }
+    }
+    &.primary-button{
+        background:$primaryColor;
+        color:$color-white;
+        padding-left: 2.3rem;
+        padding-right: 2.3rem;
     }
 }
 .form-group{
@@ -41,6 +49,11 @@
         min-height: 50px;
         border-color: $secondary-color;
         background: none;
+    }
+}
+.sign-in-form{
+    .form-control{
+        border-color: inherit;
     }
 }
 // toggle
@@ -164,4 +177,18 @@ select{
     background:#ffffff url(../img/down.svg) no-repeat 97% center !important;
     -webkit-appearance: none;
     background-position-x: 244px;
+}
+.modal-content{
+    background: $secondary-color;
+    color: $color-white;
+    padding: 1.2rem 1.2rem 2rem;
+    .modal-header{
+        border: none;
+        padding: 0;
+        .close{
+            color: $color-white;
+            text-shadow: none;
+        }
+       
+    }
 }

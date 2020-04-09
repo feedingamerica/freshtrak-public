@@ -2,7 +2,7 @@
 @import "./mixins";
 @import "./form-elements";
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Varela+Round&display=swap");
 
 body {
     background: $color-white;
@@ -13,7 +13,7 @@ body {
             color: $high-light-color;
         }
     }
-    .big-title{
+    .big-title {
         font-size: 4rem;
         letter-spacing: -1px;
         color: $text-color;
@@ -21,15 +21,15 @@ body {
         @include responsive(extra-smaller-devices) {
             font-size: 2rem;
             margin: 2rem 0 1.4rem !important;
-            &.mobile-mb{
-                margin-bottom: .2rem!important;
+            &.mobile-mb {
+                margin-bottom: 0.2rem !important;
             }
         }
     }
-    .medium-title{
+    .medium-title {
         font-size: 18px;
     }
-    .small-title{
+    .small-title {
         font-size: 14px;
     }
     .pt-200 {
@@ -53,34 +53,40 @@ body {
     .pb-50 {
         padding-bottom: 50px;
     }
-    .mt-60{
+    .mt-60 {
         margin-top: 60px;
     }
-    .caption-text{
+    .caption-text {
         font-family: $font-varela;
-        letter-spacing: .4px;
+        letter-spacing: 0.4px;
     }
-    .navbar-toggler{
-        .navbar-toggler-icon{
+    .navbar-toggler {
+        .navbar-toggler-icon {
             background-image: none !important;
         }
-        &:focus{
+        &:focus {
             outline: none;
         }
     }
     #mainNav {
-        .sign-in-button{
-            font-size: .8rem;
+        .sign-in-button {
+            font-size: 0.8rem;
             color: $color-white;
             cursor: pointer;
             font-weight: 700;
+            background: none;
+            border: none;
+            &:focus{
+                outline: none;
+            }
         }
         &.navbar-shrink {
             border-color: rgba(34, 34, 34, 0.1);
             background-color: $primaryColor;
             @include box-shadow(0px, 4px, 8px, $primaryColor);
         }
-        li, .navbar-nav {
+        li,
+        .navbar-nav {
             align-items: center;
             margin-right: 1.5rem;
             text-align: center;
@@ -142,13 +148,13 @@ body {
         .navbar-collapse {
             &.show {
                 background: $secondary-color;
-                padding: 1rem .6rem;
-                .dropdown-menu{
+                padding: 1rem 0.6rem;
+                .dropdown-menu {
                     color: $color-white;
                     background: none;
                     border: none;
                     text-align: center;
-                    a{
+                    a {
                         color: $color-white;
                     }
                 }
@@ -173,7 +179,7 @@ body {
         }
         @include responsive(extra-large-devices) {
         }
-        
+
         .header-content {
             .banner-content {
                 width: 630px;
@@ -241,7 +247,7 @@ body {
         }
     }
     // nav-only
-    .navbar-green{
+    .navbar-green {
         background-color: $primaryColor;
         @include box-shadow(0px, 4px, 8px, $shadow-dark);
         li {
@@ -303,7 +309,7 @@ body {
             }
         }
     }
-    .back-button{
+    .back-button {
         color: $text-color;
         display: flex;
         align-items: center;
@@ -312,7 +318,7 @@ body {
         @include responsive(extra-smaller-devices) {
             display: none;
         }
-        .back-arrow{
+        .back-arrow {
             width: 24px;
             height: 24px;
             display: flex;
@@ -321,32 +327,32 @@ body {
             justify-content: center;
             padding: 3px;
             @include border-radius(50%);
-            img{
+            img {
                 max-width: 100%;
                 max-height: 100%;
             }
         }
     }
-    .title-wrap{
+    .title-wrap {
         max-width: 550px;
         @include responsive(extra-smaller-devices) {
             max-width: auto;
         }
     }
-    .register-confirmation{
-        .content-wrapper{
+    .register-confirmation {
+        .content-wrapper {
             max-width: 400px;
             margin: 1.2rem 0;
-            .member-age{
+            .member-age {
                 width: 180px;
                 font-weight: 400;
             }
-            .rounded-button{
+            .rounded-button {
                 width: 25px;
                 height: 25px;
                 @include border-radius(50%);
                 color: $color-white;
-                border:1px solid transparent;
+                border: 1px solid transparent;
                 background: $text-color;
                 font-size: 1.3rem;
                 padding: 0;
@@ -354,70 +360,71 @@ body {
                 align-items: center;
                 justify-content: center;
                 line-height: 0;
-                 &:focus{
+                &:focus {
                     outline: none;
                 }
-                span{
+                span {
                     margin-top: -2px;
                 }
             }
-            .member-count{
+            .member-count {
                 border: 0;
                 width: 60px;
                 font-weight: 700;
                 text-align: center;
             }
-            .custom-button{
+            .custom-button {
                 min-width: 220px;
             }
             @include responsive(extra-smaller-devices) {
                 max-width: auto;
             }
-            .pantry-name{
+            .pantry-name {
                 font-family: $font-varela;
-                font-size: .85rem;
+                font-size: 0.85rem;
             }
-            .time-wrapper, .address-wrapper{
-                font-size: .85rem;
+            .time-wrapper,
+            .address-wrapper {
+                font-size: 0.85rem;
             }
-            .time-value{
+            .time-value {
                 font-size: 1rem;
             }
-            .distance{
+            .distance {
                 width: 150px;
                 font-family: $font-varela;
             }
-            &.event-details{
-                font-size: .9rem;
+            &.event-details {
+                font-size: 0.9rem;
                 font-family: $font-varela;
             }
-            &.page-info-wrap{
-                font-size: .8rem;
-                p{
+            &.page-info-wrap {
+                font-size: 0.8rem;
+                p {
                     margin-bottom: 8px;
                 }
             }
-            .form-title{
+            .form-title {
                 font-weight: 700;
                 font-size: 1.1rem;
                 color: $secondary-color;
                 padding-left: 5px;
                 margin-bottom: 10px;
             }
-            .form-sub-title{
-                font-size: .8rem;
+            .form-sub-title {
+                font-size: 0.8rem;
                 color: $secondary-color;
                 padding-left: 5px;
             }
-            .form-text{
+            .form-text {
                 padding-left: 5px;
-                font-size: .8rem;
+                font-size: 0.8rem;
             }
-            .add-new-vehicle{
-                font-size: .8rem;
+            .add-new-vehicle {
+                font-size: 0.8rem;
                 display: flex;
                 padding-left: 5px;
-                .add-button{
+                .add-button {
                     width: 16px;
                     height: 16px;
                     padding: 3px;
@@ -429,12 +436,13 @@ body {
                 }
             }
         }
-        .address-details{
-            font-size: .85rem;
+        .address-details {
+            font-size: 0.85rem;
             letter-spacing: 1px;
             font-family: $font-varela;
         }
-        .medium-title, .small-title{
+        .medium-title,
+        .small-title {
             color: $secondary-color;
         }
     }
@@ -520,8 +528,8 @@ body {
             }
         }
     }
-    .search-results-list{
-        .form-group{
+    .search-results-list {
+        .form-group {
             margin-bottom: 0;
         }
     }
@@ -566,7 +574,7 @@ body {
             font-family: $font-varela;
             li {
                 padding: 5px 0;
-                letter-spacing: .4px;
+                letter-spacing: 0.4px;
                 a {
                     color: $color-white;
                     font-size: 0.85rem;
@@ -590,7 +598,8 @@ body {
             background: $color-white;
             @include box-shadow(0px, 4px, 8px, $shadow-color);
             margin-bottom: 15px;
-            .custom-button, .default-button{
+            .custom-button,
+            .default-button {
                 padding-left: inherit;
                 padding-right: inherit;
             }
@@ -673,7 +682,7 @@ body {
     @include responsive(extra-smaller-devices) {
         .mobile-text-left {
             text-align: left !important;
-            margin-bottom: 1rem!important;
+            margin-bottom: 1rem !important;
         }
         h2,
         .h2 {
@@ -702,4 +711,3 @@ body {
         }
     }
 }
-
