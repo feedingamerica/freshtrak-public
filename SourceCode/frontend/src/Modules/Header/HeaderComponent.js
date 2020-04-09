@@ -3,13 +3,15 @@
  */
 
 import React, { useEffect, useState } from 'react';
+import LoggedInComponent from '../General/LoggedInComponent';
+import SignInComponent from '../General/SignInComponent';
 
 import mainLogo from '../../Assets/img/logo.png';
 import navBarIcon from '../../Assets/img/menu.svg';
-import userIcon from '../../Assets/img/Mask.svg';
 import {Link} from "react-router-dom";
 import CustomModalComponent from '../General/Modal/CustomModalComponent';
 import {Nav,NavDropdown,Navbar,DropdownItem, Button} from 'react-bootstrap';
+import userIcon from '../../Assets/img/Mask.svg'
 
 import ButtonComponent from '../General/ButtonComponent';
 
@@ -18,6 +20,7 @@ const HeaderComponent = (props) => {
     const [show, setShow] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     console.log("Header component",isLoggedIn)
+
 
     useEffect(() => {
         if (localStorage.getItem('isLoggedIn')!==null ){
@@ -87,12 +90,13 @@ const HeaderComponent = (props) => {
                 </div>
             </nav> */}
             <Nav className={`navbar navbar-expand-md navbar-light fixed-top ${navbarShrink}`} id="mainNav">
+
                 <div className="container">
-                    <Navbar expand="md" >
-                        <Navbar.Brand href="#home">                            
-                                <h3 className="my-auto mobile-view">                                    
+                    <Navbar expand="md" className="w-100" >
+                        <Navbar.Brand href="#home" className="my-auto mobile-view">                            
+                                <span className="my-auto mobile-view">                                    
                                     <img src={mainLogo} alt="FreshTrak" className="d-inline-block" />                                    
-                                </h3>
+                                </span>
                                 <button className="navbar-toggler mr-2" type="button" data-toggle="collapse"
                                     data-target="#navbarCollapse">
                                     <span className="navbar-toggler-icon">
@@ -103,14 +107,14 @@ const HeaderComponent = (props) => {
                         </Navbar.Brand>        
                             <Navbar.Toggle aria-controls="basic-navbar-nav" />
                             <Navbar.Collapse id="navbarCollapse" className="justify-content-end">
-                                <Nav className="navbar-nav ml-auto small mt-3 mt-md-0 mb-2 mb-md-0 main-menu align-items-center">
+                                <Nav className="navbar-nav small main-menu align-items-center">
                                     <NavDropdown title="Find Resources" aria-labelledby="dropdown01">                                   
                                         <NavDropdown.Item className="dropdown-item" href="#1">Action</NavDropdown.Item>
                                         <NavDropdown.Item className="dropdown-item" href="#2">Another action</NavDropdown.Item>
                                         <NavDropdown.Item className="dropdown-item" href="#3">Something else here</NavDropdown.Item>
                                     </NavDropdown>
                                 </Nav>
-                                <Nav className="navbar-nav ml-auto small mt-3 mt-md-0 mb-2 mb-md-0 main-menu align-items-center">
+                                <Nav className="navbar-nav small  main-menu align-items-center">
                                     <NavDropdown title="For Food Banks" aria-labelledby="dropdown01">                                   
                                         <NavDropdown.Item className="dropdown-item" href="#4">Action</NavDropdown.Item>
                                         <NavDropdown.Item className="dropdown-item" href="#6">Another action</NavDropdown.Item>
@@ -134,6 +138,9 @@ const HeaderComponent = (props) => {
                                         <i className="fa fa-sign-out"></i> Logout 
                                     </DropdownItem> 
                                 </NavDropdown>
+                            {/* <div className="user-avatar">
+                                {isLoggedIn == false ? <LoggedInComponent/> : <SignInComponent/>} */}
+
                             </div>
                                 :
                                 
@@ -141,7 +148,7 @@ const HeaderComponent = (props) => {
                                     Sign In
                                 </button>}
 
-
+                                        
                              
                     </Navbar>
                 </div>
