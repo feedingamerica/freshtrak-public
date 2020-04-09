@@ -14,7 +14,7 @@ import {Nav,NavDropdown,Navbar,DropdownItem, Button} from 'react-bootstrap';
 import userIcon from '../../Assets/img/Mask.svg'
 
 import ButtonComponent from '../General/ButtonComponent';
-
+import {RENDER_URL} from '../../Utils/Urls';
 const HeaderComponent = (props) => {
     const [navbarShrink, setNavbarShrink] = useState('');
     const [show, setShow] = useState(false);
@@ -93,9 +93,9 @@ const HeaderComponent = (props) => {
 
                 <div className="container">
                     <Navbar expand="md" className="w-100" >
-                        <Navbar.Brand href="#home" className="my-auto mobile-view">                            
+                        <Navbar.Brand className="my-auto mobile-view">                            
                                 <span className="my-auto mobile-view">                                    
-                                    <img src={mainLogo} alt="FreshTrak" className="d-inline-block" />                                    
+                                    <Link to={RENDER_URL.HOME_URL}><img src={mainLogo} alt="FreshTrak" className="d-inline-block" /> </Link>                                   
                                 </span>
                                 <button className="navbar-toggler mr-2" type="button" data-toggle="collapse"
                                     data-target="#navbarCollapse">
@@ -130,10 +130,7 @@ const HeaderComponent = (props) => {
                                 <div className="user-avatar">
                                    <NavDropdown  title={                                    
                                     <img className="thumbnail-image" src={userIcon} alt="user pic" />
-                                     }> 
-                                    <DropdownItem eventKey={1.1} href="/profile">Basil TJ</DropdownItem> 
-                                    <DropdownItem eventKey={1.1} href="/profile">Profile</DropdownItem> 
-                                    <DropdownItem divider /> 
+                                     }>                                     
                                     <DropdownItem eventKey={1.3}  onClick={(()=> {localStorage.removeItem('isLoggedIn',false); setIsLoggedIn(false); window.location.reload();})}> 
                                         <i className="fa fa-sign-out"></i> Logout 
                                     </DropdownItem> 
