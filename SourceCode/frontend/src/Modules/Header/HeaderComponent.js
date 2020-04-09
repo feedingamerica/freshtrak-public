@@ -77,11 +77,11 @@ const HeaderComponent = (props) => {
             </nav>*/
             <Nav className={`navbar navbar-expand-md navbar-light fixed-top ${navbarShrink}`} id="mainNav">
                 <div className="container">
-                    <Navbar expand="md" >
-                        <Navbar.Brand href="#home">                            
-                                <h3 className="my-auto mobile-view">                                    
+                    <Navbar expand="md" className="w-100" >
+                        <Navbar.Brand href="#home" className="my-auto mobile-view">                            
+                                <span className="my-auto mobile-view">                                    
                                     <img src={mainLogo} alt="FreshTrak" className="d-inline-block" />                                    
-                                </h3>
+                                </span>
                                 <button className="navbar-toggler mr-2" type="button" data-toggle="collapse"
                                     data-target="#navbarCollapse">
                                     <span className="navbar-toggler-icon">
@@ -92,14 +92,14 @@ const HeaderComponent = (props) => {
                         </Navbar.Brand>        
                             <Navbar.Toggle aria-controls="basic-navbar-nav" />
                             <Navbar.Collapse id="navbarCollapse" className="justify-content-end">
-                                <Nav className="navbar-nav ml-auto small mt-3 mt-md-0 mb-2 mb-md-0 main-menu align-items-center">
+                                <Nav className="navbar-nav small main-menu align-items-center">
                                     <NavDropdown title="Find Resources" aria-labelledby="dropdown01">                                   
                                         <NavDropdown.Item className="dropdown-item" href="#1">Action</NavDropdown.Item>
                                         <NavDropdown.Item className="dropdown-item" href="#2">Another action</NavDropdown.Item>
                                         <NavDropdown.Item className="dropdown-item" href="#3">Something else here</NavDropdown.Item>
                                     </NavDropdown>
                                 </Nav>
-                                <Nav className="navbar-nav ml-auto small mt-3 mt-md-0 mb-2 mb-md-0 main-menu align-items-center">
+                                <Nav className="navbar-nav small  main-menu align-items-center">
                                     <NavDropdown title="For Food Banks" aria-labelledby="dropdown01">                                   
                                         <NavDropdown.Item className="dropdown-item" href="#4">Action</NavDropdown.Item>
                                         <NavDropdown.Item className="dropdown-item" href="#6">Another action</NavDropdown.Item>

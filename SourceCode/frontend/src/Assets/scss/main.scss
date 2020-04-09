@@ -92,13 +92,19 @@ body {
                 background-color: $primaryColor;
                 @include box-shadow(0px, 4px, 8px, $primaryColor);
             }
-            li {
+            li, .navbar-nav {
                 align-items: center;
                 margin-right: 1.5rem;
                 text-align: center;
+                @include responsive(extra-smaller-devices) {
+                    margin-right: 0;
+                }
                 a {
                     color: $color-white;
                     font-weight: 700;
+                    @include responsive(extra-smaller-devices) {
+                        font-size: 1rem;
+                    }
                     &.dropdown-item {
                         color: $secondary-color;
                         font-size: 0.9rem;
@@ -146,7 +152,17 @@ body {
             }
             .navbar-collapse {
                 &.show {
-                    background: $primaryColor;
+                    background: $secondary-color;
+                    padding: 1rem .6rem;
+                    .dropdown-menu{
+                        color: $color-white;
+                        background: none;
+                        border: none;
+                        text-align: center;
+                        a{
+                            color: $color-white;
+                        }
+                    }
                 }
             }
         }
