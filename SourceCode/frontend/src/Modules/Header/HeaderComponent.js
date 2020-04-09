@@ -3,15 +3,17 @@
  */
 
 import React, { useEffect, useState } from 'react';
+import LoggedInComponent from '../General/LoggedInComponent';
+import SignInComponent from '../General/SignInComponent';
 
 import mainLogo from '../../Assets/img/logo.png';
 import navBarIcon from '../../Assets/img/menu.svg';
-import userIcon from '../../Assets/img/Mask.svg';
 import {Link} from "react-router-dom";
-import {Nav,NavDropdown,Navbar,DropdownItem} from 'react-bootstrap';
+import {Nav,NavDropdown,Navbar} from 'react-bootstrap';
 
 const HeaderComponent = (props) => {
     const [navbarShrink, setNavbarShrink] = useState('');
+    const [isLoggedIn, setLoggedIn] = useState(true);
     useEffect(() => {
         window.onscroll = () => {
           if(window.pageYOffset > 100){
@@ -106,16 +108,7 @@ const HeaderComponent = (props) => {
                                 </Nav>
                             </Navbar.Collapse>                        
                             <div className="user-avatar">
-                                <NavDropdown eventKey={1} title={                                    
-                                    <img className="thumbnail-image" src={userIcon} alt="user pic" />
-                                     }> 
-                                    <DropdownItem eventKey={1.1} href="/profile">Basil TJ</DropdownItem> 
-                                    <DropdownItem eventKey={1.1} href="/profile">Profile</DropdownItem> 
-                                    <DropdownItem divider /> 
-                                    <DropdownItem eventKey={1.3}> 
-                                        <i className="fa fa-sign-out"></i> Logout 
-                                    </DropdownItem> 
-                                </NavDropdown>
+                                {isLoggedIn == true ? <LoggedInComponent/> : <SignInComponent/>}
                             </div>
                     </Navbar>
                 </div>
