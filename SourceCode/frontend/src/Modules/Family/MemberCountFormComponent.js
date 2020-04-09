@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
+import ReactDOM from 'react-dom';
 
 const MemberCountFormComponent = (props) => {
     const [countSenior, setCountSenior] = React.useState('');
     const [countMiddle, setCountMiddle] = React.useState('');
     const [countJunior, setCountJunior] = React.useState('');
+    const [value, setValue] = React.useState(0);
 
     const buildMemberCount = (e) => {
         e.preventDefault();
@@ -38,15 +40,55 @@ const MemberCountFormComponent = (props) => {
         props.onSelectedChild(childFamilyData);
     };
 
+
+    const incrementFunction=(e) =>{
+        e.preventDefault();
+        if(value < 13) {
+            setValue(value + 1)
+        }
+    };
+
+    const decrementFunction=(e)=> {
+        e.preventDefault();
+        if (value) {
+                setValue(value - 1)
+        }
+    };
+
     return (
         <div>
         <div className="form-sub-title font-weight-bold">
             Total Number of Household Members
+            <div className="mt-3 pt-1">
+            <div className="d-flex align-items-center pt-2 pb-2">
+                <div className="member-age">Seniors (65+)</div>
+                <div className="button-wrap d-flex flex-grow-1">
+                
+                <button onClick={decrementFunction} className="rounded-button"><span>-</span></button>
+                <input type="text" className="number member-count" value={value}></input>
+                <button onClick={incrementFunction} className="rounded-button"><span>+</span></button>
+                </div>
+            </div>
+            <div className="d-flex align-items-center pt-2 pb-2">
+                <div className="member-age">Adults (18+)</div>
+                <div className="button-wrap d-flex flex-grow-1">
+                
+                <button onClick={decrementFunction} className="rounded-button"><span>-</span></button>
+                <input type="text" className="number member-count" value={value}></input>
+                <button onClick={incrementFunction} className="rounded-button"><span>+</span></button>
+                </div>
+            </div>
+            <div className="d-flex align-items-center pt-2 pb-2">
+                <div className="member-age">Kids (Under 18)</div>
+                <div className="button-wrap d-flex flex-grow-1">
+                
+                <button onClick={decrementFunction} className="rounded-button"><span>-</span></button>
+                <input type="text" className="number member-count" value={value}></input>
+                <button onClick={incrementFunction} className="rounded-button"><span>+</span></button>
+                </div>
+            </div>
+            </div>
         </div>
-
-            <label>Seniors (65+) </label><input  onChange={buildMemberCount} name="countSenior" id="count_senior" type="number" min="0" max="13" />
-            <label>Adult (18+) </label><input  onChange={buildMemberCount} name="countMiddle" id="count_middle" type="number" min="0" max="13" />
-            <label>Kids (Under 18)</label><input  onChange={buildMemberCount} name="countJunior" id="count_junior" type="number" min="0" max="13" />
         </div>
 
     )

@@ -20,7 +20,8 @@ export const BASE_URL = getBaseUrl();
 export const API_URL = {    
     /*CREATE_EVENT : BASE_URL + 'event/create',
     GET_EVENT_LIST : BASE_URL + 'event/list',
-    EVENT_URL : BASE_URL + 'event',*/
+    EVENT_URL : BASE_URL + 'event',
+    GET_REG_EVENT : BASE_URL + '/event/list/*/
 };
 
 export const RENDER_URL = {
