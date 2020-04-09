@@ -1,7 +1,7 @@
 /**
  * Confirmation Component
  */
-import React from 'react';
+import {React,useEffect} from 'react';
 import '../../Assets/scss/main.scss';
 import FooterContainer from '../Footer/FooterContainer';
 import ButtonComponent from '../General/ButtonComponent';
@@ -13,6 +13,10 @@ import DashBoardFoodBankComponent from '../Dashboard/DashBoardFoodBankComponent'
 
 const AuthenticatedLandingComponent = (props) => {
 var isLoggedIn = true;
+
+useEffect(()=>{
+    isLoggedIn = localStorage.getItem('isLoggedIn')
+});
     return (
         <div>
             <HeaderContainer />

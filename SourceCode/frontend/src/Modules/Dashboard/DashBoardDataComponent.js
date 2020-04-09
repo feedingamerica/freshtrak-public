@@ -9,8 +9,13 @@ import SearchComponent from '../General/SearchComponent';
 import RegisteredEventListComponent from '../AuthenticatedLanding/RegisteredEventListComponent';
 import DashboardCreateAccountComponent from './DashboardCreateAccountComponent';
 const DashBoardDataComponent = (props) => {	
-    const isLoggedIn = props.isLoggedIn;
- 
+    const [isLoggedIn, setIsLoggedIn] = React.useState(localStorage.getItem('isLoggedIn'));
+    React.useEffect(()=>{
+		console.log(typeof(localStorage.getItem('isLoggedIn')))
+		if (localStorage.getItem('isLoggedIn')!=undefined ){
+            setIsLoggedIn(true);
+        }
+	},[localStorage.getItem('isLoggedIn')]);
     return (
     	<div className="container pt-150 pb-150">
             <SearchComponent/>
