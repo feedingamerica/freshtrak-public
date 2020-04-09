@@ -89,7 +89,7 @@ const HeaderComponent = (props) => {
                     </div>
                 </div>
             </nav> */}
-            <Nav className={`navbar navbar-expand-md navbar-light fixed-top ${navbarShrink}`} id="mainNav">
+            <Nav className={`navbar navbar-expand-md navbar-light fixed-top ${navbarShrink} ${props.shortHeader}`} id="mainNav">
 
                 <div className="container">
                     <Navbar expand="md" className="w-100" >
@@ -144,7 +144,7 @@ const HeaderComponent = (props) => {
                             </div>
                                 :
                                 
-                                <button  className="btn default-button flex-grow-1" style={{minHeight:'0px',marginLeft:'20px'}} onClick={() => setModalShow(true)}>
+                                <button  className="sign-in-button" style={{minHeight:'0px',marginLeft:'20px'}} onClick={() => setModalShow(true)}>
                                     Sign In
                                 </button>}
 
