@@ -65,13 +65,14 @@ const SignInComponent = React.forwardRef((props, ref)=>{
 
 
     return (
-        <div className="form-fields pt-50">
+        <div className="form-fields sign-in-form">
             <div className="form-title">
                 <h1>Sign In</h1>
             </div>
-            <div className="form-text mb-2">
-                Have you previously registered through FreshTrak? Input your email address and 
-                the password you entered when you created your account.
+            <div className=" mb-2">
+                <div>Have you previously registered through FreshTrak?</div>
+                <div className="small-title">Input your email address and 
+                the password you entered when you created your account.</div>
             </div>
             <div className="form-group">
                 <label>Username or Email Address</label>
@@ -81,9 +82,10 @@ const SignInComponent = React.forwardRef((props, ref)=>{
                 <label>Password</label>
                 <input type="password" className="form-control"  name="Password" id="Password" />
             </div>
-            <div className="button-wrap mt-4">
-                <button className="btn custom-button" onClick={handleSubmit}>Submit</button>
-
+            <div><a>Forgot Password?</a></div>
+            <div className="button-wrap d-flex mt-3">
+                <button className="btn primary-button flex-grow-1" onClick={handleSubmit}>Submit</button>
+               
             </div>
         </div>
     )
