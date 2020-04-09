@@ -328,6 +328,36 @@ body {
         .content-wrapper{
             max-width: 400px;
             margin: 1.2rem 0;
+            .member-age{
+                width: 180px;
+                font-weight: 400;
+            }
+            .rounded-button{
+                width: 25px;
+                height: 25px;
+                @include border-radius(50%);
+                color: $color-white;
+                border:1px solid transparent;
+                background: $text-color;
+                font-size: 1.3rem;
+                padding: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                line-height: 0;
+                 &:focus{
+                    outline: none;
+                }
+                span{
+                    margin-top: -2px;
+                }
+            }
+            .member-count{
+                border: 0;
+                width: 60px;
+                font-weight: 700;
+                text-align: center;
+            }
             .custom-button{
                 min-width: 220px;
             }
