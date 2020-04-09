@@ -8,11 +8,21 @@ import mainLogo from '../../Assets/img/logo.png';
 import navBarIcon from '../../Assets/img/menu.svg';
 import userIcon from '../../Assets/img/Mask.svg';
 import {Link} from "react-router-dom";
-import {Nav,NavDropdown,Navbar,DropdownItem} from 'react-bootstrap';
+import CustomModalComponent from '../General/Modal/CustomModalComponent';
+import {Nav,NavDropdown,Navbar,DropdownItem, Button} from 'react-bootstrap';
+
+import ButtonComponent from '../General/ButtonComponent';
 
 const HeaderComponent = (props) => {
     const [navbarShrink, setNavbarShrink] = useState('');
+    const [show, setShow] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    console.log("Header component",isLoggedIn)
+
     useEffect(() => {
+        if (localStorage.getItem('isLoggedIn')!==null ){
+            setIsLoggedIn(true);
+        }
         window.onscroll = () => {
           if(window.pageYOffset > 100){
             setNavbarShrink('navbar-shrink');
@@ -20,9 +30,12 @@ const HeaderComponent = (props) => {
             setNavbarShrink('');
           }
         }
-    }, []);
+    }, [localStorage.getItem('isLoggedIn'),isLoggedIn]);
+
+    const [modalShow, setModalShow] = React.useState(false);
     return (
-    	 /*<nav className={`navbar navbar-expand-md navbar-light fixed-top ${navbarShrink} ${props.shortHeader}`} id="mainNav">
+        <div>
+    	 { /*<nav className={`navbar navbar-expand-md navbar-light fixed-top ${navbarShrink} ${props.shortHeader}`} id="mainNav">
                 <div className="container">
                     <div>
                         <h3 className="my-auto mobile-view">
@@ -72,7 +85,7 @@ const HeaderComponent = (props) => {
                        
                     </div>
                 </div>
-            </nav>*/
+            </nav> */}
             <Nav className={`navbar navbar-expand-md navbar-light fixed-top ${navbarShrink}`} id="mainNav">
                 <div className="container">
                     <Navbar expand="md" >
@@ -105,21 +118,41 @@ const HeaderComponent = (props) => {
                                     </NavDropdown>
                                 </Nav>
                             </Navbar.Collapse>                        
-                            <div className="user-avatar">
-                                <NavDropdown eventKey={1} title={                                    
+                            
+
+                            {/* Sign In Button */}
+                                {/* <ButtonComponent type ='button' name="signIn" dataid= '' id="sign-in" value="Sign In" className = 'btn default-button flex-grow-1' onClickfunction={showModal} /> */}
+                                {isLoggedIn?
+                                <div className="user-avatar">
+                                   <NavDropdown  title={                                    
                                     <img className="thumbnail-image" src={userIcon} alt="user pic" />
                                      }> 
                                     <DropdownItem eventKey={1.1} href="/profile">Basil TJ</DropdownItem> 
                                     <DropdownItem eventKey={1.1} href="/profile">Profile</DropdownItem> 
                                     <DropdownItem divider /> 
-                                    <DropdownItem eventKey={1.3}> 
+                                    <DropdownItem eventKey={1.3}  onClick={(()=> {localStorage.removeItem('isLoggedIn',false); setIsLoggedIn(false); window.location.reload();})}> 
                                         <i className="fa fa-sign-out"></i> Logout 
                                     </DropdownItem> 
                                 </NavDropdown>
                             </div>
+                                :
+                                
+                                <button  className="btn default-button flex-grow-1" style={{minHeight:'0px',marginLeft:'20px'}} onClick={() => setModalShow(true)}>
+                                    Sign In
+                                </button>}
+
+
+                             
                     </Navbar>
                 </div>
             </Nav>
+
+            <CustomModalComponent
+            signIn = {true}
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+            />
+            </div>
     )
 };
 
