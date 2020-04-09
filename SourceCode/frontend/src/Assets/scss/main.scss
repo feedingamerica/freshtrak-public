@@ -68,6 +68,93 @@ body {
             outline: none;
         }
     }
+    #mainNav {
+        .sign-in-button{
+            font-size: .8rem;
+            color: $color-white;
+            cursor: pointer;
+            font-weight: 700;
+        }
+        &.navbar-shrink {
+            border-color: rgba(34, 34, 34, 0.1);
+            background-color: $primaryColor;
+            @include box-shadow(0px, 4px, 8px, $primaryColor);
+        }
+        li, .navbar-nav {
+            align-items: center;
+            margin-right: 1.5rem;
+            text-align: center;
+            @include responsive(extra-smaller-devices) {
+                margin-right: 0;
+            }
+            a {
+                color: $color-white;
+                font-weight: 700;
+                @include responsive(extra-smaller-devices) {
+                    font-size: 1rem;
+                }
+                &.dropdown-item {
+                    color: $secondary-color;
+                    font-size: 0.9rem;
+                }
+            }
+        }
+        .user-avatar {
+            @include responsive(extra-smaller-devices) {
+                position: absolute;
+                top: 15px;
+                right: 0;
+            }
+
+            .nav-link {
+                padding: 0;
+                &.dropdown-toggle {
+                    &::after {
+                        opacity: 0;
+                    }
+                }
+            }
+
+            .dropdown-menu {
+                left: auto;
+                right: 0;
+            }
+        }
+        @include responsive(extra-smaller-devices) {
+            .navbar-toggler {
+                position: absolute;
+                border: none;
+                color: $color-white;
+                top: 10px;
+                left: 0;
+            }
+            .navbar-brand {
+                height: 30px;
+                img {
+                    max-height: 100%;
+                }
+            }
+        }
+        .mobile-view {
+            margin: auto;
+            line-height: 0;
+        }
+        .navbar-collapse {
+            &.show {
+                background: $secondary-color;
+                padding: 1rem .6rem;
+                .dropdown-menu{
+                    color: $color-white;
+                    background: none;
+                    border: none;
+                    text-align: center;
+                    a{
+                        color: $color-white;
+                    }
+                }
+            }
+        }
+    }
     .header {
         background: $primaryColor url(../img/banner-bg.png) no-repeat center center;
         height: 509px;
@@ -86,86 +173,7 @@ body {
         }
         @include responsive(extra-large-devices) {
         }
-        #mainNav {
-            &.navbar-shrink {
-                border-color: rgba(34, 34, 34, 0.1);
-                background-color: $primaryColor;
-                @include box-shadow(0px, 4px, 8px, $primaryColor);
-            }
-            li, .navbar-nav {
-                align-items: center;
-                margin-right: 1.5rem;
-                text-align: center;
-                @include responsive(extra-smaller-devices) {
-                    margin-right: 0;
-                }
-                a {
-                    color: $color-white;
-                    font-weight: 700;
-                    @include responsive(extra-smaller-devices) {
-                        font-size: 1rem;
-                    }
-                    &.dropdown-item {
-                        color: $secondary-color;
-                        font-size: 0.9rem;
-                    }
-                }
-            }
-            .user-avatar {
-                @include responsive(extra-smaller-devices) {
-                    position: absolute;
-                    top: 15px;
-                    right: 0;
-                }
-
-                .nav-link {
-                    padding: 0;
-                    &.dropdown-toggle {
-                        &::after {
-                            opacity: 0;
-                        }
-                    }
-                }
-
-                .dropdown-menu {
-                    left: auto;
-                    right: 0;
-                }
-            }
-            @include responsive(extra-smaller-devices) {
-                .navbar-toggler {
-                    position: absolute;
-                    border: none;
-                    color: $color-white;
-                    top: 10px;
-                    left: 0;
-                }
-                .navbar-brand {
-                    height: 30px;
-                    img {
-                        max-height: 100%;
-                    }
-                }
-            }
-            .mobile-view {
-                margin: auto;
-            }
-            .navbar-collapse {
-                &.show {
-                    background: $secondary-color;
-                    padding: 1rem .6rem;
-                    .dropdown-menu{
-                        color: $color-white;
-                        background: none;
-                        border: none;
-                        text-align: center;
-                        a{
-                            color: $color-white;
-                        }
-                    }
-                }
-            }
-        }
+        
         .header-content {
             .banner-content {
                 width: 630px;
@@ -277,6 +285,7 @@ body {
                 color: $color-white;
                 top: 10px;
                 left: 0;
+                padding: 0;
             }
             .navbar-brand {
                 height: 30px;
@@ -328,6 +337,36 @@ body {
         .content-wrapper{
             max-width: 400px;
             margin: 1.2rem 0;
+            .member-age{
+                width: 180px;
+                font-weight: 400;
+            }
+            .rounded-button{
+                width: 25px;
+                height: 25px;
+                @include border-radius(50%);
+                color: $color-white;
+                border:1px solid transparent;
+                background: $text-color;
+                font-size: 1.3rem;
+                padding: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                line-height: 0;
+                 &:focus{
+                    outline: none;
+                }
+                span{
+                    margin-top: -2px;
+                }
+            }
+            .member-count{
+                border: 0;
+                width: 60px;
+                font-weight: 700;
+                text-align: center;
+            }
             .custom-button{
                 min-width: 220px;
             }

@@ -59,11 +59,34 @@ const MemberCountFormComponent = (props) => {
         <div>
         <div className="form-sub-title font-weight-bold">
             Total Number of Household Members
-            <div>
-                <button onClick={incrementFunction} className="fa fa-minus fa-inverse fa-2x">+</button>
-                <input type="text" className="number" value={value}></input>
-                <button onClick={decrementFunction} className="fa fa-plus fa-inverse fa-2x">-</button>
-
+            <div className="mt-3 pt-1">
+            <div className="d-flex align-items-center pt-2 pb-2">
+                <div className="member-age">Seniors (65+)</div>
+                <div className="button-wrap d-flex flex-grow-1">
+                
+                <button onClick={decrementFunction} className="rounded-button"><span>-</span></button>
+                <input type="text" className="number member-count" value={value}></input>
+                <button onClick={incrementFunction} className="rounded-button"><span>+</span></button>
+                </div>
+            </div>
+            <div className="d-flex align-items-center pt-2 pb-2">
+                <div className="member-age">Adults (18+)</div>
+                <div className="button-wrap d-flex flex-grow-1">
+                
+                <button onClick={decrementFunction} className="rounded-button"><span>-</span></button>
+                <input type="text" className="number member-count" value={value}></input>
+                <button onClick={incrementFunction} className="rounded-button"><span>+</span></button>
+                </div>
+            </div>
+            <div className="d-flex align-items-center pt-2 pb-2">
+                <div className="member-age">Kids (Under 18)</div>
+                <div className="button-wrap d-flex flex-grow-1">
+                
+                <button onClick={decrementFunction} className="rounded-button"><span>-</span></button>
+                <input type="text" className="number member-count" value={value}></input>
+                <button onClick={incrementFunction} className="rounded-button"><span>+</span></button>
+                </div>
+            </div>
             </div>
         </div>
         </div>
