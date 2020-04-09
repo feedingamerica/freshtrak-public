@@ -28,6 +28,9 @@ const EventListComponent = () => {
                 id:'3',
             }]}];
 
+            const onChangeHandler = (e)=>{
+                e.preventDefault();
+            }
     return (
         <div className="search-results-list">
             <div className="row align-items-end">
@@ -38,10 +41,10 @@ const EventListComponent = () => {
                 </div>
                 <div className="col-lg-4 col-xl-4 d-none-xs d-none-sm">
                     <div className="switch-view d-flex justify-content-center">
-                        <input id="toggle-on" className="toggle toggle-left" name="toggle" value="false" type="radio" checked />
-                        <label for="toggle-on" className="btn-toggle">List</label>
-                        <input id="toggle-off" className="toggle toggle-right" name="toggle" value="true" type="radio" />
-                        <label for="toggle-off" className="btn-toggle">Map</label>
+                        <input id="toggle-on" className="toggle toggle-left" name="toggle" value="false" type="radio" checked onChange={onChangeHandler} />
+                        <label htmlFor="toggle-on" className="btn-toggle">List</label>
+                        <input id="toggle-off" className="toggle toggle-right" name="toggle" value="true" type="radio" onChange={onChangeHandler}/>
+                        <label htmlFor="toggle-off" className="btn-toggle">Map</label>
                     </div>
                 </div>
                 <div className="col-lg-4 col-xl-4">
@@ -56,7 +59,7 @@ const EventListComponent = () => {
 
             {
                 items.map((details,index)=>{
-                    return <div className="row mt-5">
+                    return <div key={index} className="row mt-5">
                         <div className="col-md-12">
                             <div className="day-view">
                                 <div className="row">
@@ -65,7 +68,7 @@ const EventListComponent = () => {
                                 <div className="row mt-2">
                                     {
                                         details.day.map((day,index)=>{
-                                            return    <EventCardComponent date={details.date} day={day}/>
+                                            return    <EventCardComponent key={index} date={details.date} day={day}/>
                                         })
                                     }
 

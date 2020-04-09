@@ -3,12 +3,17 @@
  */
 
 import React, { useEffect, useState } from 'react';
+import LoggedInComponent from '../General/LoggedInComponent';
+import SignInComponent from '../General/SignInComponent';
 
 import mainLogo from '../../Assets/img/logo.png';
 import navBarIcon from '../../Assets/img/menu.svg';
-import userIcon from '../../Assets/img/Mask.svg';
+import {Link} from "react-router-dom";
+import {Nav,NavDropdown,Navbar} from 'react-bootstrap';
+
 const HeaderComponent = (props) => {
     const [navbarShrink, setNavbarShrink] = useState('');
+    const [isLoggedIn, setLoggedIn] = useState(true);
     useEffect(() => {
         window.onscroll = () => {
           if(window.pageYOffset > 100){
@@ -17,9 +22,9 @@ const HeaderComponent = (props) => {
             setNavbarShrink('');
           }
         }
-    }, []);;
+    }, []);
     return (
-    	 <nav className={`navbar navbar-expand-md navbar-light fixed-top ${navbarShrink} ${props.shortHeader}`} id="mainNav">
+    	 /*<nav className={`navbar navbar-expand-md navbar-light fixed-top ${navbarShrink} ${props.shortHeader}`} id="mainNav">
                 <div className="container">
                     <div>
                         <h3 className="my-auto mobile-view">
@@ -69,7 +74,45 @@ const HeaderComponent = (props) => {
                        
                     </div>
                 </div>
-            </nav>
+            </nav>*/
+            <Nav className={`navbar navbar-expand-md navbar-light fixed-top ${navbarShrink}`} id="mainNav">
+                <div className="container">
+                    <Navbar expand="md" >
+                        <Navbar.Brand href="#home">                            
+                                <h3 className="my-auto mobile-view">                                    
+                                    <img src={mainLogo} alt="FreshTrak" className="d-inline-block" />                                    
+                                </h3>
+                                <button className="navbar-toggler mr-2" type="button" data-toggle="collapse"
+                                    data-target="#navbarCollapse">
+                                    <span className="navbar-toggler-icon">
+                                        <img src={navBarIcon} alt="UserLogo" className="img-fluid"/>
+                                    </span>
+                                </button>
+                            
+                        </Navbar.Brand>        
+                            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                            <Navbar.Collapse id="navbarCollapse" className="justify-content-end">
+                                <Nav className="navbar-nav ml-auto small mt-3 mt-md-0 mb-2 mb-md-0 main-menu align-items-center">
+                                    <NavDropdown title="Find Resources" aria-labelledby="dropdown01">                                   
+                                        <NavDropdown.Item className="dropdown-item" href="#1">Action</NavDropdown.Item>
+                                        <NavDropdown.Item className="dropdown-item" href="#2">Another action</NavDropdown.Item>
+                                        <NavDropdown.Item className="dropdown-item" href="#3">Something else here</NavDropdown.Item>
+                                    </NavDropdown>
+                                </Nav>
+                                <Nav className="navbar-nav ml-auto small mt-3 mt-md-0 mb-2 mb-md-0 main-menu align-items-center">
+                                    <NavDropdown title="For Food Banks" aria-labelledby="dropdown01">                                   
+                                        <NavDropdown.Item className="dropdown-item" href="#4">Action</NavDropdown.Item>
+                                        <NavDropdown.Item className="dropdown-item" href="#6">Another action</NavDropdown.Item>
+                                        <NavDropdown.Item className="dropdown-item" href="#7">Something else here</NavDropdown.Item>
+                                    </NavDropdown>
+                                </Nav>
+                            </Navbar.Collapse>                        
+                            <div className="user-avatar">
+                                {isLoggedIn == true ? <LoggedInComponent/> : <SignInComponent/>}
+                            </div>
+                    </Navbar>
+                </div>
+            </Nav>
     )
 };
 
