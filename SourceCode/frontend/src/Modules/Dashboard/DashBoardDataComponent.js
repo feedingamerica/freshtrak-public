@@ -3,7 +3,7 @@
  * Created by Basil on 04/04/20.
  */
 
- import * as React from 'react';
+import * as React from 'react';
 import {useState,useEffect} from 'react';
 import SearchComponent from '../General/SearchComponent';
 import RegisteredEventListComponent from '../AuthenticatedLanding/RegisteredEventListComponent';
