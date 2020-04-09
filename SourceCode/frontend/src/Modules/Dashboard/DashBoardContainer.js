@@ -9,12 +9,18 @@ import FooterContainer from '../Footer/FooterContainer';
 import '../../Assets/scss/main.scss';
 
 const DashBoardContainer = () => {
-    
+	// const [isLoggedIn, setIsLoggedIn] = React.useState(localStorage.getItem('isLoggedIn'));
+    // React.useEffect(()=>{
+	// 	console.log(typeof(localStorage.getItem('isLoggedIn')))
+	// 	if (localStorage.getItem('isLoggedIn')!=undefined ){
+    //         setIsLoggedIn(true);
+    //     }
+	// },[localStorage.getItem('isLoggedIn')]);
     return (
 		<div>
 			<DashBoardComponent />    
 			<section>	        		                   
-				<DashBoardDataComponent isLoggedIn={false}/>
+				<DashBoardDataComponent />
 			</section>
 			<section className="gray-bg">            	
 				<DashBoardFoodBankComponent/>
