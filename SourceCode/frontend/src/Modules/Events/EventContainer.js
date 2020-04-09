@@ -10,7 +10,7 @@ const EventContainer = () => {
     return (
         <div>
             <EventHeaderComponent/>
-            <section>
+            <section className="gray-bg">
                 <div className="container pt-150 pb-150">
                     <SearchComponent/>
                     <EventListComponent/>
