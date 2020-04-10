@@ -3,6 +3,7 @@
 Jets.application.configure do
   config.project_name = 'pantry-finder-api'
   config.mode = 'api'
+  config.cors = true
 
   config.prewarm.enable = true # default is true
   # config.prewarm.rate = '30 minutes' # default is '30 minutes'
