@@ -18,9 +18,15 @@ jobs:
           - 3306:3306
         volumes:
           - "/var/run/mysqld:/var/run/mysqld"
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=10
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
+      - name: inspect
+        run: |
+          echo "${{ toJson(job) }}"
+          sudo apt-get install -y mysql-client
+          docker logs "${{ job.services.mysql.id }}"
+        if: failure()
       - name: Checkout
         uses: actions/checkout@v2
       - name: Setup Ruby
