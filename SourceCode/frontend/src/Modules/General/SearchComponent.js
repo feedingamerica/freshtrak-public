@@ -73,17 +73,22 @@ const SearchComponent = (props, ref) => {
             <div className=" row align-items-end">
                 <div className="col-sm-6 col-md-6 col-lg-7 col-xl-8">
                     <div className="d-flex">
-                        <div className="form-group flex-grow-1">
+                        {/* <div className="form-group flex-grow-1">
                             <label>Street</label>
                             <input type="text" className="form-control" name="street"
                                    value={street || ''}
                                    onChange={buildData} />
-                        </div>
+                        </div> */}
                         <div className="form-group zip-code">
-                            <label>Zip</label>
-                            <input type="text" className="form-control" name="zip"
-                                   value={zip || ''}
-                                   onChange={buildData} />
+                            <label htmlFor="zip">Zip</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                id="zip"
+                                name="zip"
+                                value={zip || ''}
+                                onChange={buildData}
+                            />
 
                             {errors.zip && (
                                 <span className="validationError">{errors.zip}</span>

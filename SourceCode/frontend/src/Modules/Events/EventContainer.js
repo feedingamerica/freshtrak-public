@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import FooterContainer from '../Footer/FooterContainer';
 import EventHeaderComponent from './EventHeaderComponent';
 import SearchComponent from '../General/SearchComponent';
@@ -8,13 +8,16 @@ import ResourceListComponent from './ResourceListComponent';
 import {API_URL} from '../../Utils/Urls';
 import {ajaxGet} from '../../Services/Http/Ajax';
 import {STATUS_ACTIVE} from '../../Utils/Constants';
+import axios from 'axios';
+import { mockFoodBank } from '../../Testing';
 
 const EventContainer = (props) => {
-    const [foodBankResponse, setFoodBankResponse] = React.useState(false);
-    const [agencyResponse, setAgencyResponse] = React.useState(false);
-    let [foodBankData,setFoodBankData] = React.useState({});
-    let [agencyData,setAgencyData] = React.useState({});
-    let [searchDetails,setSearchDetails] = React.useState({});
+    const [foodBankResponse, setFoodBankResponse] = useState(false);
+    const [agencyResponse, setAgencyResponse] = useState(false);
+    let [foodBankData,setFoodBankData] = useState({});
+    let [agencyData,setAgencyData] = useState({});
+    let [searchDetails,setSearchDetails] = useState({});
+    const [loading, setLoading] = useState(false);
     let isSearchData = !!props.location.state;
 
     React.useEffect(() => {
@@ -24,27 +27,22 @@ const EventContainer = (props) => {
         }
     }, []);
 
-    const handleSubmit = (data) => {
+    const handleSubmit = async (data) => {
         if(data) {
+            setLoading(true);
             let foodBankUri = API_URL.FOODBANK_LIST;
-            let foodbankResponse = {
-                "foodbanks": [
-                    {
-                        "address": "3960 Brookham DR",
-                        "city": "Grove City",
-                        "state": "OH",
-                        "zip": "43123",
-                        "name": "Mid-Ohio Foodbank",
-                        "nickname": "Mid-Ohio Foodbank",
-                        "display_url": "https://www.midohiofoodbank.org/get-help/get-food/",
-                        "fb_agency_locator_url": "https://www.midohiofoodbank.org/get-help/get-food/",
-                        "fb_url": "https://www.midohiofoodbank.org/",
-                        "fb_fano_url": "https://www.feedingamerica.org/find-your-local-foodbank/mid-ohio-foodbank"
-                    }
-                ]
-            };
-            setFoodBankData(foodbankResponse);
-            setFoodBankResponse(true);
+            // Going to use axios for now
+            try {
+                const { zip_code } = data;
+                const resp = await axios.get(foodBankUri, { params: zip_code });
+                setFoodBankData(resp);
+                setFoodBankResponse(true);
+                setLoading(false);
+            } catch (err) {
+                console.error(err);
+            }
+
+            // Mock Data ignoring for now
             let agencyResponse = {
                 "agencies": [
                     {
@@ -135,10 +133,11 @@ const EventContainer = (props) => {
     };
 
     const EventList = () => {
+        // Out of scope for now
+        return null;
         if (agencyResponse) {
             return <EventListComponent dataToChild = {agencyData} /> ;
         }
-        return null;
     };
 
     const ResourceList = () => {
@@ -156,7 +155,8 @@ const EventContainer = (props) => {
                     <div className="search-area text-left">
                         <SearchComponent onSelectedChild = {buildSearchData}
                                          dataToChild = {searchDetails}/>
-                        <ResourceList />
+                        {loading && <h2>Loading</h2>}
+                        {!loading && <ResourceList />}
                     </div>
                     <EventList />
                 </div>
