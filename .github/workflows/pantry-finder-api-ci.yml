@@ -16,15 +16,12 @@ jobs:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
         ports:
           - 3306:3306
-        volumes:
-          - "/var/run/mysqld:/var/run/mysqld"
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
-      - name: inspect
+      - name: Inspect MySQL (on failure)
         run: |
           echo "${{ toJson(job) }}"
-          sudo apt-get install -y mysql-client
           docker logs "${{ job.services.mysql.id }}"
         if: failure()
       - name: Checkout
