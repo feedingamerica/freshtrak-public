@@ -30,7 +30,8 @@ const EventListComponent = () => {
 
             const onChangeHandler = (e)=>{
                 e.preventDefault();
-            }
+            };
+
     return (
         <div className="search-results-list">
             <div className="row align-items-end">
@@ -76,9 +77,6 @@ const EventListComponent = () => {
                             </div>
                         </div>
                     </div>
-
-
-
 
                 })}
 
