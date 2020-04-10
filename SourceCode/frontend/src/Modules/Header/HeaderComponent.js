@@ -19,8 +19,6 @@ const HeaderComponent = (props) => {
     const [navbarShrink, setNavbarShrink] = useState('');
     const [show, setShow] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    console.log("Header component",isLoggedIn)
-
 
     useEffect(() => {
         if (localStorage.getItem('isLoggedIn')!==null ){
