@@ -11,7 +11,7 @@ const EventCardComponent = (props) => {
         <div className="col-lg-4 col-xl-4">
             <div className="day-view-item">
                 <div className="day-view-item-header">
-                    <div className="day-view-header-title">Kroger Food Pantry EXPRESS - ID - {day.id}</div>
+                    <div className="day-view-header-title">Mid-Ohio Foodbank - Kroger Community Pantry - ID - {day.id}</div>
                     <div className="day-view-item-location d-flex justify-content-between">
                         <div className="day-view-item-name">Prepack Pantry</div>
                         <div className="day-view-item-distance">14 Miles</div>
@@ -23,12 +23,12 @@ const EventCardComponent = (props) => {
                     </div>
                     <div className="timings d-flex justify-content-between">
                         <div className="date-wrapper">{date}</div>
-                        <div className="timing-wrapper">12:30pm-3:30pm</div>
+                        <div className="timing-wrapper">01:00 PM - 03:00 PM</div>
                     </div>
                     <div className="address-wrap">
-                        225 E Gates St,
-                        Columbus, OH 43206
-                        (321)456-0987
+                        3960 BROOKHAM DR,
+                        GROVE CITY, OH 43123
+                        614-317-9482
                     </div>
                     <div className="day-view-item-detail-footer d-flex mt-3">
                         <button className="btn default-button flex-grow-1">View Details</button>

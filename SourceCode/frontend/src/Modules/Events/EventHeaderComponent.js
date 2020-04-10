@@ -1,12 +1,16 @@
 import React from 'react';
-import HeaderContainer from '../Header/HeaderContainer';
+import HeaderComponent from '../Header/HeaderComponent';
+import HeaderBannerComponent from './HeaderBannerComponent';
 import '../../Assets/scss/main.scss';
 
 const EventHeaderComponent = () => {
     return (
         <div>
             <div>
-                <HeaderContainer/>
+                <header className="header">
+                    <HeaderComponent/>
+                    <HeaderBannerComponent/>
+                </header>
             </div>
         </div>
     )
