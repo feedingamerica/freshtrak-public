@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const UseForm = (props, validations, callback) => {
+const UseForm = (props, validations, callback, errorToComponent = false) => {
     const [errors, setErrors] = useState({});
 
     const formValidation = (value, validator, limit) => {
@@ -107,7 +107,10 @@ const UseForm = (props, validations, callback) => {
             callback();
         }
 
-        props.onFormErrors(errors);
+        if(!errorToComponent){
+            props.onFormErrors(errors);
+        }
+
 
     }, [errors]);
 
