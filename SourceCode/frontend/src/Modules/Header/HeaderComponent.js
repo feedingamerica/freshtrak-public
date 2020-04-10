@@ -93,7 +93,7 @@ const HeaderComponent = (props) => {
                     <Navbar expand="md" className="w-100" >
                         <Navbar.Brand className="my-auto mobile-view">                            
                                 <span className="my-auto mobile-view">                                    
-                                    <Link to={RENDER_URL.HOME_URL}><img src={mainLogo} alt="FreshTrak" className="d-inline-block" /> </Link>                                   
+                                    <Link to={RENDER_URL.HOME_URL}><img src={mainLogo} alt="FreshTrak Main" className="d-inline-block" /> </Link>                                   
                                 </span>
                                 <button className="navbar-toggler mr-2" type="button" data-toggle="collapse"
                                     data-target="#navbarCollapse">
