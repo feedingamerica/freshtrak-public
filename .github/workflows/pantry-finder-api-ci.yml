@@ -18,7 +18,7 @@ jobs:
           - 3306:3306
         volumes:
           - "/var/run/mysqld:/var/run/mysqld"
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=10
 
     steps:
       - name: Checkout
