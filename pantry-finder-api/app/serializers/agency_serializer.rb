@@ -6,6 +6,7 @@ class AgencySerializer < ActiveModel::Serializer
   attribute :loc_name, key: :name
   attribute :loc_nickname, key: :nickname
 
+  has_many :events
   has_many :event_dates
 
   def address
