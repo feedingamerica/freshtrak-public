@@ -27,7 +27,7 @@ test('Successful api call', async () => {
   }
   axios.get.mockImplementation(() => Promise.resolve(successResponse));
   
-  const { getByText, getByLabelText, getAllByText } = render(
+  const { getByText, getByLabelText, getAllByText, getByTestId } = render(
     <Router>
       <EventContainer location={{ state: '' }} />
     </Router>
@@ -45,7 +45,7 @@ test('Successful api call', async () => {
   // TODO find a different way. This is fragile.
   const button = getAllByText(/search for resources/i)[0];
   fireEvent.click(button);
-  getByText(/loading/i);
+  getByTestId(/loading/i);
   await waitFor(() => {
     getByText(mockFoodBank.name);
   });

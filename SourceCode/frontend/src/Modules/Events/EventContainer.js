@@ -5,6 +5,7 @@ import SearchComponent from '../General/SearchComponent';
 import EventListComponent from './EventListComponent';
 import '../../Assets/scss/main.scss';
 import ResourceListComponent from './ResourceListComponent';
+import { ProgressBar } from 'react-bootstrap';
 import {API_URL} from '../../Utils/Urls';
 import {ajaxGet} from '../../Services/Http/Ajax';
 import {STATUS_ACTIVE} from '../../Utils/Constants';
@@ -156,7 +157,11 @@ const EventContainer = (props) => {
                     <div className="search-area text-left">
                         <SearchComponent onSelectedChild = {buildSearchData}
                                          dataToChild = {searchDetails}/>
-                        {loading && <h2>Loading</h2>}
+                        {loading && 
+                            <div className="pt-4">
+                                <ProgressBar animated now={100} data-testid="loading" />
+                            </div>
+                        }
                         {!loading && <ResourceList />}
                     </div>
                     <EventList />
