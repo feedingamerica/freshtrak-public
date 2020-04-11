@@ -18,6 +18,9 @@ Parameters:
     Type: String
     Description: Prefix to append to the hosted zone for the url
     Default: beta
+  CertificateArn:
+    Type: String
+    Description: ACM Cert Arn to allow tls and alternate domain name
 Mappings:
   Region2S3WebsiteSuffix:
     us-east-1:
@@ -60,8 +63,7 @@ Resources:
       DistributionConfig:
         Comment: CDN for S3-backed website
         Aliases:
-        - !Join ['', [!Ref 'AWS::StackName', !Ref 'AWS::AccountId', ., !Ref 'AWS::Region',
-            ., !Ref 'HostedZone']]
+        - !Join ['', [!Ref 'UrlPrefix', ., !Ref 'HostedZone']]
         Enabled: 'true'
         DefaultCacheBehavior:
           ForwardedValues:
@@ -77,6 +79,10 @@ Resources:
           DomainName: !Join ['', [!Ref 'S3BucketForWebsiteContent', !FindInMap [Region2S3WebsiteSuffix,
                 !Ref 'AWS::Region', Suffix]]]
           Id: only-origin
+        ViewerCertificate:
+          AcmCertificateArn: !Ref CertificateArn
+          MinimumProtocolVersion: TLSv1.1_2016
+          SslSupportMethod: sni-only
   WebsiteDNSName:
     Type: AWS::Route53::RecordSet
     Properties:
