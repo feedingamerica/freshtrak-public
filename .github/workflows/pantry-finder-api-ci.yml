@@ -61,7 +61,7 @@ jobs:
       # https://github.com/codecov/codecov-bash
       - name: Upload Coverage Report
         run: |
-          bash <(curl -s https://codecov.io/bash)
+          bash <(curl -s https://codecov.io/bash) -Z
 
   lint-pantry-finder-api:
     name: Run Linter For Pantry Finder API
