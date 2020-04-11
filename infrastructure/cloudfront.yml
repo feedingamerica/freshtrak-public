@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Metadata: 
+Metadata:
   License: Apache-2.0
 Description: 'AWS CloudFormation Sample Template S3_Website_With_CloudFront_Distribution:
   Sample template showing how to create a website with a custom DNS name, hosted on
