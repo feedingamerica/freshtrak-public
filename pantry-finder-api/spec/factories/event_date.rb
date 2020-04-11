@@ -14,7 +14,7 @@ FactoryBot.define do
     accept_walkin { 1 }
     accept_reservations { 1 }
     accept_interest { 1 }
-    published_date_key { 0 }
+    published_date_key { (Date.today - 1).to_s.delete('-') }
     added_by { 0 }
     last_update_by { 0 }
 
