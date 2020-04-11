@@ -60,13 +60,27 @@ describe Api::AgenciesController, type: :controller do
           phone: agency.phone,
           name: agency.loc_name,
           nickname: agency.loc_nickname,
-          event_dates: [
+          events: [
             {
-              id: event_date.id,
+              id: event.id,
+              address: "#{event.address1} #{event.address2}",
+              city: event.city,
+              state: event.state,
+              zip: event.zip,
+              pt_latitude: event.pt_latitude,
+              pt_longitude: event.pt_longitude,
+              loc_id: event.loc_id,
+              name: event.event_name,
               service: event.service_description,
-              start_time: '09:30 AM',
-              end_time: '10:00 PM',
-              date: date
+              event_dates: [
+                {
+                  id: event_date.id,
+                  event_id: event.id,
+                  start_time: '09:30 AM',
+                  end_time: '10:00 PM',
+                  date: date
+                }
+              ]
             }
           ]
         }
