@@ -27,15 +27,16 @@ const EventContainer = (props) => {
         }
     }, []);
 
-    const handleSubmit = async (data) => {
-        if(data) {
+    const handleSubmit = async (query) => {
+        if(query) {
             setLoading(true);
             let foodBankUri = API_URL.FOODBANK_LIST;
             // Going to use axios for now
             try {
-                const { zip_code } = data;
-                const resp = await axios.get(foodBankUri, { params: zip_code });
-                setFoodBankData(resp);
+                const { zip_code } = query;
+                const resp = await axios.get(foodBankUri, { params: { zip_code } });
+                const { data } = resp;
+                setFoodBankData(data);
                 setFoodBankResponse(true);
                 setLoading(false);
             } catch (err) {

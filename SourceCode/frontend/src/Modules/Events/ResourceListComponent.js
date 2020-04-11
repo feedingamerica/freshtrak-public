@@ -6,8 +6,8 @@ const ResourceListComponent = (props) => {
 
     React.useEffect(() => {
         if(props.dataToChild){
-            let propData = props.dataToChild.foodbanks;
-            let foodBankArray = propData.map(foodbank => {
+            const { dataToChild: { foodbanks } } = props;
+            let foodBankArray = foodbanks.map(foodbank => {
                 return {foodbank}
             });
             setFoodBankArray(foodBankArray);

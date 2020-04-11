@@ -19,7 +19,11 @@ test('should load without errors', () => {
 
 test('Successful api call', async () => {
   const successResponse = {
-    foodbanks: [mockFoodBank]
+    data: {
+      foodbanks: [mockFoodBank]
+    },
+    status: 200,
+    statusText: 'OK',
   }
   axios.get.mockImplementation(() => Promise.resolve(successResponse));
   
