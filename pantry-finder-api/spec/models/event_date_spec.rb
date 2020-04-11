@@ -18,9 +18,9 @@ describe EventDate, type: :model do
 
     it 'defaults to dates that have been published' do
       create(:event_date, status_publish: 1,
-             published_date_key: (Date.today + 2).to_s.delete('-'))
+                          published_date_key: (Date.today + 2).to_s.delete('-'))
       create(:event_date, status_publish: 0,
-             published_date_key: (Date.today - 2).to_s.delete('-'))
+                          published_date_key: (Date.today - 2).to_s.delete('-'))
 
       expected_event_id = event_date.id
       expect(described_class.all.pluck(:id)).to eq([expected_event_id])
