@@ -1,6 +1,10 @@
 name: Pantry Finder API CI
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - master
+  pull_request:
 
 jobs:
   test-pantry-finder-api:
