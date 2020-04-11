@@ -15,6 +15,11 @@ class Event < ApplicationRecord
   scope :published, -> { where(status_publish_event: 1) }
   scope :publishes_dates, -> { where(status_publish_event_dates: 1) }
 
+  scope :by_event_date, lambda { |date|
+    joins(:event_dates)
+      .where(event_dates: { date: date })
+  }
+
   def service_description
     service_category.service_category_name
   end

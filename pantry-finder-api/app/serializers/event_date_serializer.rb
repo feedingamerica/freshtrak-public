@@ -4,8 +4,8 @@
 class EventDateSerializer < ActiveModel::Serializer
   attributes :id
 
-  attribute :service do
-    object.event.service_description
+  attribute :event_id do
+    object.event.event_id
   end
 
   attribute :start_time do
