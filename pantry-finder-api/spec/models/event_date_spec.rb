@@ -16,10 +16,18 @@ describe EventDate, type: :model do
       expect(described_class.all.pluck(:id)).to eq([expected_event_id])
     end
 
-    it 'defaults to active and published events' do
-      create(:event_date, status_id: 0, status_publish: 0)
-      create(:event_date, status_id: 1, status_publish: 0)
-      create(:event_date, status_id: 0, status_publish: 1)
+    it 'defaults to dates that have been published' do
+      create(:event_date, status_publish: 1,
+             published_date_key: (Date.today + 2).to_s.delete('-'))
+      create(:event_date, status_publish: 0,
+             published_date_key: (Date.today - 2).to_s.delete('-'))
+
+      expected_event_id = event_date.id
+      expect(described_class.all.pluck(:id)).to eq([expected_event_id])
+    end
+
+    it 'defaults to active events' do
+      create(:event_date, status_id: 0)
 
       expected_id = event_date.id
       expect(described_class.all.pluck(:id)).to eq([expected_id])
