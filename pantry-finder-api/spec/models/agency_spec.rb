@@ -58,17 +58,20 @@ describe Agency, type: :model do
       expect(agency_results.pluck(:id)).to eq(agencies.pluck(:id))
     end
 
-    it 'can find agencies through an event date' do
-      date = (Date.today + 2).to_s.delete('-')
-      agencies = 5.times.map do
+    it 'can find agencies with events after a date' do
+      agencies = 5.times.map do |i|
+        date = (Date.today + i).to_s.delete('-')
         agency = create(:agency)
         event = create(:event, agency: agency)
         create(:event_date, event: event, date: date)
         agency
       end
 
-      agency_results = described_class.by_event_date(date)
-      expect(agency_results.pluck(:id)).to eq(agencies.pluck(:id))
+      target_date = (Date.today + 1).to_s.delete('-')
+      expected_agency_ids = agencies[1..-1].pluck(:id)
+
+      agency_results = described_class.with_event_after(target_date)
+      expect(agency_results.pluck(:id)).to eq(expected_agency_ids)
     end
   end
 end

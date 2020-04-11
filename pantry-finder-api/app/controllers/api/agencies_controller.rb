@@ -10,7 +10,7 @@ module Api
         @agencies = @agencies.by_foodbank(zip)
       end
       if (date = search_params[:event_date])
-        @agencies = @agencies.by_event_date(date.delete('-'))
+        @agencies = @agencies.with_event_after(date.delete('-'))
       end
 
       render json: serialized_agencies
