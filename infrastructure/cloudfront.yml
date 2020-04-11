@@ -1,102 +1,70 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Metadata:
-  License: Apache-2.0
-Description: 'AWS CloudFormation Sample Template S3_Website_With_CloudFront_Distribution:
-  Sample template showing how to create a website with a custom DNS name, hosted on
-  Amazon S3 and served via Amazone CloudFront. It assumes you already have a Hosted
-  Zone registered with Amazon Route 53. **WARNING** This template creates an Amazon
-  Route 53 DNS record, an S3 bucket and a CloudFront distribution. You will be billed
-  for the AWS resources used if you create a stack from this template.'
+Description: Creates a S3 bucket, Cloudfront distribution used for static web hosting.
 Parameters:
-  HostedZone:
+  Name:
     Type: String
-    Description: The DNS name of an existing Amazon Route 53 hosted zone
-    AllowedPattern: (?!-)[a-zA-Z0-9-.]{1,63}(?<!-)
-    ConstraintDescription: must be a valid DNS zone name.
-    Default: freshtrak.com
-  UrlPrefix:
+    Description: A friendly name for this Cloudfront distribution.
+    Default: freshtrak-ui
+  Stage:
     Type: String
-    Description: Prefix to append to the hosted zone for the url
+    Description: Deployment stage
+    AllowedValues:
+      - beta
     Default: beta
-  CertificateArn:
-    Type: String
-    Description: ACM Cert Arn to allow tls and alternate domain name
-Mappings:
-  Region2S3WebsiteSuffix:
-    us-east-1:
-      Suffix: .s3-website-us-east-1.amazonaws.com
-    us-west-1:
-      Suffix: .s3-website-us-west-1.amazonaws.com
-    us-west-2:
-      Suffix: .s3-website-us-west-2.amazonaws.com
-    eu-west-1:
-      Suffix: .s3-website-eu-west-1.amazonaws.com
-    ap-northeast-1:
-      Suffix: .s3-website-ap-northeast-1.amazonaws.com
-    ap-northeast-2:
-      Suffix: .s3-website-ap-northeast-2.amazonaws.com
-    ap-southeast-1:
-      Suffix: .s3-website-ap-southeast-1.amazonaws.com
-    ap-southeast-2:
-      Suffix: .s3-website-ap-southeast-2.amazonaws.com
-    ap-south-1:
-      Suffix: .s3-website-ap-south-1.amazonaws.com
-    us-east-2:
-      Suffix: .s3-website-us-east-2.amazonaws.com
-    sa-east-1:
-      Suffix: .s3-website-sa-east-1.amazonaws.com
-    cn-north-1:
-      Suffix: .s3-website.cn-north-1.amazonaws.com.cn
-    eu-central-1:
-      Suffix: .s3-website.eu-central-1.amazonaws.com
 Resources:
-  S3BucketForWebsiteContent:
-    Type: AWS::S3::Bucket
-    Properties:
-      AccessControl: PublicRead
-      WebsiteConfiguration:
-        IndexDocument: index.html
-        ErrorDocument: error.html
-  WebsiteCDN:
+  CloudfrontDistribution:
     Type: AWS::CloudFront::Distribution
     Properties:
       DistributionConfig:
-        Comment: CDN for S3-backed website
-        Aliases:
-        - !Join ['', [!Ref 'UrlPrefix', ., !Ref 'HostedZone']]
-        Enabled: 'true'
-        DefaultCacheBehavior:
-          ForwardedValues:
-            QueryString: 'true'
-          TargetOriginId: only-origin
-          ViewerProtocolPolicy: allow-all
-        DefaultRootObject: index.html
+        HttpVersion: http2
         Origins:
-        - CustomOriginConfig:
-            HTTPPort: '80'
-            HTTPSPort: '443'
-            OriginProtocolPolicy: http-only
-          DomainName: !Join ['', [!Ref 'S3BucketForWebsiteContent', !FindInMap [Region2S3WebsiteSuffix,
-                !Ref 'AWS::Region', Suffix]]]
-          Id: only-origin
-        ViewerCertificate:
-          AcmCertificateArn: !Ref CertificateArn
-          MinimumProtocolVersion: TLSv1.1_2016
-          SslSupportMethod: sni-only
-  WebsiteDNSName:
-    Type: AWS::Route53::RecordSet
+          - DomainName: !Sub "${S3WebsiteBucket}.s3.amazonaws.com"
+            Id: !Sub "${Stage}-${Name}-Origin"
+            S3OriginConfig:
+              OriginAccessIdentity: ''
+        Enabled: true
+        Comment: !Sub "A Cloudfront distribution for ${Name}-${Stage}"
+        CustomErrorResponses:
+          - ResponseCode: 200
+            ErrorCode: 404
+            ResponsePagePath: "/index.html"
+          - ResponseCode: 200
+            ErrorCode: 403
+            ResponsePagePath: "/index.html"
+        DefaultRootObject: index.html
+        DefaultCacheBehavior:
+          Compress: true
+          AllowedMethods:
+            - GET
+            - HEAD
+            - OPTIONS
+          TargetOriginId: !Sub "${Stage}-${Name}-Origin"
+          ForwardedValues:
+            QueryString: false
+            Cookies:
+              Forward: none
+          ViewerProtocolPolicy: redirect-to-https
+  S3WebsiteBucket:
+    Type: AWS::S3::Bucket
     Properties:
-      HostedZoneName: !Join ['', [!Ref 'HostedZone', .]]
-      Comment: CNAME redirect custom name to CloudFront distribution
-      Name: !Join ['', [!Ref 'UrlPrefix', ., !Ref 'HostedZone']]
-      Type: CNAME
-      TTL: '900'
-      ResourceRecords:
-      - !GetAtt [WebsiteCDN, DomainName]
+      AccessControl: PublicRead
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+      VersioningConfiguration:
+        Status: Enabled
 Outputs:
-  WebsiteURL:
-    Value: !Join ['', ['http://', !Ref 'WebsiteDNSName']]
-    Description: The URL of the newly created website
-  BucketName:
-    Value: !Ref 'S3BucketForWebsiteContent'
-    Description: Name of S3 bucket to hold website content
+  S3WebsiteBucketWebsiteURL:
+    Description: The S3 bucket used for static web hosting
+    Value: !Sub "${S3WebsiteBucket.WebsiteURL}"
+  S3WebsiteBucketName:
+    Description: Name of the S3 bucket used for static web hosting
+    Value: !Ref S3WebsiteBucket
+    Export:
+      Name: !Sub "${Name}-S3WebsiteBucket"
+  CloudfrontDistributionID:
+    Description: Name of the cloudfront distribution.
+    Value: !Ref CloudfrontDistribution
+    Export:
+      Name: !Sub "${Name}-CloudfrontDistribution"
