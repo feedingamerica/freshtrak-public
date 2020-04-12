@@ -12,7 +12,7 @@ const getBaseUrl = () => {
         case 'production':
             return 'http://api-freshtrak.inapp.com/';
         default:
-            break;
+            return 'http://localhost:8888/';
     }
 };
 
