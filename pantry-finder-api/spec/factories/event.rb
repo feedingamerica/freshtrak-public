@@ -2,6 +2,12 @@
 
 FactoryBot.define do
   factory :event do
+    event_name { 'Pantry' }
+    zip { agency.zip }
+    city { agency.city }
+    state { agency.state }
+    address1 { agency.address1 }
+    address2 { agency.address2 }
     service_zips { '' }
     last_schedule_mgmt_datekey { 0 }
     status_id { 1 }
