@@ -19,6 +19,7 @@ const EventContainer = (props) => {
     let [foodBankData,setFoodBankData] = useState({});
     let [agencyData,setAgencyData] = useState({});
     let [searchDetails,setSearchDetails] = useState({});
+    const [serverError, setServerError] = useState(false);
     const [loading, setLoading] = useState(false);
     let isSearchData = !!props.location.state;
 
@@ -42,7 +43,8 @@ const EventContainer = (props) => {
                 setFoodBankResponse(true);
                 setLoading(false);
             } catch (err) {
-                console.error(err);
+                setServerError(true);
+                setLoading(false);
             }
 
             // Mock Data for now
@@ -88,6 +90,9 @@ const EventContainer = (props) => {
     const ResourceList = () => {
         if (foodBankResponse) {
             return <ResourceListComponent dataToChild = {foodBankData} /> ;
+        }
+        if (serverError) {
+            return <h2>Something went wrong</h2>
         }
         return null;
     };
