@@ -14,10 +14,10 @@ const App = lazy(() => import("../App"));
 
 const Routes = () => {
     return (
-        <Router>
+        <Router basename="/">
             <Suspense fallback={<div className="displayNone"> </div>}>
                 <Switch>
-                    <Route path={RENDER_URL.HOME_URL} component={App}/>
+                    <Route exact path={RENDER_URL.HOME_URL} component={App}/>
                     <Route path={RENDER_URL.EVENT_CONFIRM_URL} component={ConfirmationComponent}/>
                     <Route path={RENDER_URL.EVENT_LIST_URL} component={EventListComponent}/>   
                     <Route path={RENDER_URL.DASHBOARD_URL} component={DashBoardContainer}/>
