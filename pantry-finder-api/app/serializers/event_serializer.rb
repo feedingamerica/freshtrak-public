@@ -2,8 +2,10 @@
 
 # Defines Event attributes to be returned in JSON
 class EventSerializer < ActiveModel::Serializer
-  attributes :id, :address, :city, :state, :zip,
-             :pt_latitude, :pt_longitude, :loc_id
+  attributes :id, :address, :city, :state, :zip
+  attribute :loc_id, key: :agency_id
+  attribute :pt_latitude, key: :latitude
+  attribute :pt_longitude, key: :longitude
   attribute :event_name, key: :name
   attribute :service_description, key: :service
 

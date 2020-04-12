@@ -67,9 +67,9 @@ describe Api::AgenciesController, type: :controller do
               city: event.city,
               state: event.state,
               zip: event.zip,
-              pt_latitude: event.pt_latitude.to_f.to_s,
-              pt_longitude: event.pt_longitude.to_f.to_s,
-              loc_id: event.loc_id,
+              latitude: event.pt_latitude.to_f.to_s,
+              longitude: event.pt_longitude.to_f.to_s,
+              agency_id: event.loc_id,
               name: event.event_name,
               service: event.service_description,
               event_dates: [
