@@ -39,8 +39,8 @@ const EventListComponent = props => {
           </div>
         </div> */}
       </div>
-
-      {Object.entries(events).map(([date, event]) => (
+      {Object.keys(events).length === 0 && <h3>No Events Currently Scheduled</h3>}
+      {Object.keys(events).length > 0 && Object.entries(events).map(([date, event]) => (
         <div key={date} className="row mt-5">
           <div className="col-md-12">
             <div className="day-view">

@@ -79,10 +79,9 @@ const EventContainer = (props) => {
     };
 
     const EventList = () => {
-        // Out of scope for now
         if (agencyResponse) {
           const agencyDataSorted = EventDateSorter(EventHandler(agencyData));
-          return <EventListComponent events = {agencyDataSorted} /> ;
+          return <EventListComponent events = {agencyDataSorted} />;
         }
         return null;
     };
