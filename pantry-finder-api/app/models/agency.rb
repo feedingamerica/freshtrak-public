@@ -18,9 +18,9 @@ class Agency < ApplicationRecord
 
   scope :active, -> { where(status_id: 1) }
 
-  scope :by_event_date, lambda { |date|
+  scope :with_event_after, lambda { |date|
     joins(:event_dates)
-      .where(event_dates: { date: date })
+      .where('event_dates.event_date_key >= ?', date)
   }
 
   scope :by_foodbank, lambda { |zip_code|
