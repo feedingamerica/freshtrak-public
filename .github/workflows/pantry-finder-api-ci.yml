@@ -1,6 +1,10 @@
 name: Pantry Finder API CI
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - master
+  pull_request:
 
 jobs:
   test-pantry-finder-api:
@@ -16,11 +20,14 @@ jobs:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
         ports:
           - 3306:3306
-        volumes:
-          - "/var/run/mysqld:/var/run/mysqld"
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
+      - name: Inspect MySQL (on failure)
+        run: |
+          echo "${{ toJson(job) }}"
+          docker logs "${{ job.services.mysql.id }}"
+        if: failure()
       - name: Checkout
         uses: actions/checkout@v2
       - name: Setup Ruby
@@ -51,11 +58,10 @@ jobs:
         run: |
           bundle exec rspec
         working-directory: ${{env.working-directory}}
+      # https://github.com/codecov/codecov-bash
       - name: Upload Coverage Report
-        uses: codecov/codecov-action@v1
-        with:
-          file: ${{env.working-directory}}/coverage/coverage.xml
-          fail_ci_if_error: true
+        run: |
+          bash <(curl -s https://codecov.io/bash) -Z
 
   lint-pantry-finder-api:
     name: Run Linter For Pantry Finder API
