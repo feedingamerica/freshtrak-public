@@ -9,8 +9,9 @@ import { ProgressBar } from 'react-bootstrap';
 import {API_URL} from '../../Utils/Urls';
 import {ajaxGet} from '../../Services/Http/Ajax';
 import {STATUS_ACTIVE} from '../../Utils/Constants';
+import { EventDateSorter, EventHandler } from '../../Utils/EventHandler';
 import axios from 'axios';
-import { mockFoodBank } from '../../Testing';
+import { testDataWithMulitple } from '../../Testing';
 
 const EventContainer = (props) => {
     const [foodBankResponse, setFoodBankResponse] = useState(false);
@@ -44,67 +45,8 @@ const EventContainer = (props) => {
                 console.error(err);
             }
 
-            // Mock Data ignoring for now
-            let agencyResponse = {
-                "agencies": [
-                    {
-                        "id": 1,
-                        "address": "1460 S CHAMPION AVE",
-                        "city": "COLUMBUS",
-                        "state": "OH",
-                        "zip": "43206",
-                        "phone": "614-443-5130",
-                        "name": "Lutheran Social Services ChoicePantry - South Columbus",
-                        "nickname": "LSS Champion",
-                        "event_dates": []
-                    },
-                    {
-                        "id": 4,
-                        "address": "2045 E MAIN ST",
-                        "city": "LANCASTER",
-                        "state": "OH",
-                        "zip": "43130",
-                        "phone": "740-687-5130",
-                        "name": "Lutheran Social Services ChoicePantry - Fairfield Co.",
-                        "nickname": "LSS Lancaster",
-                        "event_dates": []
-                    },
-                    {
-                        "id": 6,
-                        "address": "3960 BROOKHAM DR",
-                        "city": "GROVE CITY",
-                        "state": "OH",
-                        "zip": "43123",
-                        "phone": "614-317-9482",
-                        "name": "Mid-Ohio Foodbank - Kroger Community Pantry",
-                        "nickname": "MOF Kroger Pantry",
-                        "event_dates": [
-                            {
-                                "id": 3,
-                                "service": "Prepack Pantry",
-                                "start_time": "01:00 PM",
-                                "end_time": "03:00 PM",
-                                "date": "2020-04-10"
-                            },
-                            {
-                                "id": 5,
-                                "service": "Prepack Pantry",
-                                "start_time": "01:00 PM",
-                                "end_time": "03:00 PM",
-                                "date": "2020-04-13"
-                            },
-                            {
-                                "id": 6,
-                                "service": "Prepack Pantry",
-                                "start_time": "01:00 PM",
-                                "end_time": "03:00 PM",
-                                "date": "2020-04-15"
-                            }
-                        ]
-                    },
-                ]
-            };
-            setAgencyData(agencyResponse);
+            // Mock Data for now
+            setAgencyData(testDataWithMulitple);
             setAgencyResponse(true);
         }
 
@@ -136,10 +78,11 @@ const EventContainer = (props) => {
 
     const EventList = () => {
         // Out of scope for now
-        return null;
         if (agencyResponse) {
-            return <EventListComponent dataToChild = {agencyData} /> ;
+          const agencyDataSorted = EventDateSorter(EventHandler(agencyData));
+          return <EventListComponent events = {agencyDataSorted} /> ;
         }
+        return null;
     };
 
     const ResourceList = () => {
