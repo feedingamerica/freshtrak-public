@@ -9,6 +9,5 @@ Currently there is very little infrastructure custom infrastructure needed to ru
 ```
 aws cloudformation deploy \
   --template-file cloudfront.yml \
-  --stack-name freshtrak-ui-beta \
-  --parameter-overrides CertificateArn=<arn>
+  --stack-name freshtrak-ui-beta
 ```
