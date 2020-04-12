@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { render, fireEvent, waitFor } from '@testing-library/react';
+import { render, fireEvent, waitFor, wait } from '@testing-library/react';
 import EventContainer from '../EventContainer';
 import axios from 'axios';
 import { mockFoodBank } from '../../../Testing'
@@ -46,7 +46,7 @@ test('Successful api call', async () => {
   const button = getAllByText(/search for resources/i)[0];
   fireEvent.click(button);
   getByTestId(/loading/i);
-  await waitFor(() => {
+  await wait(() => {
     getByText(mockFoodBank.name);
   });
 });
