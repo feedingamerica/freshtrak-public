@@ -6,7 +6,6 @@ default: &default
   username: <%= ENV['DB_USER'] || 'root' %>
   password: <%= ENV['DB_PASS'] %>
   host: <%= ENV["DB_HOST"] %>
-  url: <%= ENV['DATABASE_URL'] %> # takes higher precedence than other settings
   reconnect: true
 
 development:
@@ -17,7 +16,10 @@ test:
   <<: *default
   database: pantry_finder_api_test
 
+beta:
+  <<: *default
+  database: freshtrak_public
+
 production:
   <<: *default
-  database: pantry_finder_api_production
-  url: <%= ENV['DATABASE_URL'] %>
+  database: freshtrak_public
