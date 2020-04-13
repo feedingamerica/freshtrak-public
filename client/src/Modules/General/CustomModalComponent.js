@@ -2,8 +2,8 @@
  * Custom Modal Component || Can be used for Sign in template
  */
 import React from 'react';
-import '../../../Assets/scss/main.scss';
-import SignInComponent from '../../SignIn/SignInComponent';
+import '../../Assets/scss/main.scss';
+import SignInComponent from '../SignIn/SignInComponent';
 import {Modal, Button} from 'react-bootstrap'; 
 import ModalHeader from 'react-bootstrap/ModalHeader';
 

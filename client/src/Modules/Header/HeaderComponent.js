@@ -4,12 +4,11 @@
 
 import React, { useEffect, useState } from 'react';
 import LoggedInComponent from '../General/LoggedInComponent';
-import SignInComponent from '../General/SignInComponent';
 
 import mainLogo from '../../Assets/img/logo.png';
 import navBarIcon from '../../Assets/img/menu.svg';
 import {Link} from "react-router-dom";
-import CustomModalComponent from '../General/Modal/CustomModalComponent';
+import CustomModalComponent from '../General/CustomModalComponent';
 import {Nav,NavDropdown,Navbar,DropdownItem, Button} from 'react-bootstrap';
 import userIcon from '../../Assets/img/Mask.svg'
 

@@ -164,7 +164,7 @@ const EventContainer = (props) => {
                         }
                         {!loading && <ResourceList />}
                     </div>
-                    <EventList />
+                    <EventListComponent />
                 </div>
             </section>
             <FooterContainer/>

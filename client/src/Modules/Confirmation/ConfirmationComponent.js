@@ -2,10 +2,10 @@
  * Confirmation Component
  */
 import React from 'react';
-import MainHeadingComponent from '../General/TextContent/MainHeadingComponent';
-import NavigationBtnComponent from '../General/Buttons/NavigationBtnComponent';
-import YourInformationComponent from '../Events1/YourInformationComponent';
-import EventDescriptionComponent from '../Events1/EventDescriptionComponent';
+import MainHeadingComponent from '../General/MainHeadingComponent';
+import NavigationBtnComponent from '../General/NavigationBtnComponent';
+import YourInformationComponent from '../Events/YourInformationComponent';
+import EventDescriptionComponent from '../Events/EventDescriptionComponent';
 import AgencyDetailsComponent from '../Agency/AgencyDetailsComponent';
 import TimeDateComponent from '../General/TimeDateComponent';
 import '../../Assets/scss/main.scss';

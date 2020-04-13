@@ -2,7 +2,7 @@
  * Button Component - Can be used for back Navigation
  */
 import React from 'react';
-import backBtn from '../../../Assets/img/back.svg';
+import backBtn from '../../Assets/img/back.svg';
 const NavigationBtnComponent = (props) => { 
     
     return (
