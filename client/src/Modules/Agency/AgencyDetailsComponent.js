@@ -2,7 +2,6 @@
  * Agency Details Component
  */
 import React from 'react';
-import '../../App.scss';
 
 const AgencyDetailsComponent = (props) => {
 

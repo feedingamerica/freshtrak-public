@@ -151,7 +151,6 @@ const EventContainer = (props) => {
 
     return (
         <div>
-            <EventHeaderComponent/>
             <section className="gray-bg">
                 <div className="container pt-150 pb-150">
                     <div className="search-area text-left">
