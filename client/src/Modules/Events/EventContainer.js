@@ -7,13 +7,10 @@ import '../../Assets/scss/main.scss';
 import ResourceListComponent from './ResourceListComponent';
 import { ProgressBar } from 'react-bootstrap';
 import {API_URL} from '../../Utils/Urls';
-import {ajaxGet} from '../../Services/Http/Ajax';
-import {STATUS_ACTIVE} from '../../Utils/Constants';
 import { EventDateSorter, EventHandler } from '../../Utils/EventHandler';
 import axios from 'axios';
-import { testDataWithMultiple } from '../../Testing';
 
-const EventContainer = (props) => {
+const EventContainer = props => {
     const [foodBankResponse, setFoodBankResponse] = useState(false);
     const [agencyResponse, setAgencyResponse] = useState(false);
     let [foodBankData,setFoodBankData] = useState({});
@@ -30,13 +27,13 @@ const EventContainer = (props) => {
         }
     }, []);
 
-    const handleSubmit = async (query) => {
+    const handleSubmit = async query => {
         if(query) {
             setLoading(true);
             let foodBankUri = API_URL.FOODBANK_LIST;
+            const { zip_code } = query;
             // Going to use axios for now
             try {
-                const { zip_code } = query;
                 const resp = await axios.get(foodBankUri, { params: { zip_code } });
                 const { data } = resp;
                 setFoodBankData(data);
@@ -47,21 +44,17 @@ const EventContainer = (props) => {
                 setLoading(false);
             }
 
-            // Mock Data for now
-            setAgencyData(testDataWithMultiple);
-            setAgencyResponse(true);
+            // This along with EventList should be in it's own container.
+            try {
+                const agencyUri = API_URL.EVENTS_LIST;
+                const resp = await axios.get(agencyUri, { params: { zip_code } });
+                const { data: { agencies } } = resp;
+                setAgencyData(agencies);
+                setAgencyResponse(true);
+            } catch (err) {
+                console.error(err)
+            }
         }
-
-
-        // ajaxGet(uri, searchDetails, (response) => {
-        //     setFoodBankResponse(true);
-        //     console.log(response);
-        // if (response.status === STATUS_ACTIVE) {
-        //     console.log(response);
-        // }else {
-        //     console.log('error', response.message);
-        // }
-        // });
     };
 
 
@@ -82,7 +75,7 @@ const EventContainer = (props) => {
         // Out of scope for now
         if (agencyResponse) {
           const agencyDataSorted = EventDateSorter(EventHandler(agencyData));
-          return <EventListComponent events = {agencyDataSorted} /> ;
+          return <EventListComponent events = {agencyDataSorted} />;
         }
         return null;
     };
