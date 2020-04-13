@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { render, fireEvent, waitFor, wait } from '@testing-library/react';
+import { render, fireEvent, wait } from '@testing-library/react';
 import EventContainer from '../EventContainer';
 import axios from 'axios';
 import { mockFoodBank } from '../../../Testing'
