@@ -1,5 +1,5 @@
 import React, { lazy, Suspense } from "react";
-// import "./Assets/scss/main.scss";
+import "./Assets/scss/main.scss";
 
 import { RENDER_URL } from "./Utils/Urls";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";

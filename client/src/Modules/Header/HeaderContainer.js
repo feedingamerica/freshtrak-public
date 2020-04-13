@@ -7,7 +7,7 @@ import HeaderDataComponent from "./HeaderDataComponent";
 import { HeaderContext } from "../../Store/ContextApi/HeaderContext";
 import { useLocation } from "react-router-dom";
 import { RENDER_URL } from "../../Utils/Urls";
-// import '../../Assets/scss/main.scss';
+import '../../Assets/scss/main.scss';
 
 const HeaderContainer = (props) => {
   let location = useLocation();
