@@ -9,9 +9,12 @@ class EventDate < ApplicationRecord
 
   default_scope { active.published.event_publishes_dates.future }
   scope :active, -> { where(status_id: 1) }
-  scope :published, -> { where(status_publish: 1) }
   scope :event_publishes_dates, lambda {
     joins(:event).merge(Event.publishes_dates)
+  }
+  scope :published, lambda {
+    where('published_date_key <= ?', Date.today.to_s.delete('-'))
+      .where(status_publish: 1)
   }
   scope :future, lambda {
     where('event_date_key >= ?', Date.today.to_s.delete('-'))
