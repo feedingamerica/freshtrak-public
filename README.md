@@ -1,35 +1,68 @@
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Available Scripts
 
-# FreshTrak Public Facing API
-![](https://github.com/midohiofoodbank/freshtrak-public/workflows/Pantry%20Finder%20API%20CI/badge.svg)
-[![codecov](https://codecov.io/gh/midohiofoodbank/freshtrak-public/branch/master/graph/badge.svg)](https://codecov.io/gh/midohiofoodbank/freshtrak-public)
+In the project directory, you can run:
 
-Partnership between Can't Stop Columbus and the Mid-Ohio Foodbank to create a public api for the FreshTrak database
+### `yarn start`
 
-### Original Idea: 
+Runs the app in the development mode.<br />
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-[Whiteboard Drawing](https://drive.google.com/file/d/1MBzqWMGTDQS-R1mZc68A5V8Heoi3IBMy/view?usp=sharing)
+The page will reload if you make edits.<br />
+You will also see any lint errors in the console.
 
-### Vocabulary
+### `yarn test`
 
-**Customer**: A person or family in search of food who may or may not already be engaged with some part of the feeding network. There are ~46 million individuals across the nation who are customers. These individual customers make up over 17 million households.
+Launches the test runner in the interactive watch mode.<br />
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-**Feeding Network**: General term for all people and organizations involved in trying to feed customers.
+### `yarn build`
 
-**Foodbank**: Large distribution centers that provide food to local agencies. There are ~220 foodbanks across the United States.
+Builds the app for production to the `build` folder.<br />
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-**Agencies**: Broad term encompassing all types of organizations that work with foodbanks to distribute food to customers. Specific types of agencies include Food pantries, produce markets, Mid-Ohio Markets, soup kitchens, meal sites, etc… There are ~40k agencies across the nation.
+The build is minified and the filenames include the hashes.<br />
+Your app is ready to be deployed!
 
-**Food Resources**: General term for the services agencies provide.
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-**Service territory**: General term for all of the geographies served by a single foodbank.
+### `yarn eject`
 
-### Journeys
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-[Customer Journey](https://docs.google.com/document/d/1sIdBbXS5muUR4fwDZVw1pn9QkwEFfW9m3QK5ajZgD3E/edit?usp=sharing) - External Google Doc collecting initial ideas, thoughts, and requirements
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-## ReactJs Setup
-For running the react Js Please do the below step.
-Move to the frontend folder then execute the below commands
-### npm install
-### npm start
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+
+### Analyzing the Bundle Size
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+
+### Making a Progressive Web App
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+
+### Advanced Configuration
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+
+### Deployment
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+
+### `yarn build` fails to minify
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
