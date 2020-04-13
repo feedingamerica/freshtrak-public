@@ -1,0 +1,95 @@
+//border
+@mixin border-all($width, $style, $color) {
+  border-width: $width;
+  border-style: $style;
+  border-color: $color;
+}
+// border radius
+@mixin border-radius($radius) {
+  border-radius: $radius;
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+}
+// box-shadow
+@mixin box-shadow($top, $left, $blur, $color, $inset:"") {
+  -webkit-box-shadow:$top $left $blur $color #{$inset};
+  -moz-box-shadow:$top $left $blur $color #{$inset};
+  box-shadow:$top $left $blur $color #{$inset};
+}
+// transform
+@mixin center($xy:xy) {
+  @if $xy == xy {
+    left: 50%;
+    top: 50%;
+    bottom: auto;
+    right: auto;
+    @include transform(translateX(-50%) translateY(-50%));
+  }
+  @else if $xy == x {
+    left: 50%;
+    right: auto;
+    @include transform(translateX(-50%));
+  }
+  @else if $xy == y {
+    top: 50%;
+    bottom: auto;
+    @include transform(translateY(-50%));
+  }
+}
+@mixin transform($transforms) {
+  -webkit-transform: $transforms;
+  -moz-transform: $transforms;
+  -ms-transform: $transforms;
+  transform: $transforms;
+}
+@mixin transition($args...) {
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -ms-transition: $args;
+  -o-transition: $args;
+  transition: $args;
+}
+@mixin rotate ($deg) {
+  @include transform(rotate(#{$deg}deg));
+}
+
+//responsive
+@mixin responsive($breakpoint) {
+  @if $breakpoint == extra-smaller-devices {
+    @media (max-width: 575px) { @content; }
+  }
+  @else if $breakpoint == extra-smaller-devices-landscape {
+    @media (max-width: 575px) and (max-height:380px) { @content; }
+  }
+  @else if $breakpoint == smaller-devices {
+    @media (min-width: 576px) { @content; }
+  }
+  @else if $breakpoint == smaller-devices-landscape {
+    @media (min-width: 576px) and (max-height:400px) { @content; }
+  }
+  @else if $breakpoint == medium-devices {
+    @media (min-width: 768px) { @content; }
+  }
+  @else if $breakpoint == medium-devices-landscape {
+    @media (min-width: 768px) and (max-height:400px) { @content; }
+  }
+  @else if $breakpoint == large-devices {
+    @media (min-width: 992px)  { @content; }
+  }
+  @else if $breakpoint == extra-large-devices {
+    @media (min-width: 1200px)  { @content; }
+  }
+  @else if $breakpoint == x-extra-large-devices {
+    @media (min-width: 1500px)  { @content; }
+  }
+
+}
+
+// truncate
+@mixin truncate($truncation-boundary) {
+  max-width: $truncation-boundary;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+

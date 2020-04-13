@@ -1,0 +1,23 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8mb4
+  pool: <%= ENV["DB_POOL"] || 5  %>
+  database: <%= ENV['DB_NAME'] || 'pantry_finder_api_development' %>
+  username: <%= ENV['DB_USER'] || 'root' %>
+  password: <%= ENV['DB_PASS'] %>
+  host: <%= ENV["DB_HOST"] %>
+  url: <%= ENV['DATABASE_URL'] %> # takes higher precedence than other settings
+  reconnect: true
+
+development:
+  <<: *default
+  database: <%= ENV['DB_NAME'] || 'pantry_finder_api_development' %>
+
+test:
+  <<: *default
+  database: pantry_finder_api_test
+
+production:
+  <<: *default
+  database: pantry_finder_api_production
+  url: <%= ENV['DATABASE_URL'] %>

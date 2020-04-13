@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+
+`bundle exec jets db:create db:schema:load`
+
+puts 'Seeding dev database'
+
+user = ENV.fetch('DB_USER', 'root')
+password = ENV.fetch('DB_PASS', '')
+host = ENV.fetch('DB_HOST', '')
+
+mysql_args = "-u #{user}"
+mysql_args += " -p#{password}" unless password.empty?
+mysql_args += " -h #{host}" unless host.empty?
+
+`unzip -p setup/seed.sql.zip \
+  | mysql #{mysql_args} pantry_finder_api_development`
