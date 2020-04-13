@@ -50,3 +50,30 @@ test('Successful api call', async () => {
     getByText(mockFoodBank.name);
   });
 });
+
+test('Failed api call', async () => {
+  const failedResponse = {
+    status: 500,
+    statusText: 'ERROR',
+  };
+  axios.get.mockImplementation(() => Promise.reject(failedResponse));
+  const { getByText, getByLabelText, getAllByText, getByTestId } = render(
+    <Router>
+      <EventContainer location={{ state: '' }} />
+    </Router>
+  );
+
+  fireEvent.change(
+    getByLabelText(/zip/i, { id: 'search-zip'}),
+    {
+      target: { value: `${mockFoodBank.zip}` }
+    }
+  );
+
+  const button = getAllByText(/search for resources/i)[0];
+  fireEvent.click(button);
+  getByTestId(/loading/i);
+  await wait(() => {
+    getByText(/something went wrong/i);
+  });
+});
