@@ -57,7 +57,7 @@ const SignInComponent = React.forwardRef((props, ref) => {
       <div className="form-title">
         <h1>Sign In</h1>
       </div>
-      <div className=" mb-2">
+      <div className="mb-2">
         <div>Have you previously registered through FreshTrak?</div>
         <div className="small-title">
           Input your email address and the password you entered when you created
