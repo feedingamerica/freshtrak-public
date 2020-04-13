@@ -149,7 +149,7 @@ const HeaderComponent = (props) => {
       </Nav>
 
       <CustomModalComponent
-        signingin={true}
+        signin={true}
         show={modalShow}
         onHide={() => setModalShow(false)}
       />
