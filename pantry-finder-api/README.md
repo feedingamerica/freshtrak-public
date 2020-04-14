@@ -46,3 +46,15 @@ mysqldump -h <rds_host> -u <user> -p <password> freshtrak_public > setup/seed.sq
 zip setup/seed.sql.zip setup/seed.sql
 rm setup/seed.sql
 ```
+
+## Deployment
+
+This project is deployed using the [jets cli](https://rubyonjets.com/docs/deploy/).
+Under the hood it creates a [CloudFormation stack set](https://rubyonjets.com/docs/debugging/cloudformation/).
+The relevant configuration files are at `config/application.rb` and `config/environments/*`.
+Environment variables are set using the `.env.*` files.
+
+Deploying to beta
+```
+AWS_PROFILE=<profile> AWS_REGION=us-east-2 JETS_ENV=beta bundle exec jets deploy
+```
