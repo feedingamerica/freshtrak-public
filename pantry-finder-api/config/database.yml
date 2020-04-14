@@ -5,7 +5,8 @@ default: &default
   database: <%= ENV['DB_NAME'] || 'pantry_finder_api_development' %>
   username: <%= ENV['DB_USER'] || 'root' %>
   password: <%= ENV['DB_PASS'] %>
-  host: <%= ENV["DB_HOST"] %>
+  host: <%= ENV['DB_HOST'] %>
+  url: <%= ENV['DATABASE_URL'] %> # takes higher precedence than other settings
   reconnect: true
 
 development:

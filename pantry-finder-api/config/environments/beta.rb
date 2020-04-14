@@ -2,7 +2,7 @@
 
 Jets.application.configure do
   # Lambda config
-  config.function.timeout = 60
+  config.function.timeout = 45 # api gateway has an implicit timeout of 30 secs
   config.function.memory_size = 1536
 
   config.prewarm.enable = false # No need to keep testing api warm
