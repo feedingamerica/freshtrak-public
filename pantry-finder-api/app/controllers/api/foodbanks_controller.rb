@@ -11,6 +11,8 @@ module Api
       render json: serialized_foodbanks
     end
 
+    private
+
     def search_params
       params.require(:zip_code)
     end
