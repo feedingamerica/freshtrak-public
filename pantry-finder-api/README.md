@@ -50,7 +50,7 @@ rm setup/seed.sql
 ## Deployment
 
 This project is deployed using the [jets cli](https://rubyonjets.com/docs/deploy/).
-Under the hood it creates a [CloudFormation stack set](https://rubyonjets.com/docs/debugging/cloudformation/).
+Under the hood it creates nested [CloudFormation stacks](https://rubyonjets.com/docs/debugging/cloudformation/).
 The relevant configuration files are at `config/application.rb` and `config/environments/*`.
 Environment variables are set using the `.env.*` files.
 
