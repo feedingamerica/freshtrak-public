@@ -7,17 +7,16 @@ import '../../Assets/scss/main.scss';
 import ResourceListComponent from './ResourceListComponent';
 import { ProgressBar } from 'react-bootstrap';
 import {API_URL} from '../../Utils/Urls';
-import {ajaxGet} from '../../Services/Http/Ajax';
-import {STATUS_ACTIVE} from '../../Utils/Constants';
+import { EventDateSorter, EventHandler } from '../../Utils/EventHandler';
 import axios from 'axios';
-import { mockFoodBank } from '../../Testing';
 
-const EventContainer = (props) => {
+const EventContainer = props => {
     const [foodBankResponse, setFoodBankResponse] = useState(false);
     const [agencyResponse, setAgencyResponse] = useState(false);
     let [foodBankData,setFoodBankData] = useState({});
     let [agencyData,setAgencyData] = useState({});
     let [searchDetails,setSearchDetails] = useState({});
+    const [serverError, setServerError] = useState(false);
     const [loading, setLoading] = useState(false);
     let isSearchData = !!props.location.state;
 
@@ -28,96 +27,34 @@ const EventContainer = (props) => {
         }
     }, []);
 
-    const handleSubmit = async (query) => {
+    const handleSubmit = async query => {
         if(query) {
             setLoading(true);
             let foodBankUri = API_URL.FOODBANK_LIST;
+            const { zip_code } = query;
             // Going to use axios for now
             try {
-                const { zip_code } = query;
                 const resp = await axios.get(foodBankUri, { params: { zip_code } });
                 const { data } = resp;
                 setFoodBankData(data);
                 setFoodBankResponse(true);
                 setLoading(false);
             } catch (err) {
-                console.error(err);
+                setServerError(true);
+                setLoading(false);
             }
 
-            // Mock Data ignoring for now
-            let agencyResponse = {
-                "agencies": [
-                    {
-                        "id": 1,
-                        "address": "1460 S CHAMPION AVE",
-                        "city": "COLUMBUS",
-                        "state": "OH",
-                        "zip": "43206",
-                        "phone": "614-443-5130",
-                        "name": "Lutheran Social Services ChoicePantry - South Columbus",
-                        "nickname": "LSS Champion",
-                        "event_dates": []
-                    },
-                    {
-                        "id": 4,
-                        "address": "2045 E MAIN ST",
-                        "city": "LANCASTER",
-                        "state": "OH",
-                        "zip": "43130",
-                        "phone": "740-687-5130",
-                        "name": "Lutheran Social Services ChoicePantry - Fairfield Co.",
-                        "nickname": "LSS Lancaster",
-                        "event_dates": []
-                    },
-                    {
-                        "id": 6,
-                        "address": "3960 BROOKHAM DR",
-                        "city": "GROVE CITY",
-                        "state": "OH",
-                        "zip": "43123",
-                        "phone": "614-317-9482",
-                        "name": "Mid-Ohio Foodbank - Kroger Community Pantry",
-                        "nickname": "MOF Kroger Pantry",
-                        "event_dates": [
-                            {
-                                "id": 3,
-                                "service": "Prepack Pantry",
-                                "start_time": "01:00 PM",
-                                "end_time": "03:00 PM",
-                                "date": "2020-04-10"
-                            },
-                            {
-                                "id": 5,
-                                "service": "Prepack Pantry",
-                                "start_time": "01:00 PM",
-                                "end_time": "03:00 PM",
-                                "date": "2020-04-13"
-                            },
-                            {
-                                "id": 6,
-                                "service": "Prepack Pantry",
-                                "start_time": "01:00 PM",
-                                "end_time": "03:00 PM",
-                                "date": "2020-04-15"
-                            }
-                        ]
-                    },
-                ]
-            };
-            setAgencyData(agencyResponse);
-            setAgencyResponse(true);
+            // This along with EventList should be in it's own container.
+            try {
+                const agencyUri = API_URL.EVENTS_LIST;
+                const resp = await axios.get(agencyUri, { params: { zip_code } });
+                const { data: { agencies } } = resp;
+                setAgencyData(agencies);
+                setAgencyResponse(true);
+            } catch (err) {
+                console.error(err)
+            }
         }
-
-
-        // ajaxGet(uri, searchDetails, (response) => {
-        //     setFoodBankResponse(true);
-        //     console.log(response);
-        // if (response.status === STATUS_ACTIVE) {
-        //     console.log(response);
-        // }else {
-        //     console.log('error', response.message);
-        // }
-        // });
     };
 
 
@@ -136,15 +73,19 @@ const EventContainer = (props) => {
 
     const EventList = () => {
         // Out of scope for now
-        return null;
         if (agencyResponse) {
-            return <EventListComponent dataToChild = {agencyData} /> ;
+          const agencyDataSorted = EventDateSorter(EventHandler(agencyData));
+          return <EventListComponent events = {agencyDataSorted} />;
         }
+        return null;
     };
 
     const ResourceList = () => {
         if (foodBankResponse) {
             return <ResourceListComponent dataToChild = {foodBankData} /> ;
+        }
+        if (serverError) {
+            return <h2>Something went wrong</h2>
         }
         return null;
     };
