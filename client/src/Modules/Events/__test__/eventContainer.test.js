@@ -7,6 +7,8 @@ import { mockFoodBank } from '../../../Testing'
 
 jest.mock('axios');
 
+jest.mock('../EventListContainer', () => () => <mock-event-list-container />);
+
 // Suppress the moment warning. This is a consequence of using test-data-bot
 // and does not show in reality 
 const originalWarn = console.warn.bind(console.warn);

@@ -50,6 +50,6 @@ export const EventHandler = agencies => {
         eventDateMapper(event, phone, name).forEach(x => eventDates.push(x));
       });
     }
-  });
+  });  
   return eventDates;
 }
