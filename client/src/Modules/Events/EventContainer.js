@@ -107,7 +107,6 @@ const EventContainer = props => {
                     <EventList />
                 </div>
             </section>
-            <FooterContainer/>
         </div>
     )
 
