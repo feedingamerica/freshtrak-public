@@ -3,7 +3,7 @@ import FooterContainer from '../Footer/FooterContainer';
 import EventHeaderComponent from './EventHeaderComponent';
 import SearchComponent from '../General/SearchComponent';
 import EventListComponent from './EventListComponent';
-import '../../Assets/scss/main.scss';
+
 import ResourceListComponent from './ResourceListComponent';
 import { ProgressBar } from 'react-bootstrap';
 import {API_URL} from '../../Utils/Urls';
@@ -104,7 +104,7 @@ const EventContainer = props => {
                         }
                         {!loading && <ResourceList />}
                     </div>
-                    <EventListComponent />
+                    <EventList />
                 </div>
             </section>
             <FooterContainer/>

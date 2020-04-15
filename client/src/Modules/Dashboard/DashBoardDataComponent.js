@@ -4,8 +4,7 @@ import {withRouter} from 'react-router-dom';
 import SearchComponent from '../General/SearchComponent';
 import RegisteredEventListComponent from '../AuthenticatedLanding/RegisteredEventListComponent';
 import DashboardCreateAccountComponent from './DashboardCreateAccountComponent';
-import '../../Assets/scss/main.scss'
-import '../../Assets/css/style.css'
+import '../../Assets/scss/main.scss';
 const DashBoardDataComponent = (props) => {
     const [isLoggedIn, setIsLoggedIn] = React.useState(localStorage.getItem('isLoggedIn'));
 

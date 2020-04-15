@@ -11,9 +11,10 @@ import HeaderComponent from "../Header/HeaderComponent";
 import '../../Assets/scss/main.scss';
 import back from '../../Assets/img/back.svg';
 import {RENDER_URL} from '../../Utils/Urls';
+import NavigationBtnComponent from "../General/NavigationBtnComponent";
 
 
-const FamilyContainer = () => {
+const FamilyContainer = (props) => {
     let familyData = [];
     let formError = '';
     let componentErrors = [];
@@ -104,6 +105,8 @@ const FamilyContainer = () => {
         formError = errors;
     };
 
+ 
+
     return (
 
         <div>
@@ -113,12 +116,7 @@ const FamilyContainer = () => {
                     <div className="container pt-100 pb-100 register-confirmation">
                         <div className="row">
                             <div className="col-md-12">
-                                <div className="back-button">
-                            <span className="back-arrow">
-                                <img src={back} />
-                            </span>
-                                    <span className="font-weight-bold text-uppercase ml-2">Back</span>
-                                </div>
+                            <NavigationBtnComponent {...props}/>
                             </div>
                         </div>
                         <div className="row">
@@ -192,8 +190,6 @@ const FamilyContainer = () => {
                                         </div>
                                     </div>
                                 </form>
-
-
                             </div>
                         </div>
                     </div>

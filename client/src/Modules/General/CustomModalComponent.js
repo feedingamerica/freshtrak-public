@@ -2,6 +2,7 @@
  * Custom Modal Component || Can be used for Sign in template
  */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import SignInComponent from '../SignIn/SignInComponent';
 import {Modal, Button} from 'react-bootstrap';
@@ -30,5 +31,8 @@ const CustomModalComponent = (props) => {
     </Modal>
 
     )}
+    CustomModalComponent.propTypes={
+      signin: PropTypes.string
+    }
 
 export default CustomModalComponent;
