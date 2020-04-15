@@ -1,3 +1,15 @@
+export const EventDateSorter = events => {
+  const eventSortedByDate = {};
+  events.forEach(event => {
+    if (event.date in eventSortedByDate) {
+      eventSortedByDate[event.date].push(event);
+    } else {
+      eventSortedByDate[event.date] = [event];
+    }
+  });
+  return eventSortedByDate;
+}
+
 
 const eventDateMapper = (event, phone, name) => {
   const { event_dates } = event;
@@ -11,10 +23,11 @@ const eventDateMapper = (event, phone, name) => {
         endTime: end_time,
         date,
         eventAddress: event.address,
+        eventCity: event.city,
         eventState: event.state,
         eventZip: event.zip,
         phoneNumber: phone,
-        agancyName: name,
+        agencyName: name,
         eventName: event.name,
         eventService: event.service,
       }

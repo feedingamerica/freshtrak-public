@@ -18,9 +18,9 @@ export const mockEventsBuilder = build('Events').fields({
   city: fake(f => f.address.city()),
   state: fake(f => f.address.state()),
   zip: fake(f => f.address.zipCode()),
-  pt_latitude: fake(f => f.address.latitude()),
-  pt_longitude: fake(f => f.address.longitude()),
-  loc_id: fake(f => f.random.number()),
+  latitude: fake(f => f.address.latitude()),
+  longitude: fake(f => f.address.longitude()),
+  agency_id: fake(f => f.random.number()),
   name: fake(f => f.random.word()),
   service: fake(f => f.random.word()),
   event_dates: [],
@@ -37,3 +37,49 @@ export const mockEventDatesBuilder = build('EventDates').fields({
 export const mockAgency = mockAgencyBuilder();
 export const mockEvent = mockEventsBuilder();
 export const mockEventDate = mockEventDatesBuilder();
+
+const agency1 = mockAgencyBuilder();
+const agency2 = mockAgencyBuilder();
+const event1 = mockEventsBuilder();
+const event2 = mockEventsBuilder();
+const event3 = mockEventsBuilder();
+const eventDate1 = mockEventDatesBuilder();
+const eventDate2 = mockEventDatesBuilder();
+const eventDate3 = mockEventDatesBuilder();
+export const testData = [
+  { ...agency1, events: [{ ...event1, event_dates: [{ ...eventDate1 }] }] },
+  { ...agency2, events: [{ ...event2, event_dates: [{ ...eventDate2 }] }] },
+];
+
+export const testDataWithMultiple = [
+  { ...agency1, events: [{ ...event1, event_dates: [{ ...eventDate1 }] }] },
+  {
+    ...agency2,
+    events: [
+      {
+        ...event2,
+        event_dates: [{ ...eventDate2, date: eventDate1.date }],
+      },
+      {
+        ...event3,
+        event_dates: [{ ...eventDate3 }],
+      },
+    ],
+  },
+];
+
+export const preformattedEventData = {
+  id: eventDate1.id,
+  eventId: eventDate1.event_id,
+  startTime: eventDate1.start_time,
+  endTime: eventDate1.end_time,
+  date: eventDate1.date,
+  eventAddress: event1.address,
+  eventCity: event1.city,
+  eventState: event1.state,
+  eventZip: event1.zip,
+  phoneNumber: agency1.phone,
+  agencyName: agency1.name,
+  eventName: event1.name,
+  eventService: event1.service,
+};
