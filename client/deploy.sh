@@ -26,8 +26,13 @@ MSG
 }
 
 function build {
+  rm -rf build
   yarn install
-  yarn run build
+  if [ $STAGE == 'beta' ]; then
+    yarn run build-beta
+  else
+    yarn run build
+  fi
 }
 
 function deploy {
@@ -39,4 +44,3 @@ function deploy {
 }
 
 main
-
