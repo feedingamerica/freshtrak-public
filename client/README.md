@@ -66,3 +66,12 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `yarn build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+## Deployment to AWS
+
+This project is deployed to AWS as CloudFront distribution.
+The cloudformation template can be found in the `infrastructure` directory.
+
+```
+AWS_PROFILE=<profile> AWS_REGION=us-east-2 ./deploy.sh beta
+```
