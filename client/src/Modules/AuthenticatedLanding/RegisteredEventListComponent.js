@@ -5,10 +5,6 @@ import React from 'react';
 import '../../Assets/scss/main.scss';
 import {API_URL} from '../../Utils/Urls';
 import EventCardComponent from '../Events/EventCardComponent';
-import {ajaxPost, ajaxGet, ajaxPut} from '../../Services/Http/Ajax';
-import {confirm, showMessage} from '../../Utils/Util';
-import {ToastContainer} from 'react-toastify';
-import {STATUS_ACTIVE} from '../../Utils/Constants';
 
 const RegisteredEventListComponent = (props) => {
 var isLoggedIn = true;

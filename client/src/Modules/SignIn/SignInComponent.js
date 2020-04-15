@@ -1,28 +1,28 @@
 import React from "react";
-import '../../Assets/scss/main.scss';
+import "../../Assets/scss/main.scss";
 
-const SignInComponent = React.forwardRef((props, ref) => {
+const SignInComponent =(props)=> {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
   let data,
     childFamilyData = "";
 
-  const buildForm = (e) => {
-    let { name, value } = e.target;
-    let setFunction = "";
-    switch (name) {
-      case "Password":
-        setFunction = setPassword;
-        break;
+  // const buildForm = (e) => {
+  //   let { name, value } = e.target;
+  //   let setFunction = "";
+  //   switch (name) {
+  //     case "Password":
+  //       setFunction = setPassword;
+  //       break;
 
-      case "Username":
-        setFunction = setUsername;
-        break;
-    }
-    if (setFunction !== "") {
-      setFunction(value);
-    }
-  };
+  //     case "Username":
+  //       setFunction = setUsername;
+  //       break;
+  //   }
+  //   if (setFunction !== "") {
+  //     setFunction(value);
+  //   }
+  // };
 
   const handleChange = () => {
     data = {
@@ -39,17 +39,9 @@ const SignInComponent = React.forwardRef((props, ref) => {
     handleChange();
   }, [username, password]);
 
-  const handleSubmitConfirm = () => {
-    let title = "Are you sure you want to proceed?";
-    // confirm(title, handleSubmit);
-  };
-
   const handleSubmit = () => {
     localStorage.setItem("isLoggedIn", true);
     window.location.reload();
-  };
-  const dataToParent = () => {
-    // props.onSelectedChild(childFamilyData);
   };
 
   return (
@@ -95,5 +87,5 @@ const SignInComponent = React.forwardRef((props, ref) => {
       </div>
     </div>
   );
-});
+};
 export default SignInComponent;

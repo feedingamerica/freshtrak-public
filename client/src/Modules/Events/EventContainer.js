@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import FooterContainer from '../Footer/FooterContainer';
-import EventHeaderComponent from './EventHeaderComponent';
 import SearchComponent from '../General/SearchComponent';
 import EventListComponent from './EventListComponent';
 
@@ -107,7 +105,6 @@ const EventContainer = props => {
                     <EventList />
                 </div>
             </section>
-            <FooterContainer/>
         </div>
     )
 

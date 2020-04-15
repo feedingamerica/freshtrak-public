@@ -2,7 +2,7 @@ import React, { lazy, Suspense } from "react";
 import "./Assets/scss/main.scss";
 
 import { RENDER_URL } from "./Utils/Urls";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 const ConfirmationComponent = lazy(() =>
   import("./Modules/Confirmation/ConfirmationComponent")
 );
@@ -37,6 +37,11 @@ const App = (props) => {
             exact
             path={RENDER_URL.EVENT_CONFIRM_URL}
             render={(props) => <ConfirmationComponent {...props} />}
+          />
+          <Route
+            
+            path={'*'}
+            render={(props) => <Redirect to="/" {...props} />}
           />
 
           {/* Add URLs above this line */}

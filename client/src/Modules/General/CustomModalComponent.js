@@ -5,7 +5,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import SignInComponent from '../SignIn/SignInComponent';
-import {Modal, Button} from 'react-bootstrap';
+import {Modal} from 'react-bootstrap';
 // import '../../Assets/scss/main.scss';
 
 const CustomModalComponent = (props) => {

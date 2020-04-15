@@ -9,8 +9,6 @@ import {confirm, showMessage} from '../../Utils/Util';
 import FooterContainer from "../Footer/FooterContainer";
 import HeaderComponent from "../Header/HeaderComponent";
 import '../../Assets/scss/main.scss';
-import back from '../../Assets/img/back.svg';
-import {RENDER_URL} from '../../Utils/Urls';
 import NavigationBtnComponent from "../General/NavigationBtnComponent";
 
 
