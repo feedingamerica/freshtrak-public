@@ -18,8 +18,9 @@ const Routes = () => {
         <Suspense fallback={<div className="displayNone"> </div>}>
           <Route render={(props) => <App {...props} />} />
 
-          <FooterContainer />
+         
         </Suspense>
+        <FooterContainer />
       </HeaderProvider>
     </Router>
   );
