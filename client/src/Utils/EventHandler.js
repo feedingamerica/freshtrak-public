@@ -1,4 +1,18 @@
-export const EventDateSorter = events => {
+import moment from 'moment';
+
+export const EventHandler = agencies => EventDateSorterByDate(EventObjectBuilder(AgencyHandler(agencies)));
+
+export const EventDateSorterByDate = eventObj => {
+  const eventOrderByDate = {};
+  Object.keys(eventObj).sort((a, b) => {
+    return moment(a, 'YYYY/MM/DD').toDate() - moment(b, 'YYYY/MM/DD').toDate();
+  }).forEach(key => {
+    eventOrderByDate[key] = eventObj[key];
+  });
+  return eventOrderByDate;
+}
+
+export const EventObjectBuilder = events => {
   const eventSortedByDate = {};
   events.forEach(event => {
     if (event.date in eventSortedByDate) {
@@ -9,7 +23,6 @@ export const EventDateSorter = events => {
   });
   return eventSortedByDate;
 }
-
 
 const eventDateMapper = (event, phone, name) => {
   const { event_dates } = event;
@@ -37,7 +50,7 @@ const eventDateMapper = (event, phone, name) => {
   }
 }
 
-export const EventHandler = agencies => {
+export const AgencyHandler = agencies => {
   if (!agencies || !agencies.length > 0) {
     return [];
   }
