@@ -3,7 +3,6 @@
  */
 
 import React from 'react';
-import HeaderComponent from '../General/HeaderComponent';
 const HeaderComponent = () => { 
     return (
         <header className="header">

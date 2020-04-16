@@ -9,6 +9,14 @@ jest.mock('axios');
 
 jest.mock('../EventListContainer', () => () => <mock-event-list-container />);
 
+const successResponse = {
+  data: {
+    foodbanks: [mockFoodBank]
+  },
+  status: 200,
+  statusText: 'OK',
+}
+
 // Suppress the moment warning. This is a consequence of using test-data-bot
 // and does not show in reality 
 const originalWarn = console.warn.bind(console.warn);
@@ -31,13 +39,6 @@ test('should load without errors', () => {
 });
 
 test('Successful api call', async () => {
-  const successResponse = {
-    data: {
-      foodbanks: [mockFoodBank]
-    },
-    status: 200,
-    statusText: 'OK',
-  }
   axios.get.mockImplementation(() => Promise.resolve(successResponse));
   
   const { getByText, getByLabelText, getAllByText, getByTestId } = render(
@@ -88,5 +89,27 @@ test('Failed api call', async () => {
   getByTestId(/loading/i);
   await wait(() => {
     getByText(/something went wrong/i);
+  });
+});
+
+test('Calls api on mount if props has search Data', async () => {
+  axios.get.mockImplementation(() => Promise.resolve(successResponse));
+  const parentData = {
+    state: {
+      searchData: {
+        searchData: {
+          zip: mockFoodBank.zip
+        }
+      }
+    },
+  }
+  const { getByText } = render(
+    <Router>
+      <EventContainer location={parentData} history={{ replace: jest.fn }} />
+    </Router>
+  );
+
+  await wait(() => {
+    getByText(mockFoodBank.name);
   });
 });

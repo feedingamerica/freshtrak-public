@@ -28,6 +28,7 @@
     "build-beta": "REACT_APP_STAGE=beta react-scripts build",
     "build-staging": "REACT_APP_STAGE=staging react-scripts build",
     "test": "react-scripts test",
+    "test-ci": "yarn test -- --coverage --watchAll=false",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

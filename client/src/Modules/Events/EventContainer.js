@@ -44,7 +44,7 @@ const EventContainer = props => {
     };
 
 
-    const buildSearchData = (data) =>{
+    const buildSearchData = (data) => {
         if(Object.keys(data)[0]) {
             let searchDetails = {
                 'street': data.searchData.street,
