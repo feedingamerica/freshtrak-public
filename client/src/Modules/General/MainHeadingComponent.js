@@ -3,7 +3,7 @@
  */
 import React from 'react';
 const MainHeadingComponent = (props) => {
-    console.log(props) 
+    // console.log(props) 
     return (
         <div className="title-wrap">
             <h1 className="big-title mt-5 mb-5 mobile-mb">

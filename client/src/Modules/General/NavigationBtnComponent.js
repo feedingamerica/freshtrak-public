@@ -5,7 +5,7 @@ import React from 'react';
 import backBtn from '../../Assets/img/back.svg';
 
 const NavigationBtnComponent = (props) => { 
-    console.log(props)
+    // console.log(props)
     return (
         <div className="back-button" onClick={()=>props.history.goBack()}>
             <span className="back-arrow">

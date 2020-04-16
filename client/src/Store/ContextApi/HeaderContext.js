@@ -4,10 +4,7 @@ export const themes = {
   shortHeader: "navbar-green",
 };
 
-export const HeaderContext = React.createContext({
-  themes: themes,
-  toggleTheme: () => {},
-});
+export const HeaderContext = React.createContext();
 
 export const HeaderProvider = HeaderContext.Provider;
 export const HeaderConsumer = HeaderContext.Consumer;

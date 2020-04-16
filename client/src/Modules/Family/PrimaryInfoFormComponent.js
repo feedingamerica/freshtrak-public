@@ -88,7 +88,8 @@ const PrimaryInfoFormComponent =  React.forwardRef((props, ref) => {
             email : email,
             communicationPreference : communicationPreference,
         }
-        }; console.log('data',data);
+        }; 
+        // console.log('data',data);
          props.onSelectedChild(data);
     };
 

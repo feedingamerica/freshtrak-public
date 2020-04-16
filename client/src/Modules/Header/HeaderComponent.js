@@ -26,7 +26,7 @@ const HeaderComponent = (props) => {
   const shortHeader = props.shortHeader || "";
 
   useEffect(() => {
-    console.log("HeaderComponent", new Date().getTime());
+    // console.log("HeaderComponent", new Date().getTime());
     if (localStorage.getItem("isLoggedIn") !== null) {
       setIsLoggedIn(true);
     }
