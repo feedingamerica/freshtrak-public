@@ -1,8 +1,8 @@
 /**
- * Confirmation Component
+ * FreshTrak Doc component: Used to show 'About Freshtrak' and 'Partner with us' details.
+ * The page is still under development. Not integrated to other components yet.
  */
 import React, { useContext } from "react";
-import MainHeadingComponent from "../General/MainHeadingComponent";
 import NavigationBtnComponent from "../General/NavigationBtnComponent";
 
 import '../../Assets/scss/main.scss';
