@@ -10,7 +10,7 @@ const SearchComponent = (props, ref) => {
     let data;
 
     React.useEffect(() => {
-        if(props.dataToChild){
+        if(Object.keys(props.dataToChild).length){
             let propData = props.dataToChild;
             setStreet(propData.street);
             setZip(propData.zip_code);

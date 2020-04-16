@@ -7,6 +7,8 @@ const getBaseUrl = () => {
     switch (env) {
         case 'dev':
             return 'http://localhost:8888/';
+        case 'beta':
+            return 'https://pantry-finder-api.beta.freshtrak.com/';
         case 'staging':
             return 'http://api-freshtrak.inapp.com/';
         case 'production':

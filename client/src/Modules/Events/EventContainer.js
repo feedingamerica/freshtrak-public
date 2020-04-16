@@ -1,24 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SearchComponent from '../General/SearchComponent';
-import EventListComponent from './EventListComponent';
-
 import ResourceListComponent from './ResourceListComponent';
+import EventListContainer from './EventListContainer';
 import { ProgressBar } from 'react-bootstrap';
 import {API_URL} from '../../Utils/Urls';
-import { EventDateSorter, EventHandler } from '../../Utils/EventHandler';
 import axios from 'axios';
+import '../../Assets/scss/main.scss';
 
 const EventContainer = props => {
     const [foodBankResponse, setFoodBankResponse] = useState(false);
-    const [agencyResponse, setAgencyResponse] = useState(false);
     let [foodBankData,setFoodBankData] = useState({});
-    let [agencyData,setAgencyData] = useState({});
     let [searchDetails,setSearchDetails] = useState({});
     const [serverError, setServerError] = useState(false);
     const [loading, setLoading] = useState(false);
     let isSearchData = !!props.location.state;
 
-    React.useEffect(() => {
+    useEffect(() => {
         if (isSearchData){
             buildSearchData(props.location.state.searchData);
             props.history.replace({ state: null });
@@ -41,20 +38,8 @@ const EventContainer = props => {
                 setServerError(true);
                 setLoading(false);
             }
-
-            // This along with EventList should be in it's own container.
-            try {
-                const agencyUri = API_URL.EVENTS_LIST;
-                const resp = await axios.get(agencyUri, { params: { zip_code } });
-                const { data: { agencies } } = resp;
-                setAgencyData(agencies);
-                setAgencyResponse(true);
-            } catch (err) {
-                console.error(err)
-            }
         }
     };
-
 
 
     const buildSearchData = (data) =>{
@@ -67,15 +52,6 @@ const EventContainer = props => {
             handleSubmit(searchDetails);
         }
 
-    };
-
-    const EventList = () => {
-        // Out of scope for now
-        if (agencyResponse) {
-          const agencyDataSorted = EventDateSorter(EventHandler(agencyData));
-          return <EventListComponent events = {agencyDataSorted} />;
-        }
-        return null;
     };
 
     const ResourceList = () => {
@@ -102,7 +78,7 @@ const EventContainer = props => {
                         }
                         {!loading && <ResourceList />}
                     </div>
-                    <EventList />
+                    <EventListContainer searchData={searchDetails} />
                 </div>
             </section>
         </div>
