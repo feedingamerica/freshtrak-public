@@ -1,0 +1,92 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Creates a S3 bucket, Cloudfront distribution used for static web hosting.
+Parameters:
+  Name:
+    Type: String
+    Description: A friendly name for this Cloudfront distribution.
+    Default: freshtrak-ui
+  HostedZoneName:
+    Type: String
+    Description: The name of the hosted zone
+    Default: freshtrak.com
+  UrlPrefix:
+    Type: String
+    Description: The prefix of the route53 record (will be pre-pended to the hosted zone name)
+    Default: beta.
+  CertificateArn:
+    Type: String
+    Description: The ARN of the certificate to apply to the cloudfront distro
+Resources:
+  CloudfrontDistribution:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        HttpVersion: http2
+        Origins:
+          - DomainName: !Sub "${S3WebsiteBucket}.s3.amazonaws.com"
+            Id: !Sub "${UrlPrefix}${Name}-Origin"
+            S3OriginConfig:
+              OriginAccessIdentity: ''
+        Enabled: true
+        Comment: !Sub "A Cloudfront distribution for ${UrlPrefix}${Name}"
+        CustomErrorResponses:
+          - ResponseCode: 200
+            ErrorCode: 404
+            ResponsePagePath: "/index.html"
+          - ResponseCode: 200
+            ErrorCode: 403
+            ResponsePagePath: "/index.html"
+        DefaultRootObject: index.html
+        Aliases:
+          - !Join ['', [!Ref UrlPrefix, !Ref HostedZoneName]]
+        DefaultCacheBehavior:
+          Compress: true
+          AllowedMethods:
+            - GET
+            - HEAD
+            - OPTIONS
+          TargetOriginId: !Sub "${UrlPrefix}${Name}-Origin"
+          ForwardedValues:
+            QueryString: false
+            Cookies:
+              Forward: none
+          ViewerProtocolPolicy: redirect-to-https
+        ViewerCertificate:
+          AcmCertificateArn: !Ref CertificateArn
+          MinimumProtocolVersion: TLSv1.1_2016
+          SslSupportMethod: sni-only
+  S3WebsiteBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      AccessControl: PublicRead
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+      VersioningConfiguration:
+        Status: Enabled
+  DNS:
+    Type: AWS::Route53::RecordSetGroup
+    Properties:
+      Comment: Managed via Cloudformation
+      HostedZoneName: !Sub "${HostedZoneName}."
+      RecordSets:
+        - Name: !Sub "${UrlPrefix}${HostedZoneName}."
+          Type: A
+          AliasTarget:
+            DNSName: !GetAtt [ CloudfrontDistribution, DomainName ]
+            HostedZoneId: Z2FDTNDATAQYW2 # See https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-aliastarget.html
+Outputs:
+  S3WebsiteBucketWebsiteURL:
+    Description: The S3 bucket used for static web hosting
+    Value: !Sub "${S3WebsiteBucket.WebsiteURL}"
+  S3WebsiteBucketName:
+    Description: Name of the S3 bucket used for static web hosting
+    Value: !Ref S3WebsiteBucket
+    Export:
+      Name: !Sub "${Name}-S3WebsiteBucket"
+  CloudfrontDistributionID:
+    Description: Name of the cloudfront distribution.
+    Value: !Ref CloudfrontDistribution
+    Export:
+      Name: !Sub "${Name}-CloudfrontDistribution"

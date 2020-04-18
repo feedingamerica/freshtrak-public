@@ -18,5 +18,8 @@ test:
   endpoint: http://localhost:8000
   table_namespace: <%= Jets.config.table_namespace %>
 
+beta:
+  table_namespace: <%= Jets.config.table_namespace %>
+
 production:
   table_namespace: <%= Jets.config.table_namespace %>
