@@ -75,7 +75,7 @@ jobs:
       - name: Setup Ruby
         uses: actions/setup-ruby@v1
         with:
-          ruby-version: 2.5.3
+          ruby-version: 2.6.*
       - name: Cache Dependencies
         uses: actions/cache@v1
         with:
