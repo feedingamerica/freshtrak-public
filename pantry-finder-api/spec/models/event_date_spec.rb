@@ -7,6 +7,13 @@ describe EventDate, type: :model do
     expect(event_date.event).to be_an_instance_of(Event)
   end
 
+  it 'has many event hours' do
+    event_hours =
+      5.times.map { create(:event_hour, event_date: event_date) }
+
+    expect(event_date.event_hours.pluck(:id)).to eq(event_hours.pluck(:id))
+  end
+
   context 'with scopes' do
     it 'defaults to dates in the future' do
       create(:event_date,

@@ -6,6 +6,8 @@ class EventDate < ApplicationRecord
   alias_attribute :date, :event_date_key
 
   belongs_to :event, foreign_key: :event_id, inverse_of: :event_dates
+  has_many :event_hours, foreign_key: :event_date_id, inverse_of: :event_date,
+                         dependent: :restrict_with_exception
 
   default_scope { active.published.event_publishes_dates.future }
   scope :active, -> { where(status_id: 1) }
