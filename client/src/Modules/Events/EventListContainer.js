@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import EventListComponent from './EventListComponent';
-import { EventDateSorter, EventHandler } from '../../Utils/EventHandler';
+import { EventHandler } from '../../Utils/EventHandler';
 import { API_URL } from '../../Utils/Urls';
 import axios from 'axios';
 
@@ -37,7 +37,7 @@ const EventListContainer = props => {
 
   const EventList = () => {
     if (agencyResponse) {
-      const agencyDataSorted = EventDateSorter(EventHandler(agencyData));
+      const agencyDataSorted = EventHandler(agencyData);
       return <EventListComponent events={agencyDataSorted} />;
     }
     return null;
