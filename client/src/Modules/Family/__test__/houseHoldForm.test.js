@@ -6,10 +6,7 @@ import { noop } from '../../../Testing';
 test('should render', () => {
   expect(() => {
     render(
-      <HouseHoldFormComponent
-        onSelectedChild={noop}
-        onFormErrors={noop}
-      />
+      <HouseHoldFormComponent register={noop} errors={noop} />
     );
   }).not.toThrowError();
 });

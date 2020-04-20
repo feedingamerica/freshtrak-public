@@ -1,233 +1,149 @@
-import React, {Component} from 'react';
-import {Redirect} from 'react-router-dom';
-import {ajaxGet} from '../../Services/Http/Ajax';
-import {STATUS_ACTIVE} from '../../Utils/Constants';
-import {API_URL} from '../../Utils/Urls';
-import useForm from '../../Utils/UseForm';
-
-
-const PrimaryInfoFormComponent =  React.forwardRef((props, ref) => {
-    const [firstName, setFirstName] = React.useState('');
-    const [lastName, setLastName] = React.useState('');
-    const [middleName, setMiddleName] = React.useState('');
-    const [suffix, setSuffix] = React.useState('');
-    const [suffixArray, setSuffixArray] = React.useState([]);
-    const [dob, setDob] = React.useState([]);
-    const [hoh, setHoh] = React.useState([]);
-    const [phoneNumber, setPhoneNumber] = React.useState([]);
-    const [phoneNumberCheckBOx, setPhoneNumberCheckBOx] = React.useState([]);
-    const [email, setEmail] = React.useState([]);
-    const [communicationPreference, setCommunicationPreference] = React.useState([]);
-    let first_name,last_name,middle_name,suffix_form_data='';
-    let middle_name_form,first_name_form,last_name_form='';
-    const [childFamilyData, setChildFamilyData] = React.useState([]);
-    let data = '';
+import React, { } from 'react';
 
 
 
-    const buildNameForm = (e) => {
-        let { name, value } = e.target;
-        let setFunction = '';
-      switch (name) {
-          case 'first_name':
-              setFunction = setFirstName;
-              break;
-          case 'last_name':
-              setFunction = setLastName;
-              break;
-          case 'middle_name':
-              setFunction = setMiddleName;
-              break;
-          case 'Suffix':
-              setFunction = setSuffix;
-              break;
-          case 'dob':
-              setFunction=setDob;
-              break;
-          case 'hoh':
-              setFunction=setHoh;
-              break;
-          case 'phone_number':
-              setFunction=setPhoneNumber;
-              break;
+const PrimaryInfoFormComponent =  React.forwardRef(({ register, errors }, ref) => (
+  <div className="mt-4">
+      <h2>Your Information</h2>
+      <div className="form-group">
+        <label htmlFor="first_name">First Name</label>
+        <input
+          type="text"
+          className="form-control"
+          name="first_name"
+          ref={register({ required: true })}
+        />
+        {errors.first_name && <span className="text-danger">This field is required</span>}
+      </div>
+      <div className="form-group">
+        <label htmlFor="middle_name">Middle Name</label>
+        <input
+          type="text"
+          className="form-control"
+          name="middle_name"
+          ref={register}
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="last_name">Last Name</label>
+        <input
+          type="text"
+          className="form-control"
+          name="last_name"
+          ref={register({ required: true })}
+        />
+        {errors.last_name && <span className="text-danger">This field is required</span>}
+      </div>
+      <div className="form-group">
+        <label htmlFor="suffix">Suffix</label>
+        <select
+          name="suffix"
+          className="form-control"
+          ref={register}
+        >
+          <option value="" defaultValue></option>
+          <option value="jr">Jr</option>
+          <option value="sr">Sr</option>
+        </select>
+      </div>
+      <div className="form-group">
+        <label htmlFor="dob">Date of Birth</label>
+        <input
+          type="date"
+          className="form-control"
+          name="dob"
+          ref={register({ required: true })}
+        />
+        {errors.dob && <span className="text-danger">This field is required</span>}
+      </div>
+      <div className="form-group">
+        <label htmlFor="hoh">Head of Household</label>
+        <select
+          className="form-control"
+          name="hoh"
+          ref={register({ required: true })}
+        >
+          <option value="true">Yes</option>
+          <option value="false">No</option>
+        </select>
+        {errors.hoh && <span className="text-danger">This field is required</span>}
+      </div>
+      <div className="form-group">
+        <label htmlFor="phone_number">Phone Number</label>
+        <input
+          type="tel"
+          className="form-control"
+          name="phone_number"
+          ref={register({ required: true })}
+        />
+        {errors.phone_number && <span className="text-danger">This field is required</span>}
+      </div>
+      <div>Placeholder for no phone avaible</div>
+      <div className="form-group">
+        <label htmlFor="gender">Gender</label>
+        <select
+          className="form-control"
+          name="gender"
+          ref={register}
+        >
+          <option value="" defaultValue></option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="not_specify">Prefer Not To Specify</option>
+        </select>
+      </div>
+      <div className="form-group">
+        <label htmlFor="communication_preference">Communication Preference</label>
+        <select
+          className="form-control"
+          name="communication_preference"
+          ref={register}
+        >
+          <option value="" defaultValue></option>
+          <option value="email">Email</option>
+          <option value="phone">Phone</option>
+          <option value="no_contact">Please No Contact</option>
+        </select>
+      </div>
+      <div className="form-group">
+        <label htmlFor="email">Email</label>
+        <input
+          type="email"
+          className="form-control"
+          name="email"
+          ref={register({ required: true })}
+        />
+        <small className="text-muted">
+          No Email? <a href="https://support.google.com/mail/answer/56256" target="_blank">Get one free from Google.</a>
+        </small><br />
+        {errors.email && <span className="text-danger">This field is required</span>}
+      </div>
 
-          case 'phone_number_checkbox':
-              setFunction=setPhoneNumberCheckBOx;
-              break;
-
-          case 'email':
-              setFunction=setEmail;
-              break;
-
-          case 'communication_preference':
-              setFunction=setCommunicationPreference;
-              break;
-          default:
-              break;
-      }
-
-      if (setFunction !== '') {
-          setFunction(value)
-      }
-    };
-
-    React.useEffect(() => {
-        handleChange();
-    }, [firstName, lastName,middleName, suffix,dob,hoh,phoneNumber,phoneNumberCheckBOx,email,communicationPreference]);
-
-
-
-    const handleChange = () => {
-
-
-        data = { nameData :{
-            first_name: firstName,
-            last_name: lastName,
-            middle_name: middleName,
-            suffix: suffix,
-            dob : dob,
-            hoh : hoh,
-            phoneNumber : phoneNumber,
-            phoneNumberCheckBOx : phoneNumberCheckBOx,
-            email : email,
-            communicationPreference : communicationPreference,
-        }
-        }; console.log('data',data);
-         props.onSelectedChild(data);
-    };
-
-
-    let formDataBuildOne = props.famData ? ((first_name_form= props.famData.first_name) )? props.famData : '' :'';
-    let formDataBuildtwo = props.famData ? ((middle_name_form=props.famData.middle_name))? props.famData : '' :'';
-    let formDataBuildthree = props.famData ? ((last_name_form=props.famData.last_name))? props.famData : '' :'';
-    let formDataBuildfour = props.famData ? ((suffix_form_data=props.famData.suffix))? props.famData : '' :'';
-
-
-
-    React.useEffect(() => {
-        if (first_name_form) {
-            setFirstName(first_name_form);
-            setMiddleName(middle_name_form);
-            setLastName(last_name_form);
-            setSuffix(suffix_form_data);
-        }
-    }, [first_name_form, middle_name_form, last_name_form, suffix]);
-
-    React.useEffect(() => {
-        if (first_name_form) {
-            setFirstName(first_name);
-            setMiddleName(middle_name);
-            setLastName(last_name);
-            setSuffix(suffix_form_data);
-        }
-    }, []);
-
-
-
-
-    const dataToParent = () => {
-        props.onSelectedChild(childFamilyData);
-    };
-
-    const { errors, handleErrors } =
-        useForm(props, {
-            'first_name' : ['required', 'min:1'],
-            'last_name' : ['required', 'min:1'],
-            'phone_number' : ['required', 'min:2', 'max:12'],
-            'dob' : ['required'],
-            'email' : ['required'],
-        }, dataToParent);
-
-    React.useImperativeHandle(ref, () => ({
-
-        triggerErrors(){
-            handleChange();
-            return handleErrors(data.nameData);
-        }
-
-    }));
-
-
-    return (
-        <div>
-
-
-                <div className="form-title">
-                    Your Information
-                </div>
-                <div className="form-group">
-                    <label>First Name</label>
-                    <input type="text" className="form-control" onChange={buildNameForm} name="first_name" id="first_name"
-                           onBlur={handleErrors}/>
-                </div>
-                <div className="form-group">
-                    <label>Middle Name</label>
-                    <input type="text" className="form-control" onChange={buildNameForm} defaultValue={middle_name_form}
-                           name="middle_name" id="middle_name" />
-                </div>
-                <div className="form-group">
-                    <label>Last Name</label>
-                    <input type="text" className="form-control" onChange={buildNameForm} name="last_name" id="last_name"
-                           onBlur={handleErrors} />
-                </div>
-
-                <div className="form-group">
-                    <label>Suffix</label>
-                    <select  id="suffix" name="Suffix" className="form-control"  onChange={buildNameForm}>
-                        <option>Jr</option>
-                        <option>Sr</option>
-                    </select>
-                </div>
-                <div className="form-group">
-                    <label>Date of Birth</label>
-                    <input type="date" className="form-control"  name="dob" id="dob"/>
-                </div>
-                <div className="form-group">
-                    <label>Head of Household</label>
-                    <select id="hoh" name="hoh"  onChange={buildNameForm}  className="form-control">
-                        <option>Yes</option>
-                        <option>No</option>
-                    </select>
-                </div>
-
-                <div className="form-group">
-                    <label>Phone Number</label>
-                    <input type="text" className="form-control" onChange={buildNameForm} name="phone_number" id="phone_number"
-                           onBlur={handleErrors}/>
-                </div>
-
-                <div className="form-group">
-                    <label className="custom-checkbox">
-                        <input type="checkbox" className="checkbox"  name="phone_number_checkbox"  id ="phone_number_checkbox" onChange={buildNameForm}/>
-                        <span>No Phone Available</span>
-                    </label>
-                </div>
-                <div className="form-group">
-                    <label>Email Address</label>
-                    <input type="text" className="form-control" onChange={buildNameForm} name="email" id="email"/>
-                    <small className="text-muted">
-                        No Email? <a href="">Get one free from Google.</a>
-                    </small>
-                </div>
-                <div className="form-group">
-                    <label>Communication Preference</label>
-                    <select  id='communication_preference' name='communication_preference' onChange={buildNameForm} className="form-control">
-                        <option>Email</option>
-                        <option>Email</option>
-                    </select>
-
-            </div>
-        </div>
-    )
-});
+      <h2>Create Frestrak Account</h2>
+      <small>
+        Input a password to create a Frestrak account and easily register with one click in the future
+      </small>
+      <div className="form-group mt-4">
+        <label htmlFor="password">Password</label>
+        <input
+          type="password"
+          className="form-control"
+          name="password"
+          ref={register({ required: true })}
+        />
+        {errors.password && <span className="text-danger">This field is required</span>}
+      </div>
+      <div className="form-group">
+        <label htmlFor="password_confirm">Confirm Password</label>
+        <input
+          type="password"
+          className="form-control"
+          name="password_confirm"
+          ref={register({ required: true })}
+        />
+        {errors.password_confirm && <span className="text-danger">This field is required</span>}
+      </div>
+  </div>
+));
 
 export default PrimaryInfoFormComponent;
-
-
-
-
-
-
-
-
-

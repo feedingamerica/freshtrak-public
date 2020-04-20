@@ -20,10 +20,7 @@ body {
         font-weight: 700;
         @include responsive(extra-smaller-devices) {
             font-size: 2rem;
-            margin: 2rem 0 1.4rem !important;
-            &.mobile-mb {
-                margin-bottom: 0.2rem !important;
-            }
+            margin: 1rem 0 !important;
         }
     }
     .medium-title {
@@ -316,9 +313,13 @@ body {
         cursor: pointer;
         font-size: 1.3rem;
         @include responsive(extra-smaller-devices) {
-            display: none;
+            font-size: 1em;
         }
         .back-arrow {
+            @include responsive(extra-smaller-devices) {
+                width: 20px;
+                height: 20px;
+            }   
             width: 24px;
             height: 24px;
             display: flex;
@@ -340,9 +341,22 @@ body {
         }
     }
     .register-confirmation {
+        @include responsive(large-devices) {
+            display: flex;
+            flex-direction: column;
+            .registration-form {
+                display: flex;
+                justify-content: flex-end;
+            }
+        }
+
         .content-wrapper {
             max-width: 400px;
             margin: 1.2rem 0;
+
+            h2 {
+                font-weight: 700;
+            }
             .member-age {
                 width: 180px;
                 font-weight: 400;

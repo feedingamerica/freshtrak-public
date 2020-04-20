@@ -1,114 +1,62 @@
-import React from 'react';
-import useForm from '../../Utils/UseForm';
+import React, { Fragment, forwardRef } from 'react';
 
-const HouseHoldFormComponent= React.forwardRef((props, ref)=> {
+const HouseHoldFormComponent = forwardRef(({ register, errors }, ref) => (
+  <Fragment>
+    <div className="form-group">
+      <label htmlFor="street_address">Street Address</label>
+      <input
+        type="text"
+        className="form-control"
+        name="street_address"
+        ref={register({ required: true })}
+      />
+      {errors.street_address && <span className="text-danger">This field is required</span>}
+    </div>
 
-    const [streetAddress, setStreetAddress] = React.useState('');
-    const [aptNo, setAptNo] = React.useState('');
-    const [zip, setZip] = React.useState('');
-    let street_address_form , apt_number_form='';
-    const [childFamilyData, setChildFamilyData] = React.useState([]);
-    let data='';
+    <div className="d-flex">
+      <div className="form-group">
+        <label htmlFor="apt_no">Unit or Apt.</label>
+        <input
+          type="text"
+          className="form-control"
+          name="apt_no"
+          ref={register}
+        />
+      </div>
+      <div className="form-group ml-2">
+        <label htmlFor="zip_code">Zip Code</label>
+        <input
+          type="text"
+          className="form-control"
+          name="zip_code"
+          ref={register({ required: true })}
+        />
+        {errors.zip_code && <span className="text-danger">This field is required</span>}
+      </div>
+    </div>
 
-    const buildAddressForm = (event) => {
-        event.preventDefault();
-        let name = event.target.name;
-        switch (name) {
-            case 'street_address':
-                setStreetAddress(event.target.value);
-                break;
-            case 'apt_no':
-                setAptNo(event.target.value);
-                break;
-                case 'zip_code':
-                    setZip(event.target.value);
-                break;
-            default:
-                break;
-        }
-    };
-
-    const handleChange = () => {
-        data = {
-            addressData: {
-                streetAddress: streetAddress,
-                aptNo: aptNo,
-                zipcode: zip,
-            }
-        };
-
-        props.onSelectedChild(data);
-    };
-
-    React.useEffect(() => {
-        handleChange();
-    }, [streetAddress, aptNo,zip]);
-
-    let formDataBuildOne = props.famData ? ((street_address_form=props.famData.address))? props.famData : '' :'';
-    let formDataBuildtwo = props.famData ? ((apt_number_form=props.famData.apt_number))? props.famData : '' :'';
-
-    React.useEffect(() => {
-        if (street_address_form) {
-            setStreetAddress(street_address_form);
-            setAptNo(apt_number_form);
-        }
-    }, [street_address_form]);
-
-
-    const dataToParent = () => {
-        props.onSelectedChild(childFamilyData);
-    };
-
-    const { errors, handleErrors } =
-        useForm(props, {
-            'street_address' : ['required', 'min:5', 'max:20'],
-            'apt_no' : ['required'],
-            'zip_code' : ['required', 'min:5', 'max:5','number'],
-        }, dataToParent);
-
-    React.useImperativeHandle(ref, () => ({
-
-        triggerErrors(){
-            handleChange();
-            return handleErrors(data.addressData);
-        }
-
-    }));
-
-
-    return (
-
-        <div>
-            <div className="form-title">
-                        Household Information
-            </div>
-            <div className="form-group">
-                <label>Housing Type</label>
-                <select className="form-control" name="housing_type" id="housing_type" >
-                    <option>Apartment</option>
-                </select>
-            </div>
-
-            <div className="form-group">
-                   <label>Street Address</label>
-                <input type="text" className="form-control" onChange={buildAddressForm} name="street_address" id="street_address"
-                       onBlur={handleErrors}/>
-            </div>
-
-            <div className="d-flex">
-                <div className="form-group">
-                    <label>Unit or Apt.</label>
-                    <input type="text" className="form-control" onChange={buildAddressForm} name="apt_no" id="apt_no"  onBlur={handleErrors}/>
-                </div>
-                <div className="form-group ml-2">
-                    <label>ZIP Code</label>
-                    <input type="text" className="form-control"  onChange={buildAddressForm} name="zip_code" id="zip_code"  onBlur={handleErrors}/>
-                </div>
-            </div>
-
-
-        </div>
-    )
-});
+    <div className="d-flex">
+      <div className="form-group">
+        <label htmlFor="city">City</label>
+        <input
+          type="text"
+          className="form-control"
+          name="city"
+          ref={register}
+        />
+      </div>
+      <div className="form-group ml-2">
+        <label htmlFor="state">State</label>
+        <input
+          type="text"
+          className="form-control"
+          name="state"
+          ref={register({ required: true })}
+        />
+        {errors.state && <span className="text-danger">This field is required</span>}
+      </div>
+    </div>
+  </Fragment>
+));
 
 export default HouseHoldFormComponent;
