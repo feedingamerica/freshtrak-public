@@ -13,6 +13,7 @@ class Agency < ApplicationRecord
                     dependent: :restrict_with_exception
   has_many :event_dates, through: :events,
                          dependent: :restrict_with_exception
+  has_many :zip_agencies, through: :events
 
   default_scope { active }
 
