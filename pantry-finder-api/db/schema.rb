@@ -141,16 +141,39 @@ ActiveRecord::Schema.define(version: 0) do
     t.integer "end_time_key", null: false, comment: "The end time of the distribution. Usually an hour end, but can be any valid timekey from the dim_times table", unsigned: true
     t.decimal "event_duration_hours", precision: 4, scale: 2, null: false, comment: "Provides an accurate way to sum up a column and state how long an agency is open for a day, accounts well for half hours, 15 of 60 minute hours, etc..."
     t.integer "slot_length_minutes", default: 60, null: false, comment: "The length in minutes of the distribution slots tied to the distribution hour records of this distribution date record. e.g. If a distribution operates with four 15 minute slots of time per hour, this value would be 15.", unsigned: true
-    t.integer "status_publish", limit: 1, null: false, comment: "Controls whether this event_date is published or not."
-    t.integer "accept_walkin", limit: 1, null: false, comment: "Whether this event_date is eligible for walkins or not."
-    t.integer "accept_reservations", limit: 1, null: false, comment: "Whether this event_date accepts reservations or not."
-    t.integer "accept_interest", limit: 1, null: false, comment: "Whether this event_date accepts general interest or not."
-    t.integer "published_date_key", null: false, comment: "The date the entry is allowed to be shown to the public."
-    t.datetime "date_added"
+    t.integer "status_publish", limit: 1, null: false, comment: "Controls whether this event_date is published or not.", unsigned: true
+    t.integer "accept_walkin", limit: 1, null: false, comment: "Whether this event_date is eligible for walkins or not.", unsigned: true
+    t.integer "accept_reservations", limit: 1, null: false, comment: "Whether this event_date accepts reservations or not.", unsigned: true
+    t.integer "accept_interest", limit: 1, null: false, comment: "Whether this event_date accepts general interest or not.", unsigned: true
+    t.integer "published_date_key", null: false, comment: "The date the entry is allowed to be shown to the public.", unsigned: true
+    t.datetime "date_added", null: false
+    t.integer "published_end_date_key", default: 0, null: false, comment: "The date the entry stops being published.", unsigned: true
+    t.integer "published_end_time_key", default: 0, null: false, comment: "The time the entry stops being published", unsigned: true
+    t.string "public_registration_url", default: "", null: false, comment: "URL for customers to go and register themselves for a distribution"
+    t.string "private_registration_url", default: "", null: false, comment: "URL for 3rd parties to go and register customers through."
+    t.integer "mobile_serve_user_id", default: 0, null: false, comment: "The user_id that mobile logins go under", unsigned: true
+    t.string "mobile_serve_login_hash", default: "", null: false, comment: "The login hash that a login QR code is generated from"
     t.integer "added_by", null: false, unsigned: true
     t.datetime "last_update"
     t.integer "last_update_by", null: false, unsigned: true
     t.integer "status_id", default: 1, null: false, unsigned: true
+  end
+
+  create_table "event_geography_profiles", primary_key: "egp_id", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", comment: "The geographies an agency does and does not serve along with notes", force: :cascade do |t|
+    t.integer "event_id", default: 0, null: false, comment: "Event ID this esg record applies to.", unsigned: true
+    t.integer "geo_profile_type_id", limit: 1, default: 1, null: false, comment: "The type of geography this respresents, e.g. specific zip codes, all zip codes in CNTY, etc... ", unsigned: true
+    t.string "geo_profile_value", limit: 100, collation: "utf8_general_ci", comment: "The geography value matched with the geo_profile_type_id, e.g. All zip codes in Franklin County Ohio would be represnted by geo_profile_type_id = 2 & geo_value = 39049."
+    t.string "exception_note", comment: "Short note to feed to customers if there is an exception. E.g. (We serve 43046 but only in Fairfield County)"
+    t.text "notes", collation: "utf8_general_ci", comment: "Additional Notes to feed out to customers to help them understand specific limitations not captured through this data."
+    t.datetime "date_added", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.integer "added_by", null: false, comment: "user_id of the person that created this record", unsigned: true
+    t.datetime "last_update", null: false
+    t.integer "last_update_by", null: false, comment: "user_id of the last person to update this record", unsigned: true
+    t.integer "status_id", limit: 1, default: 1, null: false, comment: "status of the record, uses codes from table status_codes", unsigned: true
+    t.index ["event_id", "status_id"], name: "event_id_and_status"
+    t.index ["geo_profile_type_id", "geo_profile_value"], name: "geo_types_values"
+    t.index ["geo_profile_value"], name: "geo_values"
+    t.index ["status_id"], name: "status_id"
   end
 
   create_table "event_hours", primary_key: "event_hour_id", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", comment: "Record of what hours, connected to the event_dates, are available to order on, with controls for capacity. Also allows for split shifts and early closures because of low reservations.", force: :cascade do |t|
@@ -165,6 +188,26 @@ ActiveRecord::Schema.define(version: 0) do
     t.datetime "last_update"
     t.integer "last_update_by", null: false, unsigned: true
     t.integer "status_id", default: 1, null: false, unsigned: true
+  end
+
+  create_table "event_service_geographies", primary_key: "esg_id", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", comment: "The geographies an agency does and does not serve along with", force: :cascade do |t|
+    t.integer "egp_id", default: 0, null: false, comment: "The event geography profile record that generated this event_service_geography", unsigned: true
+    t.integer "event_id", default: 0, null: false, comment: "Event ID this esg record applies to.", unsigned: true
+    t.integer "geo_type_id", limit: 1, default: 1, null: false, comment: "1-zip code , others from AT file select_list_arrays", unsigned: true
+    t.string "geo_value", limit: 100, collation: "utf8_general_ci", comment: "The geography value matched with the geo_type_id, e.g. Zip Code 43123 would be represnted by geo_type_id = 1 & geo_value = 43123."
+    t.integer "trigger_exception_note", limit: 1, default: 0, null: false, comment: "If this is turned on, a text field from the event_geography_profile is shown (e.g. We serve zip code 43046 but only in Fairfield County)", unsigned: true
+    t.text "notes", collation: "utf8_general_ci", comment: "Additional Notes to feed out to customers to help them understand specific limitations not captured through this data."
+    t.datetime "date_added", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.integer "added_by", null: false, comment: "user_id of the person that created this record", unsigned: true
+    t.datetime "last_update", null: false
+    t.integer "last_update_by", null: false, comment: "user_id of the last person to update this record", unsigned: true
+    t.integer "status_id", limit: 1, default: 1, null: false, comment: "status of the record, uses codes from table status_codes", unsigned: true
+    t.index ["egp_id"], name: "event_geography_profile"
+    t.index ["event_id", "geo_type_id", "status_id"], name: "event_geotype_status"
+    t.index ["event_id", "status_id"], name: "event_id_and_status"
+    t.index ["geo_type_id", "geo_value"], name: "geo_types_values"
+    t.index ["geo_value"], name: "geo_values"
+    t.index ["status_id"], name: "status_id"
   end
 
   create_table "event_service_profiles", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
@@ -478,6 +521,16 @@ ActiveRecord::Schema.define(version: 0) do
     t.integer "status_id", limit: 1, null: false, unsigned: true
   end
 
+  create_table "geography_profile_types", primary_key: "geo_profile_type_id", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+    t.string "geo_profile_type_name", limit: 25, default: "", null: false, comment: "The type of geography this respresents, e.g. specific zip codes, all zip codes in CNTY, etc... "
+    t.text "geo_profile_notes", collation: "utf8_general_ci"
+    t.datetime "date_added", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.integer "added_by", null: false, comment: "user_id of the person that created this record", unsigned: true
+    t.datetime "last_update", null: false
+    t.integer "last_update_by", null: false, comment: "user_id of the last person to update this record", unsigned: true
+    t.integer "status_id", limit: 1, default: 1, null: false, comment: "status of the record, uses codes from table status_codes", unsigned: true
+  end
+
   create_table "locations", primary_key: "loc_id", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", comment: "agencies as defined by their supporting food bank, typically a single physical site that operates one of more events (programs)", force: :cascade do |t|
     t.string "loc_num", limit: 20, null: false, collation: "utf8_general_ci"
     t.integer "org_id", default: 0, null: false, unsigned: true
@@ -623,6 +676,16 @@ ActiveRecord::Schema.define(version: 0) do
     t.index ["grouping"], name: "group"
     t.index ["service_category1"], name: "service_cat"
     t.index ["sub_grouping"], name: "sg"
+  end
+
+  create_table "types_service_geography", primary_key: "geo_type_id", id: :integer, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+    t.string "geo_type_name", limit: 25, default: "", null: false, comment: "The type of geography this respresents, e.g. zip codes, CNTY, etc... "
+    t.text "geo_type_notes", collation: "utf8_general_ci"
+    t.datetime "date_added", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.integer "added_by", null: false, comment: "user_id of the person that created this record", unsigned: true
+    t.datetime "last_update"
+    t.integer "last_update_by", null: false, comment: "user_id of the last person to update this record", unsigned: true
+    t.integer "status_id", limit: 1, default: 1, null: false, comment: "status of the record, uses codes from table status_codes", unsigned: true
   end
 
   create_table "zip_codes", primary_key: "zip_id", id: :integer, limit: 3, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", comment: "every unique zip code in the us and the multi-county zips, processed with ranking by address counts", force: :cascade do |t|
