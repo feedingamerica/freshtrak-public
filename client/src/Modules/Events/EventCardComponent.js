@@ -45,7 +45,7 @@ const EventCardComponent = (props) => {
           <div className="address-wrap">
             {eventAddress}
             <br />
-            {eventCity} {eventState} {eventZip}
+            {eventCity} {eventState} {eventZip}<br />
             {phoneNumber}
           </div>
           {/* Out of scope */}
