@@ -1,0 +1,40 @@
+name: FreshTrak Client CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  test-client:
+    name: Run Unit Tests For FreshTrak Client
+    runs-on: ubuntu-latest
+    env:
+      working-directory: client
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: Cache dependencies
+        uses: actions/cache@v1
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: Setup
+        run: |
+          yarn install
+        working-directory: ${{env.working-directory}}
+      - name: Run Tests
+        run: |
+          yarn test-ci
+        working-directory: ${{env.working-directory}}
