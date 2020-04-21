@@ -24,6 +24,13 @@ describe Agency, type: :model do
     expect(agency.event_dates.pluck(:id)).to eq(event_dates.pluck(:id))
   end
 
+  it 'has event zip codes' do
+    event = create(:event, agency: agency)
+    event_zip_codes = 5.times.map { create(:event_zip_code, event: event) }
+
+    expect(agency.event_zip_codes.pluck(:id)).to eq(event_zip_codes.pluck(:id))
+  end
+
   context 'with scopes' do
     before do
       # default that should be ignored by scopes

@@ -13,6 +13,7 @@ class Agency < ApplicationRecord
                     dependent: :restrict_with_exception
   has_many :event_dates, through: :events,
                          dependent: :restrict_with_exception
+  has_many :event_zip_codes, through: :events
 
   default_scope { active }
 
@@ -31,5 +32,10 @@ class Agency < ApplicationRecord
   scope :by_county, lambda { |zip_code|
     joins(county: :zip_codes)
       .where(counties: { zip_codes: { zip_code: zip_code } })
+  }
+
+  scope :by_zip_code, lambda { |zip_code|
+    joins(:event_zip_codes)
+      .where(event_service_geographies: { geo_value: zip_code })
   }
 end
