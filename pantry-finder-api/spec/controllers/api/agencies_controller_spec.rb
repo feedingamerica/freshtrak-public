@@ -3,9 +3,11 @@
 describe Api::AgenciesController, type: :controller do
   let(:zip_code) { create(:zip_code) }
   let(:date) { (Date.today + 5).to_s }
-  let(:foodbank) { create(:foodbank, county_ids: zip_code.county.id) }
-  let(:agency) { create(:agency, foodbank: foodbank) }
+  let(:agency) { create(:agency) }
   let(:event) { create(:event, agency: agency) }
+  let!(:event_zip_code) do
+    create(:event_zip_code, event: event, zip_code: zip_code.zip_code)
+  end
   let!(:event_date) do
     create(:event_date, event: event, date: date.delete('-'),
                         start_time_key: 930, end_time_key: 2200)
@@ -28,7 +30,7 @@ describe Api::AgenciesController, type: :controller do
   end
 
   it 'is indexable by zip_code' do
-    get '/api/agencies', zip_code: zip_code.zip_code
+    get '/api/agencies', zip_code: event_zip_code.zip_code
     expect(response.status).to eq 200
     response_body = JSON.parse(response.body).deep_symbolize_keys
     expect(response_body).to eq(expected_response)
@@ -42,7 +44,7 @@ describe Api::AgenciesController, type: :controller do
   end
 
   it 'is indexable by zip_code and event_date' do
-    get '/api/agencies', zip_code: zip_code.zip_code, event_date: date
+    get '/api/agencies', zip_code: event_zip_code.zip_code, event_date: date
     expect(response.status).to eq 200
     response_body = JSON.parse(response.body).deep_symbolize_keys
     expect(response_body).to eq(expected_response)
