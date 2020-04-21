@@ -8,6 +8,7 @@ const HouseHoldFormComponent = forwardRef(({ register, errors }, ref) => (
         type="text"
         className="form-control"
         name="street_address"
+        id="street_address"
         ref={register({ required: true })}
       />
       {errors.street_address && <span className="text-danger">This field is required</span>}
@@ -20,6 +21,7 @@ const HouseHoldFormComponent = forwardRef(({ register, errors }, ref) => (
           type="text"
           className="form-control"
           name="apt_no"
+          id="apt_no"
           ref={register}
         />
       </div>
@@ -29,6 +31,7 @@ const HouseHoldFormComponent = forwardRef(({ register, errors }, ref) => (
           type="text"
           className="form-control"
           name="zip_code"
+          id="zip_code"
           ref={register({ required: true })}
         />
         {errors.zip_code && <span className="text-danger">This field is required</span>}
@@ -42,8 +45,10 @@ const HouseHoldFormComponent = forwardRef(({ register, errors }, ref) => (
           type="text"
           className="form-control"
           name="city"
-          ref={register}
+          id="city"
+          ref={register({ required: true })}
         />
+        {errors.city && <span className="text-danger">This field is required</span>}
       </div>
       <div className="form-group ml-2">
         <label htmlFor="state">State</label>
@@ -51,6 +56,7 @@ const HouseHoldFormComponent = forwardRef(({ register, errors }, ref) => (
           type="text"
           className="form-control"
           name="state"
+          id="state"
           ref={register({ required: true })}
         />
         {errors.state && <span className="text-danger">This field is required</span>}

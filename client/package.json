@@ -47,6 +47,7 @@
     ]
   },
   "devDependencies": {
+    "mutationobserver-shim": "^0.3.5",
     "test-data-bot": "^0.8.0"
   }
 }

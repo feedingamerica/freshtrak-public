@@ -11,6 +11,7 @@ const PrimaryInfoFormComponent =  React.forwardRef(({ register, errors }, ref) =
           type="text"
           className="form-control"
           name="first_name"
+          id="first_name"
           ref={register({ required: true })}
         />
         {errors.first_name && <span className="text-danger">This field is required</span>}
@@ -21,6 +22,7 @@ const PrimaryInfoFormComponent =  React.forwardRef(({ register, errors }, ref) =
           type="text"
           className="form-control"
           name="middle_name"
+          id="middle_name"
           ref={register}
         />
       </div>
@@ -30,6 +32,7 @@ const PrimaryInfoFormComponent =  React.forwardRef(({ register, errors }, ref) =
           type="text"
           className="form-control"
           name="last_name"
+          id="last_name"
           ref={register({ required: true })}
         />
         {errors.last_name && <span className="text-danger">This field is required</span>}
@@ -38,6 +41,7 @@ const PrimaryInfoFormComponent =  React.forwardRef(({ register, errors }, ref) =
         <label htmlFor="suffix">Suffix</label>
         <select
           name="suffix"
+          id="suffix"
           className="form-control"
           ref={register}
         >
@@ -52,6 +56,7 @@ const PrimaryInfoFormComponent =  React.forwardRef(({ register, errors }, ref) =
           type="date"
           className="form-control"
           name="dob"
+          id="dob"
           ref={register({ required: true })}
         />
         {errors.dob && <span className="text-danger">This field is required</span>}
@@ -61,6 +66,7 @@ const PrimaryInfoFormComponent =  React.forwardRef(({ register, errors }, ref) =
         <select
           className="form-control"
           name="hoh"
+          id="hoh"
           ref={register({ required: true })}
         >
           <option value="true">Yes</option>
@@ -74,6 +80,7 @@ const PrimaryInfoFormComponent =  React.forwardRef(({ register, errors }, ref) =
           type="tel"
           className="form-control"
           name="phone_number"
+          id="phone_number"
           ref={register({ required: true })}
         />
         {errors.phone_number && <span className="text-danger">This field is required</span>}
@@ -84,6 +91,7 @@ const PrimaryInfoFormComponent =  React.forwardRef(({ register, errors }, ref) =
         <select
           className="form-control"
           name="gender"
+          id="gender"
           ref={register}
         >
           <option value="" defaultValue></option>
@@ -97,6 +105,7 @@ const PrimaryInfoFormComponent =  React.forwardRef(({ register, errors }, ref) =
         <select
           className="form-control"
           name="communication_preference"
+          id="communication_preference"
           ref={register}
         >
           <option value="" defaultValue></option>
@@ -111,6 +120,7 @@ const PrimaryInfoFormComponent =  React.forwardRef(({ register, errors }, ref) =
           type="email"
           className="form-control"
           name="email"
+          id="email"
           ref={register({ required: true })}
         />
         <small className="text-muted">
@@ -129,6 +139,7 @@ const PrimaryInfoFormComponent =  React.forwardRef(({ register, errors }, ref) =
           type="password"
           className="form-control"
           name="password"
+          id="password"
           ref={register({ required: true })}
         />
         {errors.password && <span className="text-danger">This field is required</span>}
@@ -139,6 +150,7 @@ const PrimaryInfoFormComponent =  React.forwardRef(({ register, errors }, ref) =
           type="password"
           className="form-control"
           name="password_confirm"
+          id="password_confirm"
           ref={register({ required: true })}
         />
         {errors.password_confirm && <span className="text-danger">This field is required</span>}

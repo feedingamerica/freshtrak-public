@@ -55,26 +55,30 @@ const MemberCountFormComponent = forwardRef(({ register, errors }, ref) => {
             <div className="button-wrap d-flex flex-grow-1"></div>
             <button
               onClick={seniorDecrementFunction}
-              name="count_senior_dec"
+              data-testid="count_senior_dec"
               className="rounded-button"
               type="button"
             >
-              <span>-</span>
+              <span className="sr-only">Decrease number of seniors</span>
+              <span aria-hidden="true">-</span>
             </button>
+            <label className="sr-only" htmlFor="count_senior">Number of Seniors(65+)</label>
             <input
               type="text"
               className="number member-count"
               name="count_senior"
+              id="count_senior"
               value={countSenior}
               onChange={() => {}}
               ref={register}
             ></input>
             <button
               onClick={seniorIncrementFunction}
-              name="count_senior_inc"
+              data-testid="count_senior_inc"
               className="rounded-button"
             >
-              <span>+</span>
+              <span className="sr-only">Increase number of seniors</span>
+              <span aria-hidden="true">+</span>
             </button>
           </div>
 
@@ -83,26 +87,30 @@ const MemberCountFormComponent = forwardRef(({ register, errors }, ref) => {
               <div className="button-wrap d-flex flex-grow-1"></div>
             <button
               onClick={adultDecrementFunction}
-              name="count_adult_dec"
+              data-testid="count_adult_dec"
               className="rounded-button"
               type="button"
             >
-              <span>-</span>
+              <span className="sr-only">Decrease number of adults</span>
+              <span aria-hidden="true">-</span>
             </button>
+            <label className="sr-only" htmlFor="count_adult">Number of Adults</label>
             <input
               type="text"
               className="number member-count"
               name="count_adult"
+              id="count_adult"
               value={countAdult}
               onChange={() => {}}
               ref={register}
             ></input>
             <button
               onClick={adultIncrementFunction}
-              name="count_adult_inc"
+              data-testid="count_adult_inc"
               className="rounded-button"
             >
-              <span>+</span>
+              <span className="sr-only">Increase number of Adults</span>
+              <span aria-hidden="true">+</span>
             </button>
           </div>
 
@@ -111,26 +119,30 @@ const MemberCountFormComponent = forwardRef(({ register, errors }, ref) => {
               <div className="button-wrap d-flex flex-grow-1"></div>
             <button
               onClick={kidDecrementFunction}
-              name="count_kid_dec"
+              data-testid="count_kid_dec"
               className="rounded-button"
               type="button"
             >
-              <span>-</span>
+              <span className="sr-only">Decrease number of kids</span>
+              <span aria-hidden="true">-</span>
             </button>
+            <label className="sr-only" htmlFor="count_kid">Number of Kids</label>
             <input
               type="text"
               className="number member-count"
               name="count_kid"
+              id="count_kid"
               value={countKid}
               onChange={() => {}}
               ref={register}
             ></input>
             <button
               onClick={kidIncrementFunction}
-              name="count_kid_inc"
+              data-testid="count_kid_inc"
               className="rounded-button"
             >
-              <span>+</span>
+              <span className="sr-only">Increase number of kids</span>
+              <span aria-hidden="true">+</span>
             </button>
           </div>
         </div>
