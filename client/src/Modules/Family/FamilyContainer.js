@@ -10,7 +10,7 @@ import PrimaryInfoFormComponent from './PrimaryInfoFormComponent';
 import '../../Assets/scss/main.scss';
 
 const FamilyContainer = () => {
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors, getValues } = useForm();
   const onSubmit = data => { console.log(data) };
   return (
     <Fragment>
@@ -26,9 +26,13 @@ const FamilyContainer = () => {
               <form onSubmit={handleSubmit(onSubmit)}>
                 <HouseHoldFormComponent register={register} errors={errors} />
                 <MemberCountFormComponent register={register} errors={errors} />
-                <PrimaryInfoFormComponent register={register} errors={errors} />
+                <PrimaryInfoFormComponent register={register} errors={errors} getValues={getValues} />
                 <div className="button-wrap mt-4">
-                  <button type="submit" className="btn custom-button">Continue</button>
+                  <button
+                    type="submit"
+                    className="btn custom-button"
+                    data-testid="continue button"
+                  >Continue</button>
                 </div>
               </form>
             </div>

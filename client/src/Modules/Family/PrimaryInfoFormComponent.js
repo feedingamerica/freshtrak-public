@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 
-const PrimaryInfoFormComponent =  forwardRef(({ register, errors }, ref) => (
+const PrimaryInfoFormComponent =  forwardRef(({ register, errors, getValues }, ref) => (
   <div className="mt-4">
       <h2>Your Information</h2>
       <div className="form-group">
@@ -79,11 +79,31 @@ const PrimaryInfoFormComponent =  forwardRef(({ register, errors }, ref) => (
           className="form-control"
           name="phone_number"
           id="phone_number"
-          ref={register({ required: true })}
+          ref={register({
+            validate: value => {
+              const { no_phone_number } = getValues()
+              if (!value && !no_phone_number) {
+                return false;
+              }
+            }
+          })}
         />
-        {errors.phone_number && <span className="text-danger">This field is required</span>}
+        {
+          errors.phone_number && <span className="text-danger" data-testid="no phone error">This field is required. If you have no phone check "No Phone Available".</span>
+        }
       </div>
-      <div>Placeholder for no phone avaible</div>
+      <div className="form-check">
+        <input
+          type="checkbox"
+          className="form-check-input"
+          name="no_phone_number"
+          id="no_phone_number"
+          value=""
+          ref={register}
+        />
+        <label htmlFor="no_phone_number" className="form-check-label">No Phone Available</label>
+      </div>
+
       <div className="form-group">
         <label htmlFor="gender">Gender</label>
         <select
@@ -149,9 +169,17 @@ const PrimaryInfoFormComponent =  forwardRef(({ register, errors }, ref) => (
           className="form-control"
           name="password_confirm"
           id="password_confirm"
-          ref={register({ required: true })}
+          ref={register({
+            required: 'Please confirm password',
+            validate: {
+              matchesPassword: value => {
+                const { password } = getValues();
+                return password === value || 'Passwords should match!';
+              }
+            }
+          })}
         />
-        {errors.password_confirm && <span className="text-danger">This field is required</span>}
+        {errors.password_confirm && <span className="text-danger">{errors.password_confirm.message}</span>}
       </div>
   </div>
 ));
