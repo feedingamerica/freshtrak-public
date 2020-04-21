@@ -89,39 +89,6 @@ const HeaderComponent = (props) => {
                 </NavDropdown>
               </Nav>
             </Navbar.Collapse>
-
-            {isLoggedIn ? (
-              <div className="user-avatar">
-                <NavDropdown
-                  title={
-                    <img
-                      className="thumbnail-image"
-                      src={userIcon}
-                      alt="user pic"
-                    />
-                  }
-                >
-                  <DropdownItem
-                    eventKey={1.3}
-                    onClick={() => {
-                      localStorage.removeItem("isLoggedIn", false);
-                      setIsLoggedIn(false);
-                      window.location.reload();
-                    }}
-                  >
-                    <i className="fa fa-sign-out"></i> Logout
-                  </DropdownItem>
-                </NavDropdown>
-              </div>
-            ) : (
-              <button
-                className="sign-in-button"
-                style={{ minHeight: "0px", marginLeft: "20px" }}
-                
-              >
-                Sign In
-              </button>
-            )}
           </Navbar>
         </div>
       </Nav>

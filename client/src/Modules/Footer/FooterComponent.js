@@ -22,8 +22,8 @@ const FooterComponent = (props) => {
                             <div className="col-md-6">
                                 <span className="list-title">Find Resources</span>
                                 <ul>
-                                    <li><a href="">Working with FreshTrak</a></li>
-                                    <li><a href="">Register Your Foodbank</a></li>
+                                    <li><a>Working with FreshTrak</a></li>
+                                    <li><a>Register Your Foodbank</a></li>
                                 </ul>
                             </div>
                         </div>

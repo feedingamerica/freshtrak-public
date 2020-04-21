@@ -12,7 +12,6 @@ const DashBoardContainer = lazy(() =>
   import("../Modules/Dashboard/DashBoardContainer")
 );
 const EventContainer = lazy(() => import("../Modules/Events/EventContainer"));
-const FamilyContainer = lazy(() => import("../Modules/Family/FamilyContainer"));
 const WrapperComponent = lazy(() =>
   import("../Modules/General/WrapperComponent")
 );
@@ -34,11 +33,6 @@ const Routes = () => {
               exact
               path={RENDER_URL.EVENT_LIST_URL}
               component={EventContainer}
-            />
-            <Route
-              exact
-              path={RENDER_URL.ADD_FAMILY_URL}
-              render={(props) => <FamilyContainer {...props} />}
             />
 
             <Route
