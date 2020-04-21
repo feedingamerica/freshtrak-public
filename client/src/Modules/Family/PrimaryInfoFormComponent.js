@@ -1,8 +1,4 @@
 import React, {Component} from 'react';
-import {Redirect} from 'react-router-dom';
-import {ajaxGet} from '../../Services/Http/Ajax';
-import {STATUS_ACTIVE} from '../../Utils/Constants';
-import {API_URL} from '../../Utils/Urls';
 import useForm from '../../Utils/UseForm';
 
 
@@ -92,7 +88,7 @@ const PrimaryInfoFormComponent =  React.forwardRef((props, ref) => {
             email : email,
             communicationPreference : communicationPreference,
         }
-        }; console.log('data',data);
+        }; 
          props.onSelectedChild(data);
     };
 

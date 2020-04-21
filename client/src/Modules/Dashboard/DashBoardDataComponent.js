@@ -1,10 +1,8 @@
 import * as React from 'react';
-import {useState,useEffect} from 'react';
 import {withRouter} from 'react-router-dom';
 import SearchComponent from '../General/SearchComponent';
-import RegisteredEventListComponent from '../AuthenticatedLanding/RegisteredEventListComponent';
 import DashboardCreateAccountComponent from './DashboardCreateAccountComponent';
-
+import '../../Assets/scss/main.scss';
 const DashBoardDataComponent = (props) => {
     const [isLoggedIn, setIsLoggedIn] = React.useState(localStorage.getItem('isLoggedIn'));
 
@@ -30,8 +28,7 @@ const DashBoardDataComponent = (props) => {
                 <SearchComponent onSelectedChild = {handleSubmit} />
             </div>
 
-            {isLoggedIn==true ? <RegisteredEventListComponent />: <DashboardCreateAccountComponent />
-            }
+            <DashboardCreateAccountComponent />
         </div>
     )
 };
