@@ -5,7 +5,7 @@ Built and deployed using the [Ruby on Jets](https://rubyonjets.com/) framework
 
 ## Prerequisites
 
-1. [Ruby 2.6.5](https://www.ruby-lang.org/en/downloads/)
+1. [Ruby 2.5.3](https://www.ruby-lang.org/en/downloads/)
 2. [Bundler](https://bundler.io/)
 3. [MySQL 8.0.x](https://dev.mysql.com/doc/refman/8.0/en/installing.html)
 
@@ -42,7 +42,7 @@ DB_HOST=<rds_host> DB_USER=<user> DB_PASS=<password> DB_NAME=freshtrak_public bu
 ```
 ```bash
 rm ./setup/seed.sql.zip
-mysqldump -h <rds_host> -u <user> -p <password> freshtrak_public > setup/seed.sql
+mysqldump -h <rds_host> -u <user> -p<password> freshtrak_public > setup/seed.sql
 zip setup/seed.sql.zip setup/seed.sql
 rm setup/seed.sql
 ```
