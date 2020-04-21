@@ -1,4 +1,5 @@
 import React, { Fragment, forwardRef } from 'react';
+import StateDropdownComponent from './StateDropdownComponent';
 
 const HouseHoldFormComponent = forwardRef(({ register, errors }, ref) => (
   <Fragment>
@@ -38,7 +39,7 @@ const HouseHoldFormComponent = forwardRef(({ register, errors }, ref) => (
       </div>
     </div>
 
-    <div className="d-flex">
+    <div className="d-flex city-state-form">
       <div className="form-group">
         <label htmlFor="city">City</label>
         <input
@@ -50,17 +51,7 @@ const HouseHoldFormComponent = forwardRef(({ register, errors }, ref) => (
         />
         {errors.city && <span className="text-danger">This field is required</span>}
       </div>
-      <div className="form-group ml-2">
-        <label htmlFor="state">State</label>
-        <input
-          type="text"
-          className="form-control"
-          name="state"
-          id="state"
-          ref={register({ required: true })}
-        />
-        {errors.state && <span className="text-danger">This field is required</span>}
-      </div>
+      <StateDropdownComponent register={register} errors={errors} />
     </div>
   </Fragment>
 ));

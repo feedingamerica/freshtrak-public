@@ -725,3 +725,14 @@ body {
         }
     }
 }
+
+.city-state-form {
+    div {
+       &:first-child {
+           flex: 2;
+       }
+       &:last-child {
+           flex: 1
+       }
+    }
+}

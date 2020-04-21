@@ -1,8 +1,6 @@
-import React, { } from 'react';
+import React, { forwardRef } from 'react';
 
-
-
-const PrimaryInfoFormComponent =  React.forwardRef(({ register, errors }, ref) => (
+const PrimaryInfoFormComponent =  forwardRef(({ register, errors }, ref) => (
   <div className="mt-4">
       <h2>Your Information</h2>
       <div className="form-group">
