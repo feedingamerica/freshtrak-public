@@ -132,7 +132,13 @@ const PrimaryInfoFormComponent =  forwardRef(({ register, errors, getValues }, r
           <option value="no_contact">Please No Contact</option>
         </select>
       </div>
-      <div className="form-group">
+
+      <h2>Create Frestrak Account</h2>
+      <small>
+        Input a password to create a Frestrak account and easily register with one click in the future
+      </small>
+
+      <div className="form-group  mt-4">
         <label htmlFor="email">Email</label>
         <input
           type="email"
@@ -147,11 +153,7 @@ const PrimaryInfoFormComponent =  forwardRef(({ register, errors, getValues }, r
         {errors.email && <span className="text-danger">This field is required</span>}
       </div>
 
-      <h2>Create Frestrak Account</h2>
-      <small>
-        Input a password to create a Frestrak account and easily register with one click in the future
-      </small>
-      <div className="form-group mt-4">
+      <div className="form-group">
         <label htmlFor="password">Password</label>
         <input
           type="password"

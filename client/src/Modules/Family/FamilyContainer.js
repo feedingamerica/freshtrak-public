@@ -25,8 +25,8 @@ const FamilyContainer = () => {
               <RegistrationTextComponent />
               <form onSubmit={handleSubmit(onSubmit)}>
                 <HouseHoldFormComponent register={register} errors={errors} />
-                <MemberCountFormComponent register={register} errors={errors} />
                 <PrimaryInfoFormComponent register={register} errors={errors} getValues={getValues} />
+                <MemberCountFormComponent register={register} errors={errors} />
                 <div className="button-wrap mt-4">
                   <button
                     type="submit"
