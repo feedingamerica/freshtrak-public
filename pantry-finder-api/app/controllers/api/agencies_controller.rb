@@ -6,8 +6,8 @@ module Api
     before_action :set_agencies, only: [:index]
 
     def index
-      if (zip = search_params[:zip_code])
-        @agencies = @agencies.by_zip_code(zip)
+      if (@zip = search_params[:zip_code])
+        @agencies = @agencies.by_zip_code(@zip)
       end
       if (date = search_params[:event_date])
         @agencies = @agencies.with_event_after(date.delete('-'))
@@ -32,7 +32,8 @@ module Api
     end
 
     def serialized_agencies
-      ActiveModelSerializers::SerializableResource.new(@agencies).as_json
+      ActiveModelSerializers::SerializableResource.new(@agencies,
+                                                       zip_query: @zip).as_json
     end
   end
 end

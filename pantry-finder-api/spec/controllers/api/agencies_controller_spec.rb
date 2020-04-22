@@ -31,26 +31,29 @@ describe Api::AgenciesController, type: :controller do
 
   it 'is indexable by zip_code' do
     get '/api/agencies', zip_code: event_zip_code.zip_code
+    request_params = request.params.query_params
     expect(response.status).to eq 200
     response_body = JSON.parse(response.body).deep_symbolize_keys
-    expect(response_body).to eq(expected_response)
+    expect(response_body).to eq(expected_response(request_params))
   end
 
   it 'is indexable by event_date' do
     get '/api/agencies', event_date: date
+    request_params = request.params.query_params
     expect(response.status).to eq 200
     response_body = JSON.parse(response.body).deep_symbolize_keys
-    expect(response_body).to eq(expected_response)
+    expect(response_body).to eq(expected_response(request_params))
   end
 
   it 'is indexable by zip_code and event_date' do
     get '/api/agencies', zip_code: event_zip_code.zip_code, event_date: date
+    request_params = request.params.query_params
     expect(response.status).to eq 200
     response_body = JSON.parse(response.body).deep_symbolize_keys
-    expect(response_body).to eq(expected_response)
+    expect(response_body).to eq(expected_response(request_params))
   end
 
-  def expected_response
+  def expected_response(request_params)
     {
       agencies: [
         {
@@ -74,6 +77,10 @@ describe Api::AgenciesController, type: :controller do
               agency_id: event.loc_id,
               name: event.event_name,
               service: event.service_description,
+              distance: get_coordinates(event_zip_code.zip_code,
+                                        event.pt_latitude,
+                                        event.pt_longitude,
+                                        request_params),
               event_dates: [
                 {
                   id: event_date.id,
@@ -88,5 +95,21 @@ describe Api::AgenciesController, type: :controller do
         }
       ]
     }
+  end
+
+  def get_coordinates(zip_query, latitude, longitude, request_params)
+    return '' if request_params.to_s.include?(':zip_code') == false
+
+    zip_lat = ::ZipCode.select(:latitude)
+                       .where(zip_code: zip_query).to_a.first.latitude
+    zip_long = ::ZipCode.select(:longitude)
+                        .where(zip_code: zip_query).to_a.first.longitude
+    calc_distance(zip_lat, zip_long, latitude, longitude)
+  end
+
+  def calc_distance(zip_lat, zip_long, latitude, longitude)
+    Geocoder::Calculations.distance_between([zip_lat, zip_long],
+                                            [latitude,
+                                             longitude]).round(2)
   end
 end
