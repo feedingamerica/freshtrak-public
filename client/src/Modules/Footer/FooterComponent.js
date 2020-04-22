@@ -3,7 +3,8 @@
  */
 import React from 'react';
 import LogoComponent from '../General/LogoComponent';
-const FooterComponent = () => {
+import { withRouter } from 'react-router';
+const FooterComponent = (props) => {
     return (
     	<div className="container pt-50">
                 <div className="row">
@@ -13,16 +14,16 @@ const FooterComponent = () => {
                             <div className="col-md-6">
                                 <span className="list-title">Find Resources</span>
                                 <ul>
-                                    <li><a href="">Search for Resources Near You</a></li>
-                                    <li><a href="">Register with FreshTrak</a></li>
-                                    <li><a href="">About FreshTrak</a></li>
+                                    <li><a>Resources Near You</a></li>
+                                    <li><a>Register with FreshTrak</a></li>
+                                    <li><a>About FreshTrak</a></li>
                                 </ul>
                             </div>
                             <div className="col-md-6">
                                 <span className="list-title">Find Resources</span>
                                 <ul>
-                                    <li><a href="">Working with FreshTrak</a></li>
-                                    <li><a href="">Register Your Foodbank</a></li>
+                                    <li><a>Working with FreshTrak</a></li>
+                                    <li><a>Register Your Foodbank</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -37,4 +38,4 @@ const FooterComponent = () => {
     )
 };
 
-export default FooterComponent;
+export default withRouter(FooterComponent);

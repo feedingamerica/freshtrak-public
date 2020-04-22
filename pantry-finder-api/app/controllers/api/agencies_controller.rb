@@ -7,7 +7,7 @@ module Api
 
     def index
       if (zip = search_params[:zip_code])
-        @agencies = @agencies.by_foodbank(zip)
+        @agencies = @agencies.by_zip_code(zip)
       end
       if (date = search_params[:event_date])
         @agencies = @agencies.with_event_after(date.delete('-'))
