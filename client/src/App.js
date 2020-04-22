@@ -1,11 +1,12 @@
-import React from 'react';
-import DashBoardContainer from "./Modules/Dashboard/DashBoardContainer";
-import './Assets/scss/main.scss';
-const App=() =>{
+import React from "react";
+import Routes from "./Core/Routes";
+
+const App = () => {
+  React.useEffect(() => {}, []);
   return (
-    <div className="App">      
+    <div className="App">
       <div className="main-wrapper">
-            <DashBoardContainer/>
+        <Routes />
       </div>
     </div>
   );

@@ -11,7 +11,6 @@ import ServeFoodIcon from '../../Assets/img/serve-food.svg';
 import MoveQuickIcon from '../../Assets/img/move-quick.svg';
 const DashBoardFoodBankComponent = () => {	 
      const handleClick = (e) => {
-        console.log("Dashboard area");
     };
     return (
     	<div className="container pt-150 pb-150">

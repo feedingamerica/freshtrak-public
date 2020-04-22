@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import FooterContainer from '../Footer/FooterContainer';
-import EventHeaderComponent from './EventHeaderComponent';
+
+import React, { useState,useEffect } from 'react';
 import SearchComponent from '../General/SearchComponent';
 import ResourceListComponent from './ResourceListComponent';
 import EventListContainer from './EventListContainer';
@@ -68,7 +67,6 @@ const EventContainer = props => {
 
     return (
         <div>
-            <EventHeaderComponent/>
             <section className="gray-bg">
                 <div className="container pt-150 pb-150">
                     <div className="search-area text-left">
@@ -84,7 +82,6 @@ const EventContainer = props => {
                     <EventListContainer searchData={searchDetails} />
                 </div>
             </section>
-            <FooterContainer/>
         </div>
     )
 

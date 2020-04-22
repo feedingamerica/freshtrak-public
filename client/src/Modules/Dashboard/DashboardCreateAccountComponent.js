@@ -2,7 +2,6 @@
  * Dash board Create Account Component
  */
 import React from 'react';
-import HeaderContainer from '../Header/HeaderContainer';
 
 import BoxComponent from '../General/BoxComponent';
 import '../../Assets/scss/main.scss';
@@ -10,10 +9,8 @@ import ButtonComponent from '../General/ButtonComponent';
 import CalenderIcon from '../../Assets/img/calendar.svg';
 import PreRegisteredIcon from '../../Assets/img/pre-register.svg';
 import FindFoodIcon from '../../Assets/img/findfood.svg';
-import {RENDER_URL} from '../../Utils/Urls';
 const DashboardCreateAccountComponent = () => {
     const handleClick = (e) => {
-        window.location.assign(RENDER_URL.ADD_FAMILY_URL);
     };
     return (
 	        

@@ -191,4 +191,9 @@ select{
         }
        
     }
+    .form-group{
+        .form-control{
+            border-color: $color-white;
+        }
+    }
 }
