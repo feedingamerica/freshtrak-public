@@ -2,7 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://freshtrak-ui-beta-s3websitebucket-190zpkapk341b.s3.us-east-2.amazonaws.com/",
+  "homepage": "https://freshtrak.com",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
@@ -17,16 +17,17 @@
     "react-bootstrap": "^1.0.0",
     "react-bootstrap-time-picker": "^2.0.1",
     "react-dom": "^16.13.1",
+    "react-ga": "^2.7.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
     "react-toastify": "^5.5.0",
     "sweetalert2": "^9.10.10"
   },
   "scripts": {
-    "start": "REACT_APP_STAGE=dev react-scripts start",
-    "build": "REACT_APP_STAGE=production react-scripts build",
-    "build-beta": "REACT_APP_STAGE=beta react-scripts build",
-    "build-staging": "REACT_APP_STAGE=staging react-scripts build",
+    "start": "env-cmd -f .env.development react-scripts start",
+    "build": "env-cmd -f .env.${REACT_APP_ENV} react-scripts build",
+    "build:development": "REACT_APP_ENV=development yarn build",
+    "build:beta": "REACT_APP_ENV=beta yarn build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -46,6 +47,7 @@
     ]
   },
   "devDependencies": {
+    "env-cmd": "^10.1.0",
     "test-data-bot": "^0.8.0"
   }
 }
