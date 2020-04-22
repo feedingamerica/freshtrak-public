@@ -15,6 +15,7 @@ const EventContainer = lazy(() => import("../Modules/Events/EventContainer"));
 const WrapperComponent = lazy(() =>
   import("../Modules/General/WrapperComponent")
 );
+const FamilyContainer = lazy(() => import("../Modules/Family/FamilyContainer"));
 
 const Routes = () => {
   React.useEffect(() => {}, []);
@@ -33,6 +34,11 @@ const Routes = () => {
               exact
               path={RENDER_URL.EVENT_LIST_URL}
               component={EventContainer}
+            />
+
+            <Route
+              exact path={RENDER_URL.ADD_FAMILY_URL}
+              component={FamilyContainer}
             />
 
             <Route
