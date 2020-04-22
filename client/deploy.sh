@@ -21,18 +21,14 @@ function usage {
 cat << MSG
   Builds and deploys to this project to AWS
   usage: deploy.sh <stage>
-  requires: npm, aws cli
+  requires: yarn, aws cli
 MSG
 }
 
 function build {
   rm -rf build
   yarn install
-  if [ $STAGE == 'beta' ]; then
-    yarn run build-beta
-  else
-    yarn run build
-  fi
+  yarn run build:$STAGE
 }
 
 function deploy {
