@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { useForm } from 'react-hook-form';
 import HeaderComponent from '../Header/HeaderComponent';
-import RegistrationHeaderComponent from './RegistartionHeaderComponent';
+import RegistrationHeaderComponent from './RegistrationHeaderComponent';
 import RegistrationTextComponent from './RegistrationTextComponent';
 import HouseHoldFormComponent from './HouseHoldFormComponent';
 import MemberCountFormComponent from './MemberCountFormComponent';

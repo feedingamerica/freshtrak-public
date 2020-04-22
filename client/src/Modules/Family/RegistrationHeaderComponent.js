@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import back from '../../Assets/img/back.svg';
 import '../../Assets/scss/main.scss';
 
-const RegistartionHeaderComponent = () => {
+const RegistrationHeaderComponent = () => {
   const home = useHistory();
   const backHome = () => {
     home.goBack();
@@ -35,4 +35,4 @@ const RegistartionHeaderComponent = () => {
   )
 };
 
-export default RegistartionHeaderComponent;
+export default RegistrationHeaderComponent;
