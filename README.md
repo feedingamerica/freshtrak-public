@@ -1,3 +1,11 @@
+# Deprecated Repository
+
+This project has been split into the following repositories:
+- [freshtrak-client](https://github.com/midohiofoodbank/freshtrak-client)
+- [freshtrak-pantry-finder-api](https://github.com/midohiofoodbank/freshtrak-pantry-finder-api)
+- [freshtrak-registration-api](https://github.com/midohiofoodbank/freshtrak-registration-api)
+- [freshtrak-infrastructure](https://github.com/midohiofoodbank/freshtrak-infrastructure)
+
 # FreshTrak Public Facing API
 ![](https://github.com/midohiofoodbank/freshtrak-public/workflows/Pantry%20Finder%20API%20CI/badge.svg)
 [![codecov](https://codecov.io/gh/midohiofoodbank/freshtrak-public/branch/master/graph/badge.svg)](https://codecov.io/gh/midohiofoodbank/freshtrak-public)
